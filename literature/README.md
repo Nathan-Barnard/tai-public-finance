@@ -32,8 +32,6 @@ still visible without the files.
   *American Economic Review* 108(6): 1488–1542.
 - Acemoglu, D. & Restrepo, P. (2018) — "Artificial Intelligence, Automation
   and Work," NBER Working Paper 24196.
-- Acemoglu, D., Manera, A. & Restrepo, P. (2020) — "Does the US Tax Code
-  Favor Automation?," NBER Working Paper 27052.
 - Moll, B., Rachel, L. & Restrepo, P. (2022) — "Uneven Growth: Automation's
   Impact on Income and Wealth Inequality," *Econometrica* 90(6): 2645–2683.
   Plus online appendix.
