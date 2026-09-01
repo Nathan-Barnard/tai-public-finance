@@ -58,10 +58,13 @@ Once a specification is approved and implementation begins:
   identifiers (branch refs, package names) in the codex workspace's naming
   convention — prose still leads with the name, e.g. "LQ anchor and impulse
   responses (CS001)".
-- **Worktree:** create one when work on more than one spec overlaps or their
-  dependencies diverge (e.g. a PyTorch-based spec alongside a numpy/scipy
-  one — separate worktrees mean separate `.venv`s for free):
+- **Worktree:** every task gets one, always — no exceptions for "small" or
+  chore work. The primary checkout (this directory, no path suffix) stays
+  on `main` only; nothing gets implemented there directly:
   `git worktree add "../TAI public finnace claude-cs<NNN>-<slug>" -b cs<NNN>/<slug>`
+  (substitute `chore/<slug>` for non-spec work)
+- **Branch base:** off `main` (or the latest commit merged into it), not off
+  another unmerged branch, unless stacking is a deliberate, stated choice.
 - **Code layout:** a shared `src/tai_public_finance/primitives/` (canonical
   parameter/calibration object) plus one package per spec, e.g.
   `src/tai_public_finance/cs001_lq_anchor/`, internally separated into
@@ -72,3 +75,13 @@ Once a specification is approved and implementation begins:
 - **GitHub:** one issue per spec, titled `Implement <Title> (CS###)`, opened
   when a spec reaches `approved`, labelled `computation`. PRs link the issue
   and name the spec + version/fingerprint implemented.
+
+## Multi-session coordination
+
+Nathan runs several concurrent Claude Code sessions against this repo as a
+matter of course — check [STATUS.md](STATUS.md) and `git worktree list`
+before assuming you have it to yourself, and update your own STATUS.md row
+when you start and finish a task. Before touching a branch someone else's
+row claims, use `ListAgents` and message them directly rather than guessing
+— it resolves ambiguity in one round trip and has repeatedly beaten every
+other way of figuring out who's doing what.
