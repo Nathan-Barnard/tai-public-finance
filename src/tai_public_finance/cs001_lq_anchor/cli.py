@@ -95,7 +95,13 @@ def main() -> int:
             "No exact precautionary consumption or tax-speed correction is reported; those require a Stage 2B specification with higher deterministic fiscal-wealth derivatives, or an explicit truncated stochastic-LQ closure.",
             "The stable four-state block has a stationary covariance, but public net worth and worker consumption retain a neutral direction and need not be stationary.",
             "Finite-horizon positive-X and boundary-slack checks are local continuation plausibility, not a global stochastic solvency or transversality proof.",
-            "CS001 is registered as draft in the codex research workspace; this run implements its stated scope under Nathan's direct commission rather than a formally approved fingerprint.",
+            "CS001 is registered as draft, unfingerprinted, in the codex research workspace; this is an exploratory "
+            "first CS001 tranche run under Nathan's direct commission, not a completed or approved CS001 result. "
+            "This run's own input fingerprints (primitive/experiment/complete-input) are recorded separately from, "
+            "and must never be read as, a specification fingerprint -- none exists yet.",
+            "This run supersedes RUN-20260901T184527Z-CS001-89f6a939-01, which is preserved unchanged as historical "
+            "evidence; that run's portfolio-decomposition sign labelling, welfare-comparison language, claim/no-claim "
+            "gap description, N/J grid feasibility reporting, and specification-fingerprint field were corrected here.",
         ],
     }
     command = f"uv run python -m tai_public_finance.cs001_lq_anchor.cli --config {args.config} --output-dir {args.output_dir} --run-id {run_id}"

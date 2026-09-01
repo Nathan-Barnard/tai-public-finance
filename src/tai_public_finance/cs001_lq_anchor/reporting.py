@@ -305,8 +305,17 @@ def write_bundle(
         "run_id": report["run_id"],
         "created_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "status": "completed" if acceptance.outcome == "pass" else "failed",
-        "purpose": "Stage 1 deterministic 4x4 LQ system and Stage 2A leading small-risk baseline calculation",
-        "specification": {"id": "CS001", "version": "0.1", "fingerprint_sha256": report["fingerprints"]["complete_input_sha256"]},
+        "purpose": "Exploratory first CS001 tranche: Stage 1 deterministic 4x4 LQ system and Stage 2A leading "
+        "small-risk baseline calculation. Not a completed or approved CS001 -- see specification.status.",
+        # The specification document's own fingerprint (if/when CS001 is approved and fingerprinted in the
+        # codex registry) is NOT the same object as this run's input fingerprints below -- do not conflate
+        # a hash of what we fed in with a hash of the (currently unfingerprinted, draft) contract itself.
+        "specification": {"id": "CS001", "version": "0.1", "status": "draft", "fingerprint_sha256": None},
+        "input_fingerprints": {
+            "primitive_sha256": report["fingerprints"]["primitive_sha256"],
+            "experiment_sha256": report["fingerprints"]["experiment_sha256"],
+            "complete_input_sha256": report["fingerprints"]["complete_input_sha256"],
+        },
         "problem_id": "CP001",
         "approach_id": "CA001",
         "benchmark_id": None,

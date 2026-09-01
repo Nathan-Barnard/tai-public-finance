@@ -32,7 +32,11 @@ class LeadingPortfolio:
     zeta_j_perp: np.ndarray  # component orthogonal to the traded payoff
     marketed_fiscal_wealth_amount: float  # zeta_j . lambda_hat / beta_hat
 
-    leading_unconstrained_position: float  # s_0_bar = X - marketed_fiscal_wealth_amount
+    return_demand_component: float  # ordinary log-Merton demand = X
+    fiscal_hedge_component: float  # -zeta_j.lambda_hat/beta_hat; NEGATIVE here (a short/reduced
+    # position against the claim) because fiscal wealth already covaries positively with its
+    # payoff -- this is a reduction of exposure, not "holding more of the claim".
+    leading_unconstrained_position: float  # s_0_bar = return_demand_component + fiscal_hedge_component
     leading_constrained_position: float
     portfolio_curvature: float  # -beta_hat / (rho X^2), strictly negative
     portfolio_gradient_y: np.ndarray  # d s_0_bar(y) / dy at the anchor
@@ -43,8 +47,10 @@ class LeadingPortfolio:
     merton_position: float  # the myopic log-Merton comparator s = X
     merton_comparator_feasible: bool
 
-    access_source_gain_q: float  # Q_access: value of s vs s=0
-    hedge_source_gain_q: float  # Q_hedge: value of optimal s vs the Merton position
+    access_source_gain_q: float  # Q_access: leading-order value of optimal s vs s=0, same state
+    hedge_source_gain_q: float  # Q_hedge: leading-order LOSS AVOIDED by holding s_0_bar instead of
+    # being forced into the myopic Merton position s=X -- NOT an additional gain stacked on top of
+    # access_source_gain_q; the two compare the optimum against two different baselines and do not add.
     access_value_leading: float  # epsilon^2 Q_access / rho
     hedge_value_leading: float
     access_consumption_equivalent_leading: float  # epsilon^2 Q_access
@@ -83,7 +89,9 @@ def leading_portfolio_and_welfare(
     j = local_system.linear_fiscal_wealth
     zeta_j = capital_bar * np.array([p.sigma_z_hat * j[0], p.sigma_x_hat * j[1]])
     marketed_amount = float(zeta_j @ lambda_hat / beta_hat)
-    leading_position = comprehensive - marketed_amount
+    return_demand_component = comprehensive
+    fiscal_hedge_component = -marketed_amount
+    leading_position = return_demand_component + fiscal_hedge_component
     zeta_j_perp = zeta_j - marketed_amount * lambda_hat
     portfolio_curvature = -beta_hat / (rho * comprehensive**2)
 
@@ -137,6 +145,8 @@ def leading_portfolio_and_welfare(
         zeta_j=zeta_j,
         zeta_j_perp=zeta_j_perp,
         marketed_fiscal_wealth_amount=marketed_amount,
+        return_demand_component=return_demand_component,
+        fiscal_hedge_component=fiscal_hedge_component,
         leading_unconstrained_position=leading_position,
         leading_constrained_position=constrained_position,
         portfolio_curvature=portfolio_curvature,
@@ -168,16 +178,64 @@ def net_worth_grid(
     risk_scale_epsilon: float,
     net_worth_to_fiscal_wealth_ratios: list[float],
 ) -> list[dict]:
-    """Repeat the leading-portfolio and welfare calculation over a feasible N/J
-    grid: N_bar=0 selects one member of the deterministic fiscal-wealth family,
-    and s_0_bar, welfare, and slack all depend on which member is selected."""
+    """Repeat the leading-portfolio and welfare calculation over an N/J grid.
 
-    fiscal_wealth = local_system.anchor.fiscal_wealth_bar
+    N_bar=0 selects one member of the deterministic fiscal-wealth family; not
+    every member is economically admissible. Every row is retained -- a row
+    that fails the maintained non-negative-transfer condition, or any other
+    feasibility check, is reported with feasible=False and explicit
+    failure_reasons rather than silently dropped or allowed to crash the grid.
+    """
+
+    anchor = local_system.anchor
+    fiscal_wealth = anchor.fiscal_wealth_bar
+    wage_income = anchor.wage_income_bar
+    rho = local_system.parameters.rho
     rows = []
     for ratio in net_worth_to_fiscal_wealth_ratios:
         net_worth = float(ratio) * fiscal_wealth
-        result = leading_portfolio_and_welfare(
-            local_system, solution, risky_short_limit, safe_debt_limit, risk_scale_epsilon, public_net_worth=net_worth
-        )
-        rows.append({"public_net_worth_to_fiscal_wealth": float(ratio), **result.__dict__})
+        row: dict = {"public_net_worth_to_fiscal_wealth": float(ratio), "public_net_worth": net_worth}
+        failure_reasons: list[str] = []
+
+        comprehensive_resources = net_worth + fiscal_wealth
+        row["comprehensive_resources"] = comprehensive_resources
+        row["comprehensive_resources_positive"] = comprehensive_resources > 0.0
+        if not row["comprehensive_resources_positive"]:
+            failure_reasons.append("comprehensive_resources_not_positive")
+
+        try:
+            result = leading_portfolio_and_welfare(
+                local_system, solution, risky_short_limit, safe_debt_limit, risk_scale_epsilon, public_net_worth=net_worth
+            )
+        except ValueError as error:
+            row["portfolio_error"] = str(error)
+            failure_reasons.append("portfolio_computation_failed")
+            row["worker_consumption"] = rho * comprehensive_resources if comprehensive_resources > 0.0 else None
+            row["wage_income"] = wage_income
+            row["transfer"] = (row["worker_consumption"] - wage_income) if row["worker_consumption"] is not None else None
+            row["transfer_feasible"] = False
+            row["portfolio_bound_feasible"] = False
+            row["feasible"] = False
+            row["failure_reasons"] = failure_reasons
+            rows.append(row)
+            continue
+
+        worker_consumption = rho * comprehensive_resources
+        transfer = worker_consumption - wage_income
+        transfer_feasible = transfer >= 0.0
+        if not transfer_feasible:
+            failure_reasons.append("negative_transfer")
+        portfolio_bound_feasible = result.portfolio_lower_slack >= 0.0 and result.portfolio_upper_slack >= 0.0
+        if not portfolio_bound_feasible:
+            failure_reasons.append("portfolio_bound_infeasible")
+
+        row.update(result.__dict__)
+        row["worker_consumption"] = worker_consumption
+        row["wage_income"] = wage_income
+        row["transfer"] = transfer
+        row["transfer_feasible"] = transfer_feasible
+        row["portfolio_bound_feasible"] = portfolio_bound_feasible
+        row["feasible"] = row["comprehensive_resources_positive"] and transfer_feasible and portfolio_bound_feasible
+        row["failure_reasons"] = failure_reasons
+        rows.append(row)
     return rows
