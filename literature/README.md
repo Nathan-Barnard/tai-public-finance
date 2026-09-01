@@ -11,8 +11,8 @@ still visible without the files.
   Solutions* (2nd ed., Springer)
 - Øksendal, B. & Sulem, A. — *Applied Stochastic Control of Jump Diffusions*
   (3rd ed., Springer)
-- Acemoglu, D. — *Introduction to Modern Economic Growth* — **partial: Parts
-  5–9 only**
+- Acemoglu, D. — *Introduction to Modern Economic Growth* (2007 manuscript
+  draft; complete)
 - Ljungqvist, L. & Sargent, T. J. — *Recursive Macroeconomic Theory* (2018 ed.)
 - Scheidegger, S. — *Deep Learning for Solving and Estimating Dynamic Models
   in Economics and Finance* (July 2026). Text/figures CC0, code MIT —
@@ -35,3 +35,11 @@ still visible without the files.
 - Moll, B., Rachel, L. & Restrepo, P. (2022) — "Uneven Growth: Automation's
   Impact on Income and Wealth Inequality," *Econometrica* 90(6): 2645–2683.
   Plus online appendix.
+
+## Code
+
+- Moll, Rachel & Restrepo's official replication package for *Uneven
+  Growth* (19 July 2022) — MATLAB/Stata code and calibration data for the
+  paper's numerical exercise, return measurement, and additional-evidence
+  figures. `Readme - replication.txt` and `Readme - appendix.txt` inside
+  describe each subfolder.
