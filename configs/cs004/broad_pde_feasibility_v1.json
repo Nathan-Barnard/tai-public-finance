@@ -1,0 +1,96 @@
+{
+  "parameter_set_id": "pde_broad_feasibility_illustrative_v1",
+  "calibration_role": "standalone_pde_solver_feasibility",
+  "model_branch": "brownian_v5_1_qd1_full_specialisation",
+  "spec_id": "CS004",
+  "spec_version": "0.5",
+  "spec_status": "draft",
+  "empirical_status": "Illustrative solver-feasibility configuration; not an empirical calibration and NOT the same quantitative economy as the CS001 LQ smoke vector (see decision CD001). Do not attribute a CS001/CS004 output discrepancy to method until the matched bridge (matched_pde_lq_bridge_v1.json) is run.",
+  "provenance": {
+    "source_document": "research-notes/illustrative-ramsey-pde-parameter-and-domain-configuration.md (codex workspace, read-only)",
+    "source_section": "'Balanced task margins' adopted vector, its deterministic anchor, and its central/buffer state domain and guardrail tables",
+    "source_sha256_and_mtime": "recorded in ../../outputs/cs004-block0-bind-and-freeze/source_manifest.json"
+  },
+  "parameters": {
+    "discount_rate": 0.040,
+    "depreciation_rate": 0.060,
+    "tax_adjustment_scale": 0.500,
+    "alpha_lower": 0.25,
+    "alpha_upper": 0.55,
+    "x_mean": 0.0,
+    "capital_advantage": 0.375,
+    "new_task_labour_advantage": 1.250,
+    "productivity_mean_derived": -1.8728337915,
+    "productivity_mean_reversion": 0.080,
+    "productivity_volatility": 0.032,
+    "automation_mean_reversion": 0.080,
+    "automation_volatility": 0.100,
+    "international_log_capital_labour_ratio": 0.0,
+    "installed_capital_price": 1.0
+  },
+  "normalizations": {
+    "labour": 1.0,
+    "capital_anchor": 1.0,
+    "public_net_worth_anchor": 0.0
+  },
+  "derived_stationary_sd": {
+    "productivity": 0.08,
+    "automation": 0.25,
+    "note": "sigma_i_infinity = sigma_i / sqrt(2*kappa_i); used to size the central/buffer state boxes below in stationary-sd units for z and x"
+  },
+  "deterministic_anchor": {
+    "tax_rate": 0.5,
+    "rental_rate_minus_depreciation": 0.08,
+    "rental_rate": 0.14,
+    "capital_log": 0.0,
+    "capital_level": 1.0,
+    "alpha": 0.40,
+    "omega_alpha": 1.9601317042,
+    "output_capital_ratio": 0.35,
+    "wage_capital_ratio": 0.21,
+    "tax_base_capital_ratio": 0.08,
+    "fiscal_resources_capital_ratio": 0.25,
+    "capital_drift": 0.0,
+    "public_net_worth": 0.0,
+    "tax_speed": 0.0,
+    "specialisation_margin_automation_composite": 0.7804651081,
+    "specialisation_margin_new_task_composite": 0.8445348919
+  },
+  "state_domain": {
+    "state_order": ["z", "x", "k", "n", "tau"],
+    "z": {"anchor": -1.8728337915, "central": [-2.0328338, -1.7128338], "buffer": [-2.1128338, -1.6328338], "units": "log productivity; central +/-2 stationary sd, buffer +/-3 stationary sd"},
+    "x": {"anchor": 0.0, "central": [-0.50, 0.50], "buffer": [-0.75, 0.75], "units": "latent automation state; central +/-2 stationary sd, buffer +/-3 stationary sd"},
+    "k": {"anchor": 0.0, "central": [-0.20, 0.20], "buffer": [-0.30, 0.30], "units": "log(K/K_anchor)"},
+    "n": {"anchor": 0.0, "central": [-0.50, 0.75], "buffer": [-0.75, 1.25], "units": "N/K; training support only, NOT asserted to be the viability interval (see reference_floor below)"},
+    "tau": {"anchor": 0.5, "central": [0.35, 0.65], "buffer": [0.25, 0.75], "units": "tax rate; structural ceiling at 1"}
+  },
+  "reference_floor": {
+    "formula": "n_ref(tau) = -0.12 * tau * (1 - tau)",
+    "minimum": -0.03,
+    "minimum_location_tau": 0.5,
+    "status": "R39 compact stopped-region diagnostic under one explicit deleveraging policy; NOT the structural solvency frontier n_sol(z,x,k,tau) and NOT a proof that the broad n-buffer above is viable",
+    "eta_sol_positive_reporting_margin": null,
+    "eta_sol_status": "unresolved -- CS004 v0.5 leaves this a free positive symbol ('a declared positive numerical margin eta_sol'); no numeric value is fixed anywhere in the read records. Do not invent one; Block 1/5 must choose and justify it against measured slack."
+  },
+  "guardrails": {
+    "transfer_capital_ratio": {"lower": 0.0, "upper": 2.0, "note": "lower bound T>=0 is structural; upper bound is artificial numerical scaffolding, not a policy object"},
+    "risky_short_limit": 20.0,
+    "safe_debt_limit": 20.0,
+    "tax_alarm_band": [-0.50, 0.95],
+    "tax_structural_ceiling": 1.0,
+    "tax_speed_abs_max": 0.50,
+    "logistic_share_distance_min": 0.09,
+    "specialisation_margin_min_eta_sp": 0.20,
+    "impact_displacement_margin_min_eta_w": 0.15,
+    "claim_variance_min_eta_beta": 0.001,
+    "note": "All are artificial numerical guardrails except the transfer lower bound and the tax structural ceiling, which are genuine control/state constraints. Widening any artificial guardrail and checking central-policy stability is a required post-solve test (CS004 Sec. 'Boundary and guardrail protocol'), not optional polish."
+  },
+  "screened_margins": {
+    "central_min_specialisation_margin_automation_composite": 0.4294122267,
+    "central_min_specialisation_margin_new_task_composite": 0.4887669365,
+    "buffer_min_specialisation_margin_automation_composite": 0.2605157972,
+    "buffer_min_specialisation_margin_new_task_composite": 0.3144200952,
+    "buffer_beta_I_range": [0.0013505312, 0.0017008342],
+    "note": "Pre-solve primitive/domain screen from the source research note only. Confirms the smooth full-specialisation branch and beta_I regularity hold on the stated rectangles; does NOT establish finite stochastic value, v_n>0, v_nn<0, or guardrail slack under any recovered policy -- those are Block 1+ results."
+  }
+}

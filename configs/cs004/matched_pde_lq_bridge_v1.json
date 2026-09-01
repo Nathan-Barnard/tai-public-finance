@@ -1,0 +1,82 @@
+{
+  "parameter_set_id": "pde_lq_matched_bridge_v1",
+  "calibration_role": "matched_pde_lq_bridge",
+  "model_branch": "brownian_v5_1_qd1_full_specialisation",
+  "spec_id": "CS004",
+  "spec_version": "0.5",
+  "spec_status": "draft",
+  "decision_id": "CD001",
+  "purpose": "Run the PDE solver on the EXACT CS001 LQ primitive vector so that any PDE-vs-LQ discrepancy can be attributed to solution method rather than calibration (CD001). Distinct from broad_pde_feasibility_v1.json, which is the standalone PDE feasibility/stress vector and must not be substituted here.",
+  "cross_branch_dependency": {
+    "status": "UNRESOLVED -- blocks materializing this config as a live file reference",
+    "detail": "This branch (cs004/five-state-ramsey-pde-feasibility, based on commit a6df37f) does not yet contain configs/primitives/lq_farhi_annual_v1.json or configs/cs001/lq_farhi_smoke.json -- those were added by CS001's own implementation commits on cs001/lq-anchor-matrix-equations-irfs (still an open, unmerged PR as of this freeze). The 'embedded_lq_primitive_snapshot' block below is therefore a manually-copied, provenance-stamped snapshot, NOT a live file reference, and can drift out of sync if the source files change on cs001 before this branch merges/rebases them in.",
+    "resolution": "Once CS001 merges to main (or its configs/primitives files are otherwise merged into this branch), replace this embedded snapshot with real relative-path references (primitive_file: '../primitives/lq_farhi_annual_v1.json', experiment_file: '../cs001/lq_farhi_smoke.json') and delete the duplicate, exactly mirroring how configs/cs001/lq_farhi_smoke.json itself references its primitive file. Do not let this snapshot silently become the source of truth."
+  },
+  "embedded_lq_primitive_snapshot": {
+    "copied_from_path": "configs/primitives/lq_farhi_annual_v1.json",
+    "copied_from_branch": "cs001/lq-anchor-matrix-equations-irfs",
+    "copied_from_commit": "89f6a939e5aa11527400bb473916c1a0f3ecf8d6",
+    "copied_from_blob_sha256": "18f119ffca885a79c214eda858ab3ce916b43c4128473509897d0e4b8c139aa3",
+    "primitive_set_id": "lq_farhi_annual_primitives_v1",
+    "parameters": {
+      "annual_discount_factor": 0.98,
+      "depreciation_rate": 0.08,
+      "tax_adjustment_scale": 0.5,
+      "alpha_lower": 0.19,
+      "alpha_upper": 0.49,
+      "x_mean": 0.0,
+      "capital_advantage": 0.375,
+      "new_task_labour_advantage": 1.25,
+      "international_log_capital_labour_ratio": 0.0,
+      "productivity_persistence_annual": 0.81,
+      "productivity_stationary_sd": 0.04,
+      "automation_persistence_annual": 0.81,
+      "automation_stationary_sd": 0.25,
+      "installed_capital_price": 1.0
+    },
+    "re_derived_anchor_z_bar": -1.806616591576036,
+    "re_derived_anchor_source": "outputs/cs001-lq-anchor-baseline-repair-01 run record (RUN-20260901T194938Z-CS001-d876a61e-01.yaml), domain.local_anchor.z_bar -- reported here for the bridge's initial state, not re-derived independently in this block"
+  },
+  "embedded_lq_experiment_snapshot": {
+    "copied_from_path": "configs/cs001/lq_farhi_smoke.json",
+    "copied_from_branch": "cs001/lq-anchor-matrix-equations-irfs",
+    "copied_from_commit": "89f6a939e5aa11527400bb473916c1a0f3ecf8d6",
+    "copied_from_blob_sha256": "eb827f5db91c65bfa4635d708e2efde347307b1326ee70d3ea0dfcb38ea4a7dc",
+    "risk_scale_epsilon_at_smoke": 1.0,
+    "numerical_scaffolding": {
+      "risky_short_limit": 20.0,
+      "safe_debt_limit": 20.0,
+      "tax_min": -0.5,
+      "tax_max": 0.95,
+      "tax_speed_abs_max": 0.5
+    }
+  },
+  "risk_scale_epsilon": {
+    "definition": "sigma_i = epsilon * sigma_i_hat, applied to the shared LQ shock vector",
+    "first_run": 1.0,
+    "smaller_feasible_value_required_before_interpretation": true,
+    "smaller_value": null,
+    "status": "unresolved -- CS004 v0.5 requires 'at least one smaller feasible value' before interpreting approach to the LQ/small-risk object but does not name it; choose and justify when the bridge is actually run (post Block 0, after Sec. G of CS004)"
+  },
+  "initial_state": {
+    "state_order": ["z", "x", "k", "n", "tau"],
+    "z": {"value": null, "definition": "z_bar -- see embedded_lq_primitive_snapshot.re_derived_anchor_z_bar above; NOT the broad-vector z_bar in broad_pde_feasibility_v1.json"},
+    "x": 0.0,
+    "k": 0.0,
+    "n": 0.0,
+    "tau": 0.5
+  },
+  "bridge_domain_overlay": {
+    "note": "CS004 v0.5 / CD001 narrow this domain relative to the broad standalone PDE buffer specifically to preserve LQ-endpoint specialisation margins. Only x and k are given explicit narrowed bounds in the read records.",
+    "x": {"buffer": [-0.45, 0.45], "status": "frozen -- CS004 v0.5 Sec. 'Standalone PDE calibration and matched LQ bridge' / CD001 explicit"},
+    "k": {"buffer": [-0.21, 0.21], "status": "frozen -- CS004 v0.5 / CD001 explicit"},
+    "z": {"status": "unresolved -- no bridge-specific buffer stated in the read records"},
+    "n": {"status": "unresolved -- no bridge-specific buffer stated in the read records"},
+    "tau": {"status": "unresolved -- no bridge-specific buffer stated in the read records"}
+  },
+  "screened_margins_at_epsilon_1_LQ_endpoints": {
+    "specialisation_margin_automation_composite_min_approx": 0.6835,
+    "specialisation_margin_new_task_composite_min_approx": 0.2249,
+    "note": "As reported in CD001; the associated fixed-tax steady-state capital map remains within the narrowed k-buffer. Rejected alternative: LQ endpoints inside the BROAD PDE buffer (x in [-0.75,0.75], k in [-0.30,0.30]) drop the second margin to ~0.0363, below the 0.20 cushion -- do not use the broad buffer for the bridge."
+  }
+}
