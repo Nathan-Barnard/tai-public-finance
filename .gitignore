@@ -22,3 +22,9 @@ venv/
 
 # Claude
 .claude/settings.local.json
+
+# Reference literature (copyrighted textbooks/papers — kept local only;
+# see literature/README.md, which IS tracked, for the bibliography)
+literature/textbooks/
+literature/papers/
+literature/lecture-notes/
