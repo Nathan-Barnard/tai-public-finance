@@ -279,6 +279,8 @@ LINEAR_FIELDS = (
     "tax_revenue_deviation_linear",
     "fiscal_resources_deviation_linear",
     "planner_resource_wealth_deviation",
+    "planner_resource_wealth_wage_component_deviation",
+    "planner_resource_wealth_capital_tax_component_deviation",
     "public_net_worth_deviation",
     "worker_comprehensive_resources_deviation",
     "worker_consumption_deviation",
@@ -314,6 +316,17 @@ def build_outcome_matrix(local_system: LocalSystem, solution: LqSolution, portfo
         return np.concatenate([np.asarray(vector4, dtype=float), [0.0]])
 
     tax_base = capital_bar * local_system.tax_base_normalized_y
+    tax_revenue_y = anchor.tax_rate_bar * tax_base + anchor.tax_base_bar * np.array([0.0, 0.0, 0.0, 1.0])
+    # Split planner-resource wealth J = int exp(-int r_0)(W + tau B - Psi) into its capitalized-wage
+    # and capitalized-capital-tax components. The linear coefficient is additive, j = j_W + j_B, with
+    # (rho I - A^T) j_W = W_y/K_bar - J_W_bar d_r and (rho I - A^T) j_B = (tau B)_y/K_bar - J_B_bar d_r,
+    # J_W_bar = W_bar/(rho K_bar), J_B_bar = tau_bar B_bar/(rho K_bar); exact for the first-order object.
+    A = local_system.A
+    d_r = local_system.safe_rate_y
+    j_w_bar = anchor.wage_income_bar / (rho * capital_bar)
+    j_b_bar = anchor.tax_rate_bar * anchor.tax_base_bar / (rho * capital_bar)
+    j_w = np.linalg.solve(rho * np.eye(4) - A.T, local_system.wage_y / capital_bar - j_w_bar * d_r)
+    j_b = np.linalg.solve(rho * np.eye(4) - A.T, tax_revenue_y / capital_bar - j_b_bar * d_r)
     rows = {
         "z_deviation": e[0],
         "x_deviation": e[1],
@@ -330,6 +343,8 @@ def build_outcome_matrix(local_system: LocalSystem, solution: LqSolution, portfo
         "tax_revenue_deviation_linear": y_part(anchor.tax_rate_bar * tax_base) + anchor.tax_base_bar * e[3],
         "fiscal_resources_deviation_linear": y_part(capital_bar * local_system.fiscal_resources_normalized_y),
         "planner_resource_wealth_deviation": y_part(capital_bar * j),
+        "planner_resource_wealth_wage_component_deviation": y_part(capital_bar * j_w),
+        "planner_resource_wealth_capital_tax_component_deviation": y_part(capital_bar * j_b),
         "public_net_worth_deviation": e[4] - y_part(capital_bar * j),
         "worker_comprehensive_resources_deviation": e[4],
         "worker_consumption_deviation": rho * e[4],
@@ -840,11 +855,15 @@ SLACK_FIELDS = ECONOMIC_SLACK_FIELDS + SCAFFOLDING_SLACK_FIELDS
 # ---------------------------------------------------------------------------
 
 
+ZERO_DEADBAND = 1e-16  # absolute: first-order responses are O(1e-4); an exactly invariant path is O(1e-20)
+
+
 def crossings(horizons: np.ndarray, values: np.ndarray) -> list[float]:
     """Times where the piecewise-linear interpolant of `values` crosses zero;
     an exact zero at the first grid point is the starting condition, not a crossing."""
 
     found: list[float] = []
+    values = np.where(np.abs(values) <= ZERO_DEADBAND, 0.0, values)
     for i in range(len(values) - 1):
         v0, v1 = values[i], values[i + 1]
         if v0 == 0.0:
@@ -860,6 +879,7 @@ def _first_sign_change_time(horizons: np.ndarray, values: np.ndarray, impact_sca
     """First time the path's sign differs from its impact sign, ignoring an impact
     value that is numerically zero relative to `impact_scale`."""
 
+    values = np.where(np.abs(values) <= ZERO_DEADBAND, 0.0, values)
     impact = values[0]
     if abs(impact) <= 1e-12 * max(impact_scale, 1e-300):
         nonzero = np.nonzero(np.abs(values) > 1e-12 * max(impact_scale, 1e-300))[0]
@@ -957,6 +977,8 @@ def path_features(
         "tax_revenue_deviation_linear",
         "fiscal_resources_deviation_linear",
         "planner_resource_wealth_deviation",
+        "planner_resource_wealth_wage_component_deviation",
+        "planner_resource_wealth_capital_tax_component_deviation",
         "worker_consumption_deviation",
         "transfer_deviation_linear",
         "government_primary_cash_flow_deviation_linear",
@@ -1210,7 +1232,7 @@ def accounting_identity_checks(rows: list[dict[str, Any]], rho: float) -> dict[s
     F - c = tau B - T (the planner object F contains wages; the government's primary
     cash flow does not)."""
 
-    keys = ("dX_equals_domestic_contribution_plus_payoff_at_impact", "dc_equals_rho_dX", "dT_equals_dc_minus_dW", "dX_equals_dN_plus_dJ", "F_minus_c_equals_tauB_minus_T", "primary_cash_flow_equals_tauB_minus_T_minus_Psi")
+    keys = ("dX_equals_domestic_contribution_plus_payoff_at_impact", "dc_equals_rho_dX", "dT_equals_dc_minus_dW", "dX_equals_dN_plus_dJ", "F_minus_c_equals_tauB_minus_T", "primary_cash_flow_equals_tauB_minus_T_minus_Psi", "dJ_equals_wage_component_plus_capital_tax_component")
     worst: dict[str, Any] = {key: 0.0 for key in keys}
     worst["locator"] = None
     for row in rows:
@@ -1222,6 +1244,7 @@ def accounting_identity_checks(rows: list[dict[str, Any]], rho: float) -> dict[s
         errors["dX_equals_dN_plus_dJ"] = abs(row["worker_comprehensive_resources_deviation"] - (row["public_net_worth_deviation"] + row["planner_resource_wealth_deviation"]))
         errors["F_minus_c_equals_tauB_minus_T"] = abs((row["fiscal_resources_deviation_linear"] - row["worker_consumption_deviation"]) - (row["tax_revenue_deviation_linear"] - row["transfer_deviation_linear"]))
         errors["primary_cash_flow_equals_tauB_minus_T_minus_Psi"] = abs(row["government_primary_cash_flow_deviation_linear"] - (row["tax_revenue_deviation_linear"] - row["transfer_deviation_linear"] - row["tax_adjustment_cost_deviation_first_order"]))
+        errors["dJ_equals_wage_component_plus_capital_tax_component"] = abs(row["planner_resource_wealth_deviation"] - (row["planner_resource_wealth_wage_component_deviation"] + row["planner_resource_wealth_capital_tax_component_deviation"]))
         for key, value in errors.items():
             if value > worst[key]:
                 worst[key] = value
@@ -1861,10 +1884,10 @@ class AtlasRunner:
         base = self.config.parameters
         self.models["baseline"] = solve_atlas_model("baseline", base, self.experiment, self.horizons)
         for persistence in self.settings["persistence_cases"]:
+            # Every persistence case gets its own labelled model, including the one equal to
+            # the baseline persistence: its rows are the reference case of the persistence
+            # tables and must not be confused with (or duplicate the label of) the atlas rows.
             label = f"automation_persistence_{persistence:.2f}"
-            if abs(float(persistence) - base.automation_persistence_annual) < 1e-12:
-                self.models[label] = self.models["baseline"]
-                continue
             variant = persistence_variant_parameters(base, float(persistence))
             self.models[label] = solve_atlas_model(label, variant, self.experiment, self.horizons, {"automation_persistence_annual": float(persistence)})
         for label, model in self.models.items():
@@ -2119,8 +2142,7 @@ class AtlasRunner:
         artifacts["impact_sign_regions.csv"] = "impact_sign_regions.csv"
         # 5. persistence tables
         persistence_features = [ps.features for ps in self.path_sets.get(CHUNK_PERSISTENCE, [])]
-        baseline_named = [ps.features for chunk in (CHUNK_BROWNIAN, CHUNK_MATCHED) for ps in self.path_sets.get(chunk, []) if ps.ic.direction.named_labels]
-        atomic_write_csv(self.output_dir / "persistence_unravelling.csv", persistence_features + baseline_named)
+        atomic_write_csv(self.output_dir / "persistence_unravelling.csv", persistence_features)
         artifacts["persistence_unravelling.csv"] = "persistence_unravelling.csv"
         persistence_rows = [row for ps in self.path_sets.get(CHUNK_PERSISTENCE, []) for row in ps.rows if round(row["horizon_years"], 9) in key_h]
         atomic_write_csv(self.output_dir / "persistence_named_paths.csv", persistence_rows, fieldnames if persistence_rows else None)

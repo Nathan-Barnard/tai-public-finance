@@ -217,6 +217,31 @@ def test_rows_carry_separate_accounts_and_split_economic_from_scaffolding_flags(
     assert "feasible" not in row
 
 
+def test_planner_resource_wealth_splits_into_wage_and_capital_tax_components(atlas):
+    model = atlas["model"]
+    G = model.outcome_matrix
+    idx = sa.LINEAR_INDEX
+    total = G[idx["planner_resource_wealth_deviation"]]
+    wage = G[idx["planner_resource_wealth_wage_component_deviation"]]
+    tax = G[idx["planner_resource_wealth_capital_tax_component_deviation"]]
+    np.testing.assert_allclose(wage + tax, total, atol=1e-12)
+    # k-coefficients: a unit of capital is worth one unit of J at the margin (j_k = 1). Its
+    # capitalized-wage part exceeds one while its capitalized-capital-tax part is negative:
+    # capital deepening raises future wages but shrinks the net-rental tax base (dB/dk = alpha R - delta < 0).
+    assert wage[2] > 1.0 and tax[2] < 0.0
+    assert wage[2] + tax[2] == pytest.approx(1.0, abs=1e-10)
+    # The inherited tax rate redistributes J between the two components with zero net first-order effect.
+    assert wage[3] + tax[3] == pytest.approx(0.0, abs=1e-10) and wage[3] < 0.0 < tax[3]
+    rows = [row for ps in atlas["brownian"] for row in ps.rows]
+    assert sa.accounting_identity_checks(rows, model.rho)["dJ_equals_wage_component_plus_capital_tax_component"] < 1e-14
+
+
+def test_exactly_invariant_path_reports_no_noise_sign_reversals(atlas):
+    ps = _named(atlas["matched"], f"{sa.NAMED_CLAIM_NEUTRAL}_positive")
+    assert ps.features["tax_sign_reversal_count"] == 0
+    assert abs(ps.features["tax_rate_max"]) < 1e-15 and abs(ps.features["tax_rate_min"]) < 1e-15
+
+
 def test_anchor_decomposition_matches_documented_values(atlas):
     d = sa.anchor_decomposition(atlas["model"])
     assert d["wage_income_W"] == pytest.approx(0.2337282, abs=1e-6)

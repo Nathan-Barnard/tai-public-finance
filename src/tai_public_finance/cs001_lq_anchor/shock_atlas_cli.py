@@ -207,7 +207,8 @@ def write_figures(output_dir: Path) -> list[Path]:
     if persistence_paths.exists() and persistence_paths.stat().st_size > 0:
         prow = read_csv_typed(persistence_paths, ROW_STRING_FIELDS, ROW_BOOL_FIELDS)
         base_rows = read_csv_typed(output_dir / "atlas_raw.csv", ROW_STRING_FIELDS, ROW_BOOL_FIELDS)
-        fixed = [r for r in prow if r["family"] == FAMILY_FIXED_ACROSS_PERSISTENCE] + [r for r in base_rows if r["family"] == FAMILY_MATCHED_STATE and r["named_labels"] and r["model"] == "baseline"]
+        fixed = [r for r in prow if r["family"] == FAMILY_FIXED_ACROSS_PERSISTENCE]
+        del base_rows
         labels = sorted({r["named_labels"] for r in fixed if "positive" in r["named_labels"]})
         variables = [("output_deviation_linear", "Output"), ("wage_income_deviation_linear", "Wage income"), ("fiscal_resources_deviation_linear", "Planner resources F"), ("claim_loading_state_functional", "Claim-loading state functional dz + ell_x dx")]
         fig, axes = plt.subplots(len(labels), len(variables), figsize=(4 * len(variables), 2.6 * len(labels)), sharex=True)
