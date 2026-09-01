@@ -1,0 +1,99 @@
+schema_version: '1.0'
+run_id: RUN-20260901T201333Z-CS001-NJGRID-8e4ceb25-01
+created_utc: '2026-09-01T20:13:33Z'
+status: completed
+purpose: Focused public-net-worth (N/J) sensitivity grid, 18 points, resolving the
+  transfer boundary and the risky-position sign-change point. Exploratory first CS001
+  tranche, not a completed/approved CS001 result.
+specification:
+  id: CS001
+  version: '0.1'
+  status: draft
+  fingerprint_sha256: null
+problem_id: CP001
+supersedes: null
+based_on_run: RUN-20260901T194938Z-CS001-d876a61e-01
+implementation:
+  repository_url: https://github.com/Nathan-Barnard/tai-public-finance
+  local_path: /Users/nathanbarnard/Documents/TAI public finnace claude
+  commit: 8e4ceb25a965286d21ddc076325818c74c19db15
+  branch: cs001/lq-anchor-matrix-equations-irfs
+  dirty_worktree_at_run_start: true
+  implementer: claude_code
+  entrypoint: python3 -m tai_public_finance.cs001_lq_anchor.net_worth_grid_cli
+  command: uv run python -m tai_public_finance.cs001_lq_anchor.net_worth_grid_cli
+    --config configs/cs001/lq_farhi_smoke.json --ratios -0.15,-0.12,-0.085,-0.082,-0.07956,-0.077,-0.074,-0.06,-0.045,-0.040,-0.035523,-0.031,-0.026,-0.01,0.0,0.1,0.25,0.5
+    --output-dir outputs/cs001-net-worth-sensitivity --run-id RUN-20260901T201333Z-CS001-NJGRID-8e4ceb25-01
+environment:
+  operating_system: macOS-15.6.1-arm64-arm-64bit-Mach-O
+  runtime_versions:
+    python: 3.13.5
+    numpy: 2.5.2
+    scipy: 1.18.1
+hardware:
+  resource_lane: L1_interactive
+  machine_label: local_mac
+  accelerator: null
+inputs:
+  parameter_set_id: lq_farhi_illustrative_smoke_v1
+  input_fingerprints:
+    primitive_sha256: 78837354ee416984183ef0eed43c54105c60c8a31b6a75c2f6f84c58f924917f
+    experiment_sha256: 9c4b5e3b627e8fb031ad07649d4fdc80d1b1956ce1c251bc1bc2d94b02024570
+    complete_input_sha256: e521c69dc3fd1a3e92d1ecf603f7449a7c96becd5c0c636abde72ef0024a32a4
+  swept_ratios:
+  - -0.15
+  - -0.12
+  - -0.085
+  - -0.082
+  - -0.07956
+  - -0.077
+  - -0.074
+  - -0.06
+  - -0.045
+  - -0.04
+  - -0.035523
+  - -0.031
+  - -0.026
+  - -0.01
+  - 0.0
+  - 0.1
+  - 0.25
+  - 0.5
+  derived_thresholds:
+    transfer_boundary_net_worth_ratio: -0.07955987274923126
+    portfolio_sign_change_net_worth_ratio: -0.03552263582503867
+result:
+  outcome: mixed
+  wall_seconds: 0.00461487501161173
+  n_points: 18
+  n_feasible: 13
+  n_infeasible: 5
+  infeasible_ratios_and_reasons:
+  - ratio: -0.15
+    reasons:
+    - negative_transfer
+  - ratio: -0.12
+    reasons:
+    - negative_transfer
+  - ratio: -0.085
+    reasons:
+    - negative_transfer
+  - ratio: -0.082
+    reasons:
+    - negative_transfer
+  - ratio: -0.07956
+    reasons:
+    - negative_transfer
+artifacts:
+- role: primary_output
+  location: outputs/cs001-net-worth-sensitivity/net_worth_grid.csv
+  sha256: eac23cc483c494d0e66e10979f8182f5da7d377c25e2a86b5076f506d6c37418
+  bytes: 16804
+interpretation:
+  conclusion: 13/18 grid points are feasible (positive-X, non-negative transfer, portfolio-bound).
+    Different rows are different members of the deterministic fiscal-wealth family,
+    not a causal comparison across changing public net worth.
+  limitations:
+  - Exploratory first CS001 tranche; CS001 itself remains draft/unfingerprinted.
+  - Deterministic-family comparative statics only; not a claim about the dynamics
+    of N itself.
