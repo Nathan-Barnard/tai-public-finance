@@ -22,4 +22,4 @@ an external durable location, content hash, and size instead. Never edit a
 completed record to match a later specification; create a new one and, if
 needed, a short note linking the original and its replacement.
 
-No runs yet — nothing is implemented.
+- [`RUN-20260901T184527Z-CS001-89f6a939-01.yaml`](RUN-20260901T184527Z-CS001-89f6a939-01.yaml) — CS001 Stage 1 (deterministic/first-order 4x4 LQ system) and Stage 2A (leading small-risk portfolio/welfare) baseline on the illustrative Farhi-based smoke calibration; passed all 35 acceptance checks. Full bundle (matrices, tidy IRFs, figures, diagnostics) under `../outputs/cs001-lq-anchor-baseline/`; findings summarized in that directory's `FINDINGS.md`. `report.json`, `irfs.csv`, and `figures/` are not committed (see `.gitignore`) — regenerate with the command in this record, or verify a copy against the sha256 hashes recorded in `artifacts` below.
