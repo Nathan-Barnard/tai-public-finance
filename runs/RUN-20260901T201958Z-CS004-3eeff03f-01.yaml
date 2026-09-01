@@ -1,0 +1,182 @@
+schema_version: '1.0'
+run_id: RUN-20260901T201958Z-CS004-3eeff03f-01
+created_utc: '2026-09-01T20:19:58Z'
+status: completed
+purpose: >-
+  CS004 Block 0 ("bind and freeze"): repository binding, authoritative
+  source-record fingerprints, economic/numerical identity transcription, and
+  reproducibility-convention freeze for the interior five-state Ramsey PDE
+  feasibility problem (CP004/CS004 v0.5, draft). No solver, evaluator, or
+  network code -- permitted under CS004's own exploratory-prototype exception
+  since the specification is not yet approved. Recorded as a RUN for the same
+  traceability reason runs/README.md gives any material execution informing a
+  later model or implementation choice, not because a numerical computation
+  was performed.
+not_a_numerical_execution: true
+specification:
+  id: CS004
+  version: '0.5'
+  status: draft
+  fingerprint_sha256: null
+  fingerprint_note: >-
+    No specification-level fingerprint is recorded in the codex registry yet
+    (specification.status must reach review_ready or later for that). The
+    hash below is this block's own read-time SHA-256 of the spec file, not a
+    registry fingerprint -- do not conflate the two.
+input_fingerprints:
+  cs004_spec_sha256: aa5f379c198d133295dcdb706fb80d7e10a158a7be6320251c1f6960197f68af
+  broad_pde_config_sha256: b060925f4327a1464dc12320aba0271d3411db1ae3d05e42406d5cc11a8296cd
+  matched_bridge_config_sha256: 35aedb34db1c64ea478257358011fe47ac4865cd2d39740b7ce4de765f07bbaf
+  full_source_manifest_path: outputs/cs004-block0-bind-and-freeze/source_manifest.json
+  fingerprint_procedure: >-
+    Plain shasum -a 256 over raw file bytes. NOT CS001's canonical-JSON
+    procedure (src/tai_public_finance/primitives/parameters.py:
+    canonical_json + sha256_of) -- that module is not present on this
+    branch's base commit; see FINDINGS.md "Deterministic fingerprinting
+    procedure" for the flagged follow-up.
+problem_id: CP004
+approach_id: null
+approach_note: No candidate approach (CA005/CA006/CA007) is selected or exercised in this block.
+benchmark_id: null
+implementation:
+  repository_url: https://github.com/Nathan-Barnard/tai-public-finance
+  local_path: /Users/nathanbarnard/Documents/TAI public finnace claude-cs004-five-state-ramsey-pde-feasibility
+  primary_checkout_path: /Users/nathanbarnard/Documents/TAI public finnace claude
+  worktree_isolated: true
+  commit: 3eeff03f6872a8d0bb9711d5b369700950c60f2a
+  branch: cs004/five-state-ramsey-pde-feasibility
+  branch_base_commit: a6df37f9c4378e539be2dd080268989631097be1
+  branch_base_ref: chore/computation-workflow-setup (PR #1, open)
+  branch_deliberately_not_based_on: cs001/lq-anchor-matrix-equations-irfs (PR #2, open, actively amended by peer sessions during this block)
+  dirty_worktree: false
+  dirty_worktree_at_run_start: false
+  implementer: claude_code
+  entrypoint: null
+  command: null
+  entrypoint_note: No CLI or executable code exists for CS004 yet; this block is configuration and documentation only.
+environment:
+  operating_system: macOS-15.6.1-arm64-arm-64bit-Mach-O
+  architecture: arm64
+  runtime_versions:
+    python: 3.13.5
+    numpy: 2.5.2
+    scipy: 1.18.1
+    matplotlib: 3.11.1
+    pyyaml: 6.0.3
+  dependency_lock_path: uv.lock
+  dependency_lock_sha256: fb5e9c9a70373afd1934f617d7aa9963e310b6e748efce5d872b5289ff7404b9
+  dependency_lock_note: >-
+    This worktree's own uv.lock, resolved fresh via `uv sync` on this
+    branch's base. Differs trivially from the primary checkout's uv.lock
+    (a pyyaml entry ordering/specifier artifact of the two branches'
+    divergent history) -- not a drift bug.
+  container_or_image: null
+  provisional_framework_pytorch: not yet added to pyproject.toml/uv.lock (CS004 names it provisionally; installing it is out of scope for Block 0)
+hardware:
+  resource_lane: L0_smoke
+  machine_label: local_mac
+  cpu: arm
+  logical_cores: 10
+  memory_gb: 16.0
+  disk_free_gb_at_block_end: 6.0
+  accelerator: null
+  accelerator_memory_gb: null
+  detected_at_runtime: true
+budget:
+  wall_seconds_limit: 3600
+  cash_limit_usd: 0
+  actual_cash_usd: 0
+  early_stop_rule: >-
+    Stop and report the exact blocker if the repository or its inputs cannot
+    be identified unambiguously (CS004 v0.5, Block 0 row of the same-day
+    sequence table).
+randomness:
+  deterministic_requested: true
+  seeds: []
+  nondeterminism_notes: No stochastic computation; documentation, configuration, and hashing only.
+inputs:
+  parameter_set_ids:
+  - pde_broad_feasibility_illustrative_v1
+  - pde_lq_matched_bridge_v1
+  input_artifacts:
+  - configs/cs004/broad_pde_feasibility_v1.json
+  - configs/cs004/matched_pde_lq_bridge_v1.json
+  research_records_read: 7
+  research_records_manifest: outputs/cs004-block0-bind-and-freeze/source_manifest.json
+solver:
+  status: not_applicable
+  note: No solver code exists or was written this block.
+preflight:
+  tests_command: uv run pytest
+  tests_status: passed
+  tests_detail: "1 passed (tests/test_import.py only -- CS001's test suite lives on the cs001 branch, not this one)"
+  sync_command: uv sync
+  sync_status: passed
+result:
+  outcome: pass
+  wall_seconds: null
+  wall_seconds_note: >-
+    Not machine-timed as a single command (this block is a sequence of reads,
+    investigation, and file writes, not one solver invocation). Qualitative
+    elapsed-time estimate is in FINDINGS.md.
+  peak_memory_gb: null
+  actual_cash_usd: 0
+  checkpoints_recovered: false
+  solver_reported_metrics: null
+  independent_diagnostics: null
+  economic_quantities: null
+  reliable_region: >-
+    N/A -- no policy or value approximation exists yet. This block establishes
+    only the repository/config/convention scaffolding Block 1 will read.
+  failure_code: null
+  failure_detail: null
+artifacts:
+- role: primary_output
+  location: outputs/cs004-block0-bind-and-freeze/FINDINGS.md
+  sha256: 8272c7a5c20f8a8a7190123b59eecb6c99397b647cf62e7501554ab377976848
+  bytes: 20962
+- role: supporting_output
+  location: outputs/cs004-block0-bind-and-freeze/source_manifest.json
+  sha256: 33dfa96b52b869414829a9682c18b09aca7ae31c61867cbd4380aca22bd1f649
+  bytes: 6104
+- role: input_config
+  location: configs/cs004/broad_pde_feasibility_v1.json
+  sha256: b060925f4327a1464dc12320aba0271d3411db1ae3d05e42406d5cc11a8296cd
+  bytes: 5526
+- role: input_config
+  location: configs/cs004/matched_pde_lq_bridge_v1.json
+  sha256: 35aedb34db1c64ea478257358011fe47ac4865cd2d39740b7ce4de765f07bbaf
+  bytes: 5661
+interpretation:
+  supports_result_ids: []
+  challenges_result_ids: []
+  question_ids:
+  - Q19
+  assurance_or_review_artifacts: []
+  conclusion: >-
+    The implementation repository is unambiguously bound, the seven
+    authoritative source records are fingerprinted, the maintained economic
+    and numerical identity is transcribed without modification, and
+    reproducibility conventions are frozen where CS004 v0.5 fixes them and
+    explicitly marked unresolved where it deliberately leaves them open. No
+    model, solver, evaluator, or network code exists yet.
+  limitations:
+  - CS004 remains draft/unfingerprinted in the codex registry; this block does
+    not and cannot change that -- it is Nathan's/codex's action, not this
+    repository's.
+  - "research-context/portfolio-snapshot.md still reads implementation binding_status: unbound,
+    mirroring the codex registry exactly; this block does not hand-edit that mirror out of
+    sync with its canonical source (its own stated policy), even though the repository
+    path/URL are now unambiguous."
+  - The matched-bridge config embeds a manually-copied snapshot of CS001's primitive/
+    experiment vectors rather than a live file reference, because this branch predates
+    CS001's configs/ directory; flagged in-file for replacement once CS001 merges.
+  - Six named inputs remain genuinely unresolved (eta_sol numeric value; bridge z/n/tau
+    domain; smaller bridge epsilon; primitives/ package reuse timing; local MPS-vs-CPU
+    decision; disk-cap confirmation) -- see FINDINGS.md.
+  next_decision: >-
+    Begin Block 1 (primitive/domain screen) by first deciding whether to
+    merge/rebase in src/tai_public_finance/primitives/ from the cs001 branch
+    before writing automation()/domestic_primitives()/international_pricing()
+    against the two frozen configs, per FINDINGS.md's unresolved-item 4 and
+    Block 1 time estimate.

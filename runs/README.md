@@ -22,4 +22,4 @@ an external durable location, content hash, and size instead. Never edit a
 completed record to match a later specification; create a new one and, if
 needed, a short note linking the original and its replacement.
 
-No runs yet — nothing is implemented.
+- [`RUN-20260901T201958Z-CS004-3eeff03f-01.yaml`](RUN-20260901T201958Z-CS004-3eeff03f-01.yaml) — CS004 Block 0 ("bind and freeze"): repository binding, seven-record source manifest, economic/numerical identity transcription, and reproducibility-convention freeze for the interior five-state Ramsey PDE feasibility problem (CP004/CS004 v0.5, draft). No solver/evaluator/network code. See `../outputs/cs004-block0-bind-and-freeze/FINDINGS.md`.

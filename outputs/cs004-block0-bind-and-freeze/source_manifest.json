@@ -1,0 +1,97 @@
+{
+  "purpose": "Authoritative source manifest for CS004 Block 0 (bind and freeze). Every research record read from the read-only codex workspace (../TAI public finnace codex, not git-tracked) to produce this freeze, with path, version/status where present, modification time, and SHA-256 at the moment read.",
+  "codex_workspace_path": "/Users/nathanbarnard/Documents/TAI public finnace codex",
+  "codex_workspace_git_tracked": false,
+  "note_on_stability": "This workspace is not git-tracked, so mtime + sha256 are the only available stability markers -- there is no commit hash to pin. Re-reading a file with a different hash than recorded here means it changed after this freeze and CS004 Block 1+ must re-check for drift before relying on it.",
+  "records": [
+    {
+      "role": "current_project_context",
+      "path": "/Users/nathanbarnard/Documents/TAI public finnace codex/CURRENT_PROJECT_CONTEXT.md",
+      "self_reported_version": "Last consolidated: 2026-09-01",
+      "mtime_utc": "2026-09-01T19:51:55Z",
+      "sha256": "02c0f70aa14a5fd449ed7240762eb667dd36f854b127e6b503f9b17684cd5ba2"
+    },
+    {
+      "role": "computation_system_readme",
+      "path": "/Users/nathanbarnard/Documents/TAI public finnace codex/computation/README.md",
+      "self_reported_version": null,
+      "mtime_utc": "2026-09-01T20:23:43Z",
+      "sha256": "d46e9ab42b8573fa8898be071fd9e803b0712e7b3b604bcf7260300490c4a99a"
+    },
+    {
+      "role": "computational_roadmap",
+      "path": "/Users/nathanbarnard/Documents/TAI public finnace codex/computation/roadmap.md",
+      "self_reported_version": "Last updated: 2026-09-01",
+      "mtime_utc": "2026-09-01T21:10:20Z",
+      "sha256": "63b6fa4aaee3679beebcfbf0c3647ab6151eb2e8765ff8a4220d8aa1a17f7d72"
+    },
+    {
+      "role": "primary_specification_CS004",
+      "path": "/Users/nathanbarnard/Documents/TAI public finnace codex/computation/specifications/interior-first-global-five-state-ramsey-pde-feasibility--CS004.md",
+      "self_reported_version": "0.5",
+      "self_reported_status": "draft",
+      "mtime_utc": "2026-09-01T21:05:29Z",
+      "sha256": "aa5f379c198d133295dcdb706fb80d7e10a158a7be6320251c1f6960197f68af",
+      "note": "This is the version this entire Block 0 freeze is traceable to. A later edit to CS004 that changes this hash requires re-checking every frozen object below against the new text before Block 1 proceeds."
+    },
+    {
+      "role": "decision_CD003",
+      "path": "/Users/nathanbarnard/Documents/TAI public finnace codex/computation/decisions/neural-counterfactuals-before-selective-adaptive-grid-verification--CD003.md",
+      "self_reported_version": null,
+      "self_reported_status": "accepted",
+      "self_reported_date": "2026-09-01",
+      "mtime_utc": "2026-09-01T21:04:38Z",
+      "sha256": "300faf52d7ae0bab5bf16d3df1c528e06e31a5a202a2698495d966395d8f8071"
+    },
+    {
+      "role": "decision_CD001",
+      "path": "/Users/nathanbarnard/Documents/TAI public finnace codex/computation/decisions/separate-exploratory-calibrations-with-matched-pde-lq-bridge--CD001.md",
+      "self_reported_version": null,
+      "self_reported_status": "accepted",
+      "self_reported_date": "2026-09-01",
+      "mtime_utc": "2026-09-01T16:41:31Z",
+      "sha256": "6c6b5614009555a9ef86d4e15cf391301b868fc563bc83bd901c378e6fd5bb30"
+    },
+    {
+      "role": "illustrative_pde_parameter_and_domain_note",
+      "path": "/Users/nathanbarnard/Documents/TAI public finnace codex/research-notes/illustrative-ramsey-pde-parameter-and-domain-configuration.md",
+      "self_reported_version": "Updated: 2026-09-01",
+      "self_reported_status": "ready with qualifications for the first primitive/domain screen",
+      "mtime_utc": "2026-09-01T19:52:41Z",
+      "sha256": "99f0db6fcb5c4578cb323cfef3e0802d97b6e54a6496a66c9640bb619788d1d3",
+      "note": "Source of the numeric values in configs/cs004/broad_pde_feasibility_v1.json. Its own status line ('ready with qualifications') is a solver-feasibility screen, not a calibration or an approval of CS004 itself."
+    }
+  ],
+  "additional_records_read_to_resolve_ambiguity": [],
+  "cross_repository_provenance": [
+    {
+      "role": "matched_bridge_LQ_primitive_vector",
+      "path": "configs/primitives/lq_farhi_annual_v1.json",
+      "branch": "cs001/lq-anchor-matrix-equations-irfs",
+      "commit": "89f6a939e5aa11527400bb473916c1a0f3ecf8d6",
+      "blob_sha256": "18f119ffca885a79c214eda858ab3ce916b43c4128473509897d0e4b8c139aa3",
+      "read_via": "git show <branch>:<path> against the shared .git object store (safe against concurrent edits in another worktree; no working tree touched)",
+      "note": "Not present on this branch yet -- embedded as a provenance-stamped snapshot in configs/cs004/matched_pde_lq_bridge_v1.json. See that file's cross_branch_dependency block."
+    },
+    {
+      "role": "matched_bridge_LQ_experiment_vector",
+      "path": "configs/cs001/lq_farhi_smoke.json",
+      "branch": "cs001/lq-anchor-matrix-equations-irfs",
+      "commit": "89f6a939e5aa11527400bb473916c1a0f3ecf8d6",
+      "blob_sha256": "eb827f5db91c65bfa4635d708e2efde347307b1326ee70d3ea0dfcb38ea4a7dc",
+      "read_via": "git show <branch>:<path>",
+      "note": "Same caveat as above."
+    }
+  ],
+  "cs004_config_object_fingerprints": {
+    "fingerprinting_procedure": "shasum -a 256 over the raw committed file bytes (UTF-8, LF line endings, as written by this session's Write tool). NOT the canonical-JSON/key-sorted procedure CS001 uses (src/tai_public_finance/primitives/parameters.py: canonical_json + sha256_of) -- that module does not exist on this branch (see FINDINGS.md, 'Fingerprinting procedure'). Recompute with plain shasum -a 256 to verify; do not expect these hashes to match a canonical-JSON hash of the same content.",
+    "configs/cs004/broad_pde_feasibility_v1.json": {
+      "sha256": "b060925f4327a1464dc12320aba0271d3411db1ae3d05e42406d5cc11a8296cd",
+      "bytes": 5526
+    },
+    "configs/cs004/matched_pde_lq_bridge_v1.json": {
+      "sha256": "35aedb34db1c64ea478257358011fe47ac4865cd2d39740b7ce4de765f07bbaf",
+      "bytes": 5661
+    }
+  }
+}
