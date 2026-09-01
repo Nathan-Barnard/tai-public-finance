@@ -86,6 +86,7 @@ def sweep_one_parameter(
                     "outcome": "error",
                     "failed_checks": [f"{type(error).__name__}: {error}"],
                     "chi": None,
+                    "chi_star": None,
                     "real_closed_loop_root_real": None,
                     "real_closed_loop_root_imag_abs": None,
                     "oscillatory": None,
