@@ -19,6 +19,11 @@ __pycache__/
 .venv/
 venv/
 .ipynb_checkpoints/
+.pytest_cache/
+
+# Repository-local caches created by computational runs (e.g. matplotlib font
+# cache under MPLCONFIGDIR) — never a material run artifact.
+.cache/
 
 # Claude
 .claude/settings.local.json
