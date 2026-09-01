@@ -170,6 +170,27 @@ def leading_portfolio_and_welfare(
     )
 
 
+def transfer_boundary_net_worth_ratio(local_system: LocalSystem) -> float:
+    """The N/J ratio at which the transfer floor c=rho*(N+J) >= W_bar binds
+    exactly: rho*(N+J) = W_bar => N = W_bar/rho - J => N/J = W_bar/(rho*J) - 1.
+    Independent of the portfolio solve -- a pure function of the anchor."""
+
+    anchor = local_system.anchor
+    rho = local_system.parameters.rho
+    return anchor.wage_income_bar / (rho * anchor.fiscal_wealth_bar) - 1.0
+
+
+def portfolio_sign_change_net_worth_ratio(local_system: LocalSystem, solution: LqSolution) -> float:
+    """The N/J ratio at which the leading position s_0_bar = X - zeta_J.lambda/beta
+    is exactly zero: N+J = zeta_J.lambda/beta => N/J = (zeta_J.lambda/beta)/J - 1.
+    The marketed amount zeta_J.lambda/beta does not depend on N, so this needs
+    only one portfolio evaluation (any N) to read it off."""
+
+    anchor = local_system.anchor
+    reference = leading_portfolio_and_welfare(local_system, solution, risky_short_limit=1e9, safe_debt_limit=1e9, risk_scale_epsilon=1.0)
+    return reference.marketed_fiscal_wealth_amount / anchor.fiscal_wealth_bar - 1.0
+
+
 def net_worth_grid(
     local_system: LocalSystem,
     solution: LqSolution,
@@ -237,5 +258,11 @@ def net_worth_grid(
         row["portfolio_bound_feasible"] = portfolio_bound_feasible
         row["feasible"] = row["comprehensive_resources_positive"] and transfer_feasible and portfolio_bound_feasible
         row["failure_reasons"] = failure_reasons
+        # N - s_0_bar: the residual signed safe position at the unconstrained optimum
+        # (s_0_bar>N means the risky position is partly debt financed).
+        row["residual_safe_position"] = net_worth - result.leading_unconstrained_position
+        # Same number as hedge_consumption_equivalent_leading, under the name this
+        # exercise's brief uses: the loss avoided relative to the forced Merton s=X.
+        row["merton_misallocation_consumption_equivalent"] = result.hedge_consumption_equivalent_leading
         rows.append(row)
     return rows
