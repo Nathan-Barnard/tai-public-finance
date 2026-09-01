@@ -1,0 +1,50 @@
+{
+  "parameter_set_id": "lq_farhi_illustrative_smoke_v1",
+  "calibration_role": "standalone_lq_smoke",
+  "primitive_file": "../primitives/lq_farhi_annual_v1.json",
+  "risk_scale_epsilon": 1.0,
+  "maintained_economic_closure": {
+    "welfare_population": "representative workers only; domestic capitalists and foreigners receive zero direct welfare weight",
+    "domestic_capital_ownership": "segmented domestic capitalists own all domestic capital; government and foreigners cannot buy it",
+    "government_risky_asset": "one external international claim, not domestic public equity",
+    "international_pricing_closure": "infinitesimal price-taking domestic government with a residual foreign counterparty; domestic positions do not change sigma_I=lambda_I or beta_I",
+    "government_spending": 0.0,
+    "adoption_assumption": "weakly higher globally optimized output under adoption is maintained over the numerical region",
+    "firm_branch_assumption": "interior smooth full-specialisation branch is maintained and checked locally, not globally selected by this solve",
+    "safe_asset_convention": "signed residual safe position equals public net worth minus risky position"
+  },
+  "counterfactual_metadata": {
+    "inherited_augmented_state": "S_0=(z_bar,x_bar,K_bar,N_bar,tau_bar); M_0 empty on the maintained recursive Markov branch",
+    "commitment_regime": "maintained recursive Ramsey continuation",
+    "future_shock_coupling": "future innovations switched off for conditional-mean IRFs",
+    "asset_access_comparison": "full external-claim access versus s=0 from the same inherited state",
+    "welfare_metric": "worker-only expected discounted log consumption"
+  },
+  "reporting": {
+    "short_brownian_window_years": 0.003968253968253968,
+    "finite_ou_window_years": 1.0,
+    "constructed_automation_share_displacement": 0.01,
+    "inherited_state_displacement": 0.01,
+    "horizon_grid_years": {
+      "start": 0.0,
+      "stop": 40.0,
+      "step": 0.25
+    },
+    "public_net_worth_to_fiscal_wealth_grid": [-0.5, -0.25, 0.0, 0.25, 0.5]
+  },
+  "numerical_scaffolding": {
+    "risky_short_limit": 20.0,
+    "safe_debt_limit": 20.0,
+    "tax_min": -0.5,
+    "tax_max": 0.95,
+    "tax_speed_abs_max": 0.5
+  },
+  "acceptance_tolerances": {
+    "anchor_relative_error": 1e-10,
+    "matrix_scaled_residual": 1e-10,
+    "riccati_symmetry_error": 1e-12,
+    "closed_form_relative_error": 1e-8,
+    "matrix_exponential_vs_ode_relative_error": 1e-8,
+    "finite_difference_relative_error": 1e-6
+  }
+}

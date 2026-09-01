@@ -19,9 +19,22 @@ __pycache__/
 .venv/
 venv/
 .ipynb_checkpoints/
+.pytest_cache/
+
+# Repository-local caches created by computational runs (e.g. matplotlib font
+# cache under MPLCONFIGDIR) — never a material run artifact.
+.cache/
 
 # Claude
 .claude/settings.local.json
+
+# Large per-run computational artifacts: hash- and size-referenced from the
+# matching runs/*.yaml record rather than committed (runs/README.md), and
+# trivially regenerable from that record's command. Small structured outputs
+# (matrices, summary.md, portfolio grids) stay tracked.
+outputs/*/figures/
+outputs/*/report.json
+outputs/*/irfs.csv
 
 # Reference literature (copyrighted textbooks/papers — kept local only;
 # see literature/README.md, which IS tracked, for the bibliography)

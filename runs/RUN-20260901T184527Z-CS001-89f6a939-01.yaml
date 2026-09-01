@@ -1,0 +1,446 @@
+schema_version: '1.0'
+run_id: RUN-20260901T184527Z-CS001-89f6a939-01
+created_utc: '2026-09-01T18:45:28Z'
+status: completed
+purpose: Stage 1 deterministic 4x4 LQ system and Stage 2A leading small-risk baseline
+  calculation
+specification:
+  id: CS001
+  version: '0.1'
+  fingerprint_sha256: e521c69dc3fd1a3e92d1ecf603f7449a7c96becd5c0c636abde72ef0024a32a4
+problem_id: CP001
+approach_id: CA001
+benchmark_id: null
+implementation:
+  repository_url: https://github.com/Nathan-Barnard/tai-public-finance
+  local_path: /Users/nathanbarnard/Documents/TAI public finnace claude
+  commit: 89f6a939e5aa11527400bb473916c1a0f3ecf8d6
+  branch: cs001/lq-anchor-matrix-equations-irfs
+  dirty_worktree: false
+  dirty_worktree_at_run_start: false
+  implementer: claude_code
+  entrypoint: python3 -m tai_public_finance.cs001_lq_anchor.cli
+  command: uv run python -m tai_public_finance.cs001_lq_anchor.cli --config configs/cs001/lq_farhi_smoke.json
+    --output-dir outputs/cs001-lq-anchor-baseline --run-id RUN-20260901T184527Z-CS001-89f6a939-01
+environment:
+  operating_system: macOS-15.6.1-arm64-arm-64bit-Mach-O
+  architecture: arm64
+  runtime_versions:
+    python: 3.13.5
+    numpy: 2.5.2
+    scipy: 1.18.1
+    matplotlib: 3.11.1
+    pyyaml: 6.0.3
+  dependency_lock_path: uv.lock
+  dependency_lock_sha256: 3c59dc4b381ad68cd634a6f917f1ce4fa1080d9ce43e2344064acb6109f76c4a
+  container_or_image: null
+hardware:
+  resource_lane: L1_interactive
+  machine_label: local_mac
+  cpu: arm
+  logical_cores: 10
+  memory_gb: 16.0
+  accelerator: null
+  accelerator_memory_gb: null
+  detected_at_runtime: true
+budget:
+  wall_seconds_limit: 600
+  cash_limit_usd: 0
+  actual_cash_usd: 0
+  early_stop_rule: Stop and retain failure if any residual, concavity, feasibility,
+    or path-validity acceptance check fails.
+randomness:
+  deterministic_requested: true
+  seeds: []
+  nondeterminism_notes: Dense deterministic float64 linear algebra; no simulation
+    draws.
+inputs:
+  parameter_set_id: lq_farhi_illustrative_smoke_v1
+  parameter_fingerprint_sha256: 78837354ee416984183ef0eed43c54105c60c8a31b6a75c2f6f84c58f924917f
+  experiment_ids:
+  - brownian_productivity_1sd_short_window
+  - brownian_automation_1sd_short_window
+  - ou_productivity_conditional_sd_state_displacement
+  - ou_automation_conditional_sd_state_displacement
+  - constructed_combined_claim_rental_base_neutral
+  - constructed_worker_income_neutral
+  - constructed_output_neutral
+  - constructed_primary_resource_neutral
+  - inherited_capital_1pct
+  - inherited_tax_1pp
+  - capital_tax_mode_real_basis
+  - capital_tax_mode_quadrature_basis
+  input_artifacts:
+  - /Users/nathanbarnard/Documents/TAI public finnace claude/configs/cs001/lq_farhi_smoke.json
+  - /Users/nathanbarnard/Documents/TAI public finnace claude/configs/primitives/lq_farhi_annual_v1.json
+  domain:
+    local_anchor:
+      z_bar: -1.806616591576036
+      x_bar: 0.0
+      capital_bar: 1.0
+      public_net_worth_bar: 0.0
+      tax_rate_bar: 0.5
+      alpha_bar: 0.33999999999999997
+      alpha_x_bar: 0.075
+      alpha_xx_bar: 0.0
+      rental_rate_bar: 0.12040541463503893
+      output_bar: 0.35413357245599686
+      wage_income_bar: 0.23372815782095793
+      tax_base_bar: 0.040405414635038925
+      fiscal_resources_bar: 0.2539308651384774
+      fiscal_wealth_normalized_bar: 12.569150319683768
+      fiscal_wealth_bar: 12.569150319683768
+      comprehensive_resources_bar: 12.569150319683768
+      worker_consumption_bar: 0.2539308651384774
+      transfer_bar: 0.02020270731751947
+      eta_output_alpha: 1.0382942174102645
+      h_international_bar: 3.9794706879985
+      ell_x_bar: 0.2984603015998875
+      ell_xx_bar: -0.07372601446995912
+      gamma: 0.03973378682956285
+      chi: 1.411896637001644
+      specialisation_margin_automation_composite: 1.0382942174102645
+      specialisation_margin_new_task_composite: 0.5867057825897356
+    numerical_scaffolding:
+      risky_short_limit: 20.0
+      safe_debt_limit: 20.0
+      tax_min: -0.5
+      tax_max: 0.95
+      tax_speed_abs_max: 0.5
+  maintained_economic_closure:
+    welfare_population: representative workers only; domestic capitalists and foreigners
+      receive zero direct welfare weight
+    domestic_capital_ownership: segmented domestic capitalists own all domestic capital;
+      government and foreigners cannot buy it
+    government_risky_asset: one external international claim, not domestic public
+      equity
+    international_pricing_closure: infinitesimal price-taking domestic government
+      with a residual foreign counterparty; domestic positions do not change sigma_I=lambda_I
+      or beta_I
+    government_spending: 0.0
+    adoption_assumption: weakly higher globally optimized output under adoption is
+      maintained over the numerical region
+    firm_branch_assumption: interior smooth full-specialisation branch is maintained
+      and checked locally, not globally selected by this solve
+    safe_asset_convention: signed residual safe position equals public net worth minus
+      risky position
+  counterfactual_metadata:
+    inherited_augmented_state: S_0=(z_bar,x_bar,K_bar,N_bar,tau_bar); M_0 empty on
+      the maintained recursive Markov branch
+    commitment_regime: maintained recursive Ramsey continuation
+    future_shock_coupling: future innovations switched off for conditional-mean IRFs
+    asset_access_comparison: full external-claim access versus s=0 from the same inherited
+      state
+    welfare_metric: worker-only expected discounted log consumption
+  discretization:
+    start: 0.0
+    stop: 40.0
+    step: 0.25
+solver:
+  packages_and_versions:
+    numpy: 2.5.2
+    scipy: 1.18.1
+  method: ordered complex Schur stable invariant subspace; closed-form Hamiltonian-root
+    cross-check; scipy solve_sylvester for the Sylvester/Lyapunov blocks; matrix exponential
+    with direct DOP853 ODE cross-check
+  tolerances:
+    anchor_relative_error: 1.0e-10
+    matrix_scaled_residual: 1.0e-10
+    riccati_symmetry_error: 1.0e-12
+    closed_form_relative_error: 1.0e-08
+    matrix_exponential_vs_ode_relative_error: 1.0e-08
+    finite_difference_relative_error: 1.0e-06
+  initialization: deterministic interior anchor
+  continuation: null
+  precision: float64
+preflight:
+  tests_command: uv run pytest
+  tests_status: passed
+  exact_or_manufactured_benchmark: Q_rr cancellation, closed-form Riccati roots, manufactured
+    non-hyperbolic refusal, repeated-root ordered-Schur regression, and matrix-exponential/ODE
+    agreement
+result:
+  outcome: pass
+  wall_seconds: 0.05564783400041051
+  peak_memory_gb: null
+  actual_cash_usd: 0
+  checkpoints_recovered: false
+  solver_reported_metrics: null
+  independent_diagnostics:
+    anchor_identity_errors:
+      capital_law_vs_rho: 3.469446951953614e-18
+      fiscal_envelope_vs_rho: 3.469446951953614e-18
+      capital_growth_vs_zero: 3.469446951953614e-18
+      fiscal_resources_vs_consumption: 0.0
+      specialisation_margins_positive: 0.5867057825897356
+    linear_fiscal_wealth_identity_errors:
+      j_k_vs_one: 2.220446049250313e-16
+      j_t_vs_zero: 1.87110417367505e-16
+      j_z_closed_form_relative_error: 1.2685480010985897e-16
+      j_x_closed_form_relative_error: 0.0
+    q_rr_cancellation_relative_error: 1.1331722378074404e-17
+    finite_difference_checks:
+      output:
+        gradient_relative_error: 4.298832835181538e-10
+        hessian_relative_error: 1.4911433754375695e-08
+      rental_rate:
+        gradient_relative_error: 1.8402272509071505e-10
+        hessian_relative_error: 7.012741734184383e-09
+      wage_income:
+        gradient_relative_error: 3.1264529229335784e-10
+        hessian_relative_error: 1.0682349299140796e-08
+      safe_rate:
+        gradient_relative_error: 1.080284801406793e-10
+        hessian_relative_error: 1.0962529613560733e-10
+    riccati_full_scaled_residual: 1.159309242606376e-16
+    riccati_real_block_scaled_residual: 8.871396570100837e-17
+    riccati_symmetry_error: 0.0
+    raw_solve_symmetry_errors:
+      H_rr: 6.070623396823833e-16
+      H_ee: 8.104075354342283e-17
+      stationary_covariance_y: 2.16262049446251e-19
+    real_block_scalar_residuals:
+    - 7.968646412134013e-17
+    - 0.0
+    - 5.776263516808786e-17
+    sylvester_scaled_residual: 6.321752184243787e-17
+    discounted_lyapunov_scaled_residual: 1.608195049684813e-17
+    closed_form_vs_invariant_subspace_relative_error: 7.6911497824421e-16
+    hamiltonian:
+      eigenvalues:
+      - real: -0.08612913013774637
+        imag: 0.07826517598312635
+      - real: -0.08612913013774637
+        imag: -0.07826517598312635
+      - real: 0.08612913013774631
+        imag: 0.07826517598312634
+      - real: 0.08612913013774631
+        imag: -0.07826517598312634
+      imaginary_axis_distance: 0.08612913013774631
+      tolerance: 2.4119690268177432e-12
+      hyperbolic: true
+    popov_strict: true
+    closed_loop:
+      real_closed_loop_eigenvalues:
+      - real: -0.07602777647898668
+        imag: 0.07826517598312624
+      - real: -0.07602777647898668
+        imag: -0.07826517598312624
+      full_closed_loop_eigenvalues:
+      - real: -0.07602777647898668
+        imag: 0.07826517598312624
+      - real: -0.07602777647898668
+        imag: -0.07826517598312624
+      - real: -0.21072103131565253
+        imag: 0.0
+      - real: -0.21072103131565253
+        imag: 0.0
+      real_closed_loop_hurwitz: true
+      full_closed_loop_hurwitz: true
+      real_closed_loop_stability_margin: 0.07602777647898668
+      full_closed_loop_stability_margin: 0.07602777647898668
+    feedback_construction_errors:
+      A_rc_relative_error: 0.0
+      A_c_relative_error: 0.0
+      F_relative_error: 0.0
+    stationary_covariance:
+      scaled_residual: 4.291583170489191e-19
+      min_eigenvalue: 0.0010439370423858854
+      exogenous_block_closed_form_relative_error: 2.0408118174028925e-19
+    resolvent_identity_residual: 2.7094432538502835e-16
+    portfolio_identity_errors:
+      zeta_perp_orthogonal_to_lambda_hat: 1.5178830414797062e-18
+  economic_quantities:
+    anchor:
+      z_bar: -1.806616591576036
+      x_bar: 0.0
+      capital_bar: 1.0
+      public_net_worth_bar: 0.0
+      tax_rate_bar: 0.5
+      alpha_bar: 0.33999999999999997
+      alpha_x_bar: 0.075
+      alpha_xx_bar: 0.0
+      rental_rate_bar: 0.12040541463503893
+      output_bar: 0.35413357245599686
+      wage_income_bar: 0.23372815782095793
+      tax_base_bar: 0.040405414635038925
+      fiscal_resources_bar: 0.2539308651384774
+      fiscal_wealth_normalized_bar: 12.569150319683768
+      fiscal_wealth_bar: 12.569150319683768
+      comprehensive_resources_bar: 12.569150319683768
+      worker_consumption_bar: 0.2539308651384774
+      transfer_bar: 0.02020270731751947
+      eta_output_alpha: 1.0382942174102645
+      h_international_bar: 3.9794706879985
+      ell_x_bar: 0.2984603015998875
+      ell_xx_bar: -0.07372601446995912
+      gamma: 0.03973378682956285
+      chi: 1.411896637001644
+      specialisation_margin_automation_composite: 1.0382942174102645
+      specialisation_margin_new_task_composite: 0.5867057825897356
+    portfolio_anchor:
+      public_net_worth: 0.0
+      fiscal_wealth: 12.569150319683768
+      comprehensive_resources: 12.569150319683768
+      risk_scale_epsilon: 1.0
+      lambda_hat:
+      - 0.0259674276779601
+      - 0.048439039353357735
+      beta_hat: 0.0030206478336862273
+      zeta_j:
+      - 0.33765631945205354
+      - 0.5749540848601218
+      zeta_j_perp:
+      - 0.02286199744272266
+      - -0.012255966945109442
+      marketed_fiscal_wealth_amount: 12.122660970247473
+      leading_unconstrained_position: 0.4464893494362947
+      leading_constrained_position: 0.4464893494362947
+      portfolio_curvature: -0.0009464086106163626
+      portfolio_gradient_y:
+      - -12.642322214106523
+      - -3.557382767559386
+      - -1.032551156410937
+      - 0.09866532271011884
+      portfolio_bounds:
+      - -20.0
+      - 20.0
+      portfolio_lower_slack: 20.446489349436295
+      portfolio_upper_slack: 19.553510650563705
+      zero_position_feasible: true
+      merton_position: 12.569150319683768
+      merton_comparator_feasible: true
+      access_source_gain_q: 9.433457444551234e-05
+      hedge_source_gain_q: 0.0695415884419857
+      access_value_leading: 0.004669402618316749
+      hedge_value_leading: 3.4421915513115584
+      access_consumption_equivalent_leading: 9.433457444551234e-05
+      hedge_consumption_equivalent_leading: 0.0695415884419857
+      varpi_ee:
+      - - 0.0
+        - 0.0
+      - - 0.0
+        - 3.48237849358059
+      safe_rate_order_two_anchor: -0.0024813002795870203
+      g2_anchor: 0.0013857054666591765
+      v2_anchor: 0.06859008769866773
+    boundary_summary:
+      specialisation_margin_automation_composite: 0.9897522558123376
+      specialisation_margin_new_task_composite: 0.5767057825897358
+      output_automation_semielasticity: 0.9897522558123376
+      worker_consumption_level: 0.25301963269158145
+      transfer_level: 0.01919602618416888
+      comprehensive_resources_level: 12.52404584766552
+      portfolio_lower_slack: 20.0
+      portfolio_upper_slack: 19.54504848357909
+      tax_lower_slack: 0.9896432083822341
+      tax_upper_slack: 0.43999999999999995
+      tax_structural_ceiling_slack: 0.49
+      tax_speed_slack: 0.4937921017235696
+  reliable_region: Only the reported local paths with recorded positive branch and
+    feasibility slack.
+  failure_code: null
+  failure_detail: null
+artifacts:
+- role: primary_output
+  location: outputs/cs001-lq-anchor-baseline/report.json
+  sha256: 563ae7b89d894acd1172698c1738f018f9d8d6d2f96c2b6121f9520999275863
+  bytes: 4897766
+- role: supporting_output
+  location: outputs/cs001-lq-anchor-baseline/complete_input.json
+  sha256: 6124e8ec606d577fc95161a54ff645eb70e0a08329435c4a2ffa64efa9bca633
+  bytes: 4696
+- role: supporting_output
+  location: outputs/cs001-lq-anchor-baseline/summary.md
+  sha256: 4eabffd45cf72b420ee8dea55d7002d0e1f04fe4bb9063a63e515bb0ee5a0a0d
+  bytes: 1052
+- role: supporting_output
+  location: outputs/cs001-lq-anchor-baseline/irfs.csv
+  sha256: 2f275b4bd01403e67fb85341d5be322808fdf91aecaaf93d62cfa97a6abfc578
+  bytes: 1734619
+- role: supporting_output
+  location: outputs/cs001-lq-anchor-baseline/portfolio_net_worth_grid.csv
+  sha256: 341852049ea797549e371c2fc613984e09387affa5576c213fc61250b2b19fc3
+  bytes: 4126
+- role: supporting_output
+  location: outputs/cs001-lq-anchor-baseline/matrices/A.csv
+  sha256: 0028fe1ae97a5e84d2a69c94a721f4e24896902007b155096c2e9679d2f2e374
+  bytes: 221
+- role: supporting_output
+  location: outputs/cs001-lq-anchor-baseline/matrices/A_closed_loop.csv
+  sha256: 02b57ade7014b7524bab130725adbb8c64a7509003daf05b1710b6475275f467
+  bytes: 287
+- role: supporting_output
+  location: outputs/cs001-lq-anchor-baseline/matrices/H.csv
+  sha256: b10469eb00d7c486d1946248afed4546994c1ad6a648e1fbf7b66c2ccfe6bbe3
+  bytes: 370
+- role: supporting_output
+  location: outputs/cs001-lq-anchor-baseline/matrices/Q.csv
+  sha256: 4fd2932d923cb94a1ac34bb829158e92f45880c16271f0ce96edb1e86a1a7093
+  bytes: 368
+- role: supporting_output
+  location: outputs/cs001-lq-anchor-baseline/matrices/stationary_covariance_y.csv
+  sha256: 5cfacd995bd273a83862c6ae9c0f4ed29ed071627b1f2d9faaecb55e7c705d12
+  bytes: 357
+- role: figure
+  location: outputs/cs001-lq-anchor-baseline/figures/stage1_primitive_brownian_irfs.png
+  sha256: f3026ad1756210d58844597c5f353fc7bc80ddc5dce5aa833ba3baf0998ccc7f
+  bytes: 155830
+- role: figure
+  location: outputs/cs001-lq-anchor-baseline/figures/stage1_constructed_displacement_irfs.png
+  sha256: 969547007d90c028ae4cf434d53965e818c905a4ebd491271015576fab6bff5a
+  bytes: 203094
+- role: figure
+  location: outputs/cs001-lq-anchor-baseline/figures/stage1_fiscal_aggregate_irfs.png
+  sha256: 070b1f078dc7192ef8564079d7302b3fba066f142bcf93702311d3eee52c2ed7
+  bytes: 128975
+- role: figure
+  location: outputs/cs001-lq-anchor-baseline/figures/stage2a_consumption_with_and_without_claim.png
+  sha256: caabf22b5c8b0f202f0b68230ac57eb107da638d499a7782d72c10139a491ed3
+  bytes: 83675
+interpretation:
+  supports_result_ids:
+  - R10
+  - R11
+  - R13
+  - R14
+  - R15
+  - R17
+  - R18
+  - R19
+  - R20
+  - R22
+  - R23
+  - R24
+  challenges_result_ids: []
+  question_ids:
+  - Q01
+  - Q03
+  - Q04
+  - Q05
+  - Q06
+  - Q07
+  - Q17
+  assurance_or_review_artifacts:
+  - research-notes/local-lq-system-computation-and-proof-plan.md
+  - economics-verification/reviews/conceptual-and-economic-audit-of-the-current-full-ramsey-planner--EV10.md
+  conclusion: The configured Stage 1 (deterministic/first-order) and Stage 2A (leading
+    small-risk) calculations passed their numerical and local-applicability checks.
+  limitations:
+  - Local T3/LQ evidence only; no global constrained or off-specialisation optimality
+    claim.
+  - The Farhi-based vector is illustrative rather than an empirical UK calibration.
+  - epsilon=1 reports the leading small-risk coefficient at the primitive volatility
+    scale; it is not an exact finite-risk welfare result.
+  - No exact precautionary consumption or tax-speed correction is reported; those
+    require a Stage 2B specification with higher deterministic fiscal-wealth derivatives,
+    or an explicit truncated stochastic-LQ closure.
+  - The stable four-state block has a stationary covariance, but public net worth
+    and worker consumption retain a neutral direction and need not be stationary.
+  - Finite-horizon positive-X and boundary-slack checks are local continuation plausibility,
+    not a global stochastic solvency or transversality proof.
+  - CS001 is registered as draft in the codex research workspace; this run implements
+    its stated scope under Nathan's direct commission rather than a formally approved
+    fingerprint.
+  next_decision: Use the identical primitive fingerprint for the matched PDE-LQ bridge
+    once CS004 is approved; reserve exact precautionary policies for a Stage 2B specification.

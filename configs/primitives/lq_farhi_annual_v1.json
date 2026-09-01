@@ -1,0 +1,44 @@
+{
+  "primitive_set_id": "lq_farhi_annual_primitives_v1",
+  "model_branch": "brownian_v5_1_qd1_full_specialisation",
+  "parameters": {
+    "annual_discount_factor": 0.98,
+    "depreciation_rate": 0.08,
+    "tax_adjustment_scale": 0.5,
+    "alpha_lower": 0.19,
+    "alpha_upper": 0.49,
+    "x_mean": 0.0,
+    "capital_advantage": 0.375,
+    "new_task_labour_advantage": 1.25,
+    "international_log_capital_labour_ratio": 0.0,
+    "productivity_persistence_annual": 0.81,
+    "productivity_stationary_sd": 0.04,
+    "automation_persistence_annual": 0.81,
+    "automation_stationary_sd": 0.25,
+    "installed_capital_price": 1.0
+  },
+  "normalizations": {
+    "labour": 1.0,
+    "capital_anchor": 1.0,
+    "public_net_worth_anchor": 0.0
+  },
+  "units": {
+    "time": "years",
+    "rates": "continuous annual rates unless labelled annual discrete factors",
+    "z": "log productivity",
+    "x": "latent automation state",
+    "capital_and_flows": "levels relative to L=K_bar=1",
+    "portfolio_and_net_worth": "market value in the same consumption numeraire"
+  },
+  "provenance": {
+    "annual_discount_factor": "Farhi annual benchmark; rho=-log(0.98)",
+    "capital_share_anchor": "Logistic midpoint gives alpha_bar=0.34, matching the Farhi benchmark",
+    "productivity_process": "Farhi annual persistence and reported state standard deviation, translated to a continuous-time OU process",
+    "depreciation_rate": "Conventional annual macro value",
+    "automation_process": "Provisional project choice",
+    "tax_adjustment_scale": "Provisional project choice",
+    "task_advantages": "Project choices screened for the maintained full-specialisation branch",
+    "empirical_status": "Illustrative solver and algebra benchmark; not an empirical calibration",
+    "source": "local-lq-system-computation-and-proof-plan.md, illustrative annual smoke calibration table (TAI public finnace codex research-notes)"
+  }
+}

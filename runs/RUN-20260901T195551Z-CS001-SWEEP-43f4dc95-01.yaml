@@ -1,0 +1,71 @@
+schema_version: '1.0'
+run_id: RUN-20260901T195551Z-CS001-SWEEP-43f4dc95-01
+created_utc: '2026-09-01T19:55:51Z'
+status: completed
+purpose: CS001 L2_local_batch parameter sweep over parameters.automation_persistence_annual
+  (11 points); exploratory first CS001 tranche, not a completed/approved CS001 result.
+specification:
+  id: CS001
+  version: '0.1'
+  status: draft
+  fingerprint_sha256: null
+problem_id: CP001
+implementation:
+  repository_url: https://github.com/Nathan-Barnard/tai-public-finance
+  local_path: /Users/nathanbarnard/Documents/TAI public finnace claude
+  commit: 43f4dc954ae6b8661e7c2990f9d6dec606f0ae2b
+  branch: cs001/lq-anchor-matrix-equations-irfs
+  dirty_worktree_at_run_start: true
+  implementer: claude_code
+  entrypoint: python3 -m tai_public_finance.cs001_lq_anchor.sweep_cli
+  command: uv run python -m tai_public_finance.cs001_lq_anchor.sweep_cli --config
+    configs/cs001/lq_farhi_smoke.json --parameter-path parameters.automation_persistence_annual
+    --values 0.3,0.4,0.5,0.6,0.7,0.75,0.81,0.85,0.9,0.95,0.98 --output-dir outputs/cs001-sweep-automation-persistence
+    --run-id RUN-20260901T195551Z-CS001-SWEEP-43f4dc95-01
+environment:
+  operating_system: macOS-15.6.1-arm64-arm-64bit-Mach-O
+  runtime_versions:
+    python: 3.13.5
+    numpy: 2.5.2
+    scipy: 1.18.1
+hardware:
+  resource_lane: L2_local_batch
+  machine_label: local_mac
+  accelerator: null
+inputs:
+  parameter_set_id: lq_farhi_illustrative_smoke_v1
+  base_input_fingerprints:
+    primitive_sha256: 78837354ee416984183ef0eed43c54105c60c8a31b6a75c2f6f84c58f924917f
+    experiment_sha256: 9c4b5e3b627e8fb031ad07649d4fdc80d1b1956ce1c251bc1bc2d94b02024570
+    complete_input_sha256: e521c69dc3fd1a3e92d1ecf603f7449a7c96becd5c0c636abde72ef0024a32a4
+  swept_parameter_path: parameters.automation_persistence_annual
+  swept_values:
+  - 0.3
+  - 0.4
+  - 0.5
+  - 0.6
+  - 0.7
+  - 0.75
+  - 0.81
+  - 0.85
+  - 0.9
+  - 0.95
+  - 0.98
+result:
+  outcome: pass
+  wall_seconds: 0.592396167019615
+  n_points: 11
+  n_pass: 11
+  n_fail_or_error: 0
+  failed_values: []
+artifacts:
+- role: primary_output
+  location: outputs/cs001-sweep-automation-persistence/sweep.csv
+  sha256: bb0391e14a2f2584058d5c764aae64d0ee36a7a8c9f83ab7e059a011e2d2888b
+  bytes: 2869
+interpretation:
+  conclusion: 11/11 sweep points passed every CS001 acceptance check.
+  limitations:
+  - One-dimensional sweep only; other primitives held at the illustrative Farhi-based
+    baseline.
+  - Exploratory first CS001 tranche; CS001 itself remains draft/unfingerprinted.
