@@ -393,6 +393,10 @@ def write_bundle(
                 "retained with explicit failure reasons rather than dropped, mirroring CS001's own repaired baseline.",
                 "No derivative service (Block D3), stochastic terms, or order-epsilon^2 correction: this is the "
                 "zeroth-order deterministic path only.",
+                "task_elapsed_seconds is the implementer's own end-to-end estimate of reading, implementation, "
+                "and debugging time, not an instrumented wall-clock measurement (this environment exposes no "
+                "reliable session-start timestamp); wall_seconds (this material run's own compute time) is "
+                "directly measured and exact.",
             ],
             "next_decision": "Research owner reviews the equation map, LQ stable-manifold terminal-condition "
             "derivation, residual/branch evidence, and resource profile before CS002 may move toward review_ready "
