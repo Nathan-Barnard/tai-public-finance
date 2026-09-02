@@ -1,0 +1,60 @@
+{
+  "chunk_artifacts": {
+    "atlas_brownian_innovation": {
+      "features": "fe79a30fe93f18ca4e4e28d5fc5f4a280feb47a5bd959f16fb3ce94b785a5ed9",
+      "rows": "801dfc8604c3687a934e4a369a814052b0e23c2d96c7d0def91273f59334c68e"
+    },
+    "atlas_finite_window_ou_displacement": {
+      "features": "456002e7722eb6a9f17c8413b264a26cb99cd95e8fc1f482783daaf27a1e5bae",
+      "rows": "3391ae3b0fe577a32c0d24d3db154a1d0e4cf6e86b3c67f9ee1af2623ce4d6d9"
+    },
+    "atlas_fixed_share_check": {
+      "features": "99b75afb26c499843966287de53c5df64af4959de89a18ec250347fdc5d38673",
+      "rows": "f3bfe396c8b1fd5a4c4de5ee4d486163b4a331f1a13a85df0103e17d5f2403eb"
+    },
+    "atlas_matched_state_displacement": {
+      "features": "08f8a25d946874caae404bdc9306c0ba98500fde5a3d1c991a8bf746fa46e453",
+      "rows": "01e9fe7d86fc8a01f425f1133cdf5372f0ab73217cb03829af787fc3e803a9fe"
+    },
+    "independent_checks": {
+      "numerical_diagnostics.json": "52bc5b3de050afd59f4781425e2e1f0143165af87de7d41cd26abba3c9e9ef07"
+    },
+    "models": {
+      "models.json": "c66734888a25e4ff8fab5562dbf269e9af6ed709452045d1059898fed5563c8d"
+    },
+    "persistence_unravelling": {
+      "features": "79e2e6bc7e53eb3a514c47a6e1514d52c38531dd75160eb215a81fd05695fcf9",
+      "rows": "4ff1a5b40e63b01ebb93d4c3bded3ffbe285cf78d8bab0044a3027c502f38aa6"
+    },
+    "tables": {
+      "atlas_raw.csv": "c1e290eb0c3b7ee297b2082140020ae47ce249484451c027a3bc36f085d01321",
+      "atlas_raw_quarterly.csv.gz": "1027727ee067c43c653a9dfb00ed7d6e878692dce458362a6466b1ebd898b5ae",
+      "failed_rows.csv": "9df4c099c4a5357db682595b0d518261c91b82d8a70e43b3191bba0086e506fd",
+      "impact_sign_regions.csv": "1be90d74687f7f20de6bf0707fc7ab7dd40d374f7ea246820f84a9850d4d60a3",
+      "named_directions.csv": "ddb7dc18e438e1d49d62e2b7c97da09bd9f7cae6226ab409e7495c43d472579b",
+      "path_features.csv": "625bccbf3e62356ea968e2ae7866880fca65ce25c45ddeede6ed98ba25f0c226",
+      "persistence_named_paths.csv": "76f92aba87709337e3c2c2e9b308d9f6d7124d080d740e11da98bd0782b92d72",
+      "persistence_unravelling.csv": "79e2e6bc7e53eb3a514c47a6e1514d52c38531dd75160eb215a81fd05695fcf9",
+      "runtime.json": "de5600082a33a6b097f3eeab379c965559f0ce41822f13390122a1d13692b35a",
+      "zero_impact_thresholds.csv": "c5d9f8fc288c07900d738e19efd3a22993cc422440908a30dd264ba5bcfd0f5a"
+    }
+  },
+  "completed_chunks": [
+    "models",
+    "atlas_brownian_innovation",
+    "atlas_matched_state_displacement",
+    "atlas_finite_window_ou_displacement",
+    "atlas_fixed_share_check",
+    "persistence_unravelling",
+    "independent_checks",
+    "tables"
+  ],
+  "created_utc": "2026-09-01T23:07:03Z",
+  "fingerprint": {
+    "atlas_settings_sha256": "cb9da78b9ae4d58d103e2f6c80a3ccd08a68446afd7c172ddeece344c775d96f",
+    "commit": "ee48affef15034e74f9e3af3d2533ce51f57f1fe",
+    "complete_input_sha256": "e521c69dc3fd1a3e92d1ecf603f7449a7c96becd5c0c636abde72ef0024a32a4",
+    "shock_atlas_source_sha256": "eaaf6b8174e98275a969b0c687a351a13fc3aa86c495b8e488030e011b51eec4"
+  },
+  "updated_utc": "2026-09-01T23:07:21Z"
+}

@@ -1,0 +1,7 @@
+# large or regenerable per-run artifacts: hash-referenced from the run record
+atlas_raw_quarterly.csv.gz
+atlas_raw.csv
+persistence_named_paths.csv
+parts/
+figures/
+*.tmp

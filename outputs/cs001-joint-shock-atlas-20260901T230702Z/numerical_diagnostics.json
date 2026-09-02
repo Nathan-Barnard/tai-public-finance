@@ -1,0 +1,1008 @@
+{
+  "accounting_identities": {
+    "F_minus_c_equals_tauB_minus_T": 2.6020852139652106e-18,
+    "dJ_equals_wage_component_plus_capital_tax_component": 2.220446049250313e-16,
+    "dT_equals_dc_minus_dW": 1.734723475976807e-18,
+    "dX_equals_dN_plus_dJ": 6.938893903907228e-18,
+    "dX_equals_domestic_contribution_plus_payoff_at_impact": 0.0,
+    "dc_equals_rho_dX": 0.0,
+    "locator": "baseline::finite_window_ou_state_displacement::no_inherited_payoff::theta_345.000@2.25:primary_cash_flow_equals_tauB_minus_T_minus_Psi",
+    "primary_cash_flow_equals_tauB_minus_T_minus_Psi": 1.951563910473908e-18
+  },
+  "coordinate_conversion": {
+    "automation_persistence_0.50": {
+      "claim_neutral_orthogonal_to_lambda_hat_relative": 1.5148784409046107e-16,
+      "named_zero_angle_errors_degrees": {
+        "claim_payoff_neutral_automation_negative": 0.0,
+        "claim_payoff_neutral_automation_positive": 0.0,
+        "output_neutral_automation_negative": 5.684341886080802e-14,
+        "output_neutral_automation_positive": 0.0,
+        "primary_resource_neutral_automation_negative": 0.0,
+        "primary_resource_neutral_automation_positive": 0.0,
+        "rental_tax_base_neutral_automation_negative": 0.0,
+        "rental_tax_base_neutral_automation_positive": 0.0,
+        "worker_income_neutral_automation_negative": 0.0,
+        "worker_income_neutral_automation_positive": 0.0
+      },
+      "named_zero_angle_max_error_degrees": 5.684341886080802e-14,
+      "round_trip_max_abs_degrees": 2.842170943040401e-14,
+      "tolerance_degrees": 1e-09
+    },
+    "automation_persistence_0.81": {
+      "claim_neutral_orthogonal_to_lambda_hat_relative": 0.0,
+      "named_zero_angle_errors_degrees": {
+        "claim_payoff_neutral_automation_negative": 0.0,
+        "claim_payoff_neutral_automation_positive": 0.0,
+        "output_neutral_automation_negative": 0.0,
+        "output_neutral_automation_positive": 0.0,
+        "primary_resource_neutral_automation_negative": 0.0,
+        "primary_resource_neutral_automation_positive": 0.0,
+        "rental_tax_base_neutral_automation_negative": 0.0,
+        "rental_tax_base_neutral_automation_positive": 0.0,
+        "worker_income_neutral_automation_negative": 0.0,
+        "worker_income_neutral_automation_positive": 0.0
+      },
+      "named_zero_angle_max_error_degrees": 0.0,
+      "round_trip_max_abs_degrees": 5.684341886080802e-14,
+      "tolerance_degrees": 1e-09
+    },
+    "automation_persistence_0.95": {
+      "claim_neutral_orthogonal_to_lambda_hat_relative": 0.0,
+      "named_zero_angle_errors_degrees": {
+        "claim_payoff_neutral_automation_negative": 0.0,
+        "claim_payoff_neutral_automation_positive": 0.0,
+        "output_neutral_automation_negative": 0.0,
+        "output_neutral_automation_positive": 0.0,
+        "primary_resource_neutral_automation_negative": 0.0,
+        "primary_resource_neutral_automation_positive": 0.0,
+        "rental_tax_base_neutral_automation_negative": 0.0,
+        "rental_tax_base_neutral_automation_positive": 0.0,
+        "worker_income_neutral_automation_negative": 0.0,
+        "worker_income_neutral_automation_positive": 0.0
+      },
+      "named_zero_angle_max_error_degrees": 0.0,
+      "round_trip_max_abs_degrees": 2.842170943040401e-14,
+      "tolerance_degrees": 1e-09
+    },
+    "baseline": {
+      "claim_neutral_orthogonal_to_lambda_hat_relative": 0.0,
+      "named_zero_angle_errors_degrees": {
+        "claim_payoff_neutral_automation_negative": 0.0,
+        "claim_payoff_neutral_automation_positive": 0.0,
+        "output_neutral_automation_negative": 0.0,
+        "output_neutral_automation_positive": 0.0,
+        "primary_resource_neutral_automation_negative": 0.0,
+        "primary_resource_neutral_automation_positive": 0.0,
+        "rental_tax_base_neutral_automation_negative": 0.0,
+        "rental_tax_base_neutral_automation_positive": 0.0,
+        "worker_income_neutral_automation_negative": 0.0,
+        "worker_income_neutral_automation_positive": 0.0
+      },
+      "named_zero_angle_max_error_degrees": 0.0,
+      "round_trip_max_abs_degrees": 5.684341886080802e-14,
+      "tolerance_degrees": 1e-09
+    }
+  },
+  "discounted_cumulative_expm_integral": {
+    "horizon_years": 1500.0,
+    "locator": "baseline::brownian_innovation_short_window::zero_inherited_position::theta_115.952",
+    "max_relative_error": 1.7848980479371738e-13
+  },
+  "discounted_cumulative_resolvent": {
+    "locator": "baseline::finite_window_ou_state_displacement::no_inherited_payoff::theta_235.000",
+    "max_probe_residual": 1.3790588712495998e-16
+  },
+  "failures": [],
+  "feasibility": {
+    "classification": "genuine economic conditions (specialisation branch, transfer floor, positive consumption and worker comprehensive resources, tau<1) are reported separately from numerical-scaffolding slack; neither establishes government borrowing capacity, which this calculation does not verify",
+    "min_economic_slack": 0.0085653924728753,
+    "min_economic_slack_locator": "baseline::finite_window_ou_state_displacement::no_inherited_payoff::theta_265.000",
+    "min_numerical_scaffolding_slack": 0.4384673327417469,
+    "min_numerical_scaffolding_slack_locator": "baseline::finite_window_ou_state_displacement::no_inherited_payoff::theta_240.000",
+    "min_slack_overall": 0.0085653924728753,
+    "rows": 70518,
+    "rows_failing_economic_conditions": 0,
+    "rows_failing_numerical_scaffolding": 0
+  },
+  "first_order_budget_identity": {
+    "locator": "baseline::finite_window_ou_state_displacement::no_inherited_payoff::theta_240.000@0.5",
+    "max_abs_residual": 3.642919299551295e-17,
+    "rows": 70518
+  },
+  "fixed_share_reproduction": {
+    "compared_rows": 644,
+    "locator": "baseline::fixed_share_displacement_check::no_inherited_payoff::theta_077.400@0.75:public_net_worth_deviation vs constructed_worker_income_neutral:public_net_worth_deviation",
+    "max_abs_difference": 5.551115123125783e-17,
+    "missing": []
+  },
+  "matrix_exponential_vs_ode": {
+    "locator": "baseline::matched_deterministic_state_displacement::no_inherited_payoff::theta_151.805",
+    "max_relative_error": 1.7825048546173148e-12,
+    "paths_checked": 438
+  },
+  "models": {
+    "automation_persistence_0.50": {
+      "acceptance_outcome": "pass",
+      "baseline_pipeline_max_budget_residual": 2.5153490401663703e-16,
+      "baseline_pipeline_max_expm_vs_ode": 3.0553913338081976e-13,
+      "closed_form_vs_invariant_subspace_relative_error": 7.6911497824421e-16,
+      "discounted_lyapunov_scaled_residual": 1.6321887404763557e-18,
+      "failed_checks": [],
+      "feedback_construction_errors": {
+        "A_c_relative_error": 0.0,
+        "A_rc_relative_error": 0.0,
+        "F_relative_error": 0.0
+      },
+      "finite_difference_checks": {
+        "output": {
+          "gradient_relative_error": 4.298832835181538e-10,
+          "hessian_relative_error": 1.4911433754375695e-08
+        },
+        "rental_rate": {
+          "gradient_relative_error": 1.8402272509071505e-10,
+          "hessian_relative_error": 7.012741734184383e-09
+        },
+        "safe_rate": {
+          "gradient_relative_error": 3.346755624220145e-10,
+          "hessian_relative_error": 4.912007754109313e-10
+        },
+        "wage_income": {
+          "gradient_relative_error": 3.1264529229335784e-10,
+          "hessian_relative_error": 1.0682349299140796e-08
+        }
+      },
+      "full_closed_loop_hurwitz": true,
+      "hamiltonian_imaginary_axis_distance": 0.08612913013774631,
+      "invariant_line": {
+        "capital_growth_alignment_relative_error": 0.0,
+        "capital_growth_loading_x_over_z": 0.2984603015998875,
+        "h_I_minus_eta_plus_one_over_alpha": 0.0,
+        "k_I_minus_log_capital_labour": 0.0,
+        "kappa_z_minus_kappa_x": -0.4824261492442927,
+        "rental_gradient_x_over_z": 0.2984603015998875,
+        "tax_speed_feedback_alignment_relative_error": 0.5875924539638795,
+        "tax_speed_feedback_x_over_z": 0.12308728057201002
+      },
+      "real_closed_loop_hurwitz": true,
+      "real_closed_loop_stability_margin": 0.07602777647898668,
+      "resolvent_identity_residual": 2.7105448578828717e-16,
+      "riccati_full_scaled_residual": 1.0999193798510896e-16,
+      "riccati_real_block_scaled_residual": 8.871396570100837e-17,
+      "riccati_symmetry_error": 0.0,
+      "sylvester_scaled_residual": 5.88688580720406e-17
+    },
+    "automation_persistence_0.81": {
+      "acceptance_outcome": "pass",
+      "baseline_pipeline_max_budget_residual": 2.42861286636753e-17,
+      "baseline_pipeline_max_expm_vs_ode": 2.3186109894791185e-13,
+      "closed_form_vs_invariant_subspace_relative_error": 7.6911497824421e-16,
+      "discounted_lyapunov_scaled_residual": 1.608195049684813e-17,
+      "failed_checks": [],
+      "feedback_construction_errors": {
+        "A_c_relative_error": 0.0,
+        "A_rc_relative_error": 0.0,
+        "F_relative_error": 0.0
+      },
+      "finite_difference_checks": {
+        "output": {
+          "gradient_relative_error": 4.298832835181538e-10,
+          "hessian_relative_error": 1.4911433754375695e-08
+        },
+        "rental_rate": {
+          "gradient_relative_error": 1.8402272509071505e-10,
+          "hessian_relative_error": 7.012741734184383e-09
+        },
+        "safe_rate": {
+          "gradient_relative_error": 1.080284801406793e-10,
+          "hessian_relative_error": 1.0962529613560733e-10
+        },
+        "wage_income": {
+          "gradient_relative_error": 3.1264529229335784e-10,
+          "hessian_relative_error": 1.0682349299140796e-08
+        }
+      },
+      "full_closed_loop_hurwitz": true,
+      "hamiltonian_imaginary_axis_distance": 0.08612913013774631,
+      "invariant_line": {
+        "capital_growth_alignment_relative_error": 0.0,
+        "capital_growth_loading_x_over_z": 0.2984603015998875,
+        "h_I_minus_eta_plus_one_over_alpha": 0.0,
+        "k_I_minus_log_capital_labour": 0.0,
+        "kappa_z_minus_kappa_x": 0.0,
+        "rental_gradient_x_over_z": 0.2984603015998875,
+        "tax_speed_feedback_alignment_relative_error": 9.299587069652474e-16,
+        "tax_speed_feedback_x_over_z": 0.29846030159988723
+      },
+      "real_closed_loop_hurwitz": true,
+      "real_closed_loop_stability_margin": 0.07602777647898668,
+      "resolvent_identity_residual": 2.7094432538502835e-16,
+      "riccati_full_scaled_residual": 1.159309242606376e-16,
+      "riccati_real_block_scaled_residual": 8.871396570100837e-17,
+      "riccati_symmetry_error": 0.0,
+      "sylvester_scaled_residual": 6.321752184243787e-17
+    },
+    "automation_persistence_0.95": {
+      "acceptance_outcome": "pass",
+      "baseline_pipeline_max_budget_residual": 1.5612511283791264e-17,
+      "baseline_pipeline_max_expm_vs_ode": 6.373785542980822e-13,
+      "closed_form_vs_invariant_subspace_relative_error": 7.6911497824421e-16,
+      "discounted_lyapunov_scaled_residual": 2.3668707516699766e-17,
+      "failed_checks": [],
+      "feedback_construction_errors": {
+        "A_c_relative_error": 0.0,
+        "A_rc_relative_error": 0.0,
+        "F_relative_error": 0.0
+      },
+      "finite_difference_checks": {
+        "output": {
+          "gradient_relative_error": 4.298832835181538e-10,
+          "hessian_relative_error": 1.4911433754375695e-08
+        },
+        "rental_rate": {
+          "gradient_relative_error": 1.8402272509071505e-10,
+          "hessian_relative_error": 7.012741734184383e-09
+        },
+        "safe_rate": {
+          "gradient_relative_error": 2.6479278160803005e-11,
+          "hessian_relative_error": 4.753673567468982e-12
+        },
+        "wage_income": {
+          "gradient_relative_error": 3.1264529229335784e-10,
+          "hessian_relative_error": 1.0682349299140796e-08
+        }
+      },
+      "full_closed_loop_hurwitz": true,
+      "hamiltonian_imaginary_axis_distance": 0.08612913013774631,
+      "invariant_line": {
+        "capital_growth_alignment_relative_error": 0.0,
+        "capital_growth_loading_x_over_z": 0.2984603015998875,
+        "h_I_minus_eta_plus_one_over_alpha": 0.0,
+        "k_I_minus_log_capital_labour": 0.0,
+        "kappa_z_minus_kappa_x": 0.15942773692810197,
+        "rental_gradient_x_over_z": 0.2984603015998875,
+        "tax_speed_feedback_alignment_relative_error": 0.7120567981441251,
+        "tax_speed_feedback_x_over_z": 0.5109809883302333
+      },
+      "real_closed_loop_hurwitz": true,
+      "real_closed_loop_stability_margin": 0.07602777647898668,
+      "resolvent_identity_residual": 3.0401865161553453e-16,
+      "riccati_full_scaled_residual": 1.2157752280391473e-16,
+      "riccati_real_block_scaled_residual": 8.871396570100837e-17,
+      "riccati_symmetry_error": 0.0,
+      "sylvester_scaled_residual": 6.476727763383809e-17
+    },
+    "baseline": {
+      "acceptance_outcome": "pass",
+      "baseline_pipeline_max_budget_residual": 2.42861286636753e-17,
+      "baseline_pipeline_max_expm_vs_ode": 2.3186109894791185e-13,
+      "closed_form_vs_invariant_subspace_relative_error": 7.6911497824421e-16,
+      "discounted_lyapunov_scaled_residual": 1.608195049684813e-17,
+      "failed_checks": [],
+      "feedback_construction_errors": {
+        "A_c_relative_error": 0.0,
+        "A_rc_relative_error": 0.0,
+        "F_relative_error": 0.0
+      },
+      "finite_difference_checks": {
+        "output": {
+          "gradient_relative_error": 4.298832835181538e-10,
+          "hessian_relative_error": 1.4911433754375695e-08
+        },
+        "rental_rate": {
+          "gradient_relative_error": 1.8402272509071505e-10,
+          "hessian_relative_error": 7.012741734184383e-09
+        },
+        "safe_rate": {
+          "gradient_relative_error": 1.080284801406793e-10,
+          "hessian_relative_error": 1.0962529613560733e-10
+        },
+        "wage_income": {
+          "gradient_relative_error": 3.1264529229335784e-10,
+          "hessian_relative_error": 1.0682349299140796e-08
+        }
+      },
+      "full_closed_loop_hurwitz": true,
+      "hamiltonian_imaginary_axis_distance": 0.08612913013774631,
+      "invariant_line": {
+        "capital_growth_alignment_relative_error": 0.0,
+        "capital_growth_loading_x_over_z": 0.2984603015998875,
+        "h_I_minus_eta_plus_one_over_alpha": 0.0,
+        "k_I_minus_log_capital_labour": 0.0,
+        "kappa_z_minus_kappa_x": 0.0,
+        "rental_gradient_x_over_z": 0.2984603015998875,
+        "tax_speed_feedback_alignment_relative_error": 9.299587069652474e-16,
+        "tax_speed_feedback_x_over_z": 0.29846030159988723
+      },
+      "real_closed_loop_hurwitz": true,
+      "real_closed_loop_stability_margin": 0.07602777647898668,
+      "resolvent_identity_residual": 2.7094432538502835e-16,
+      "riccati_full_scaled_residual": 1.159309242606376e-16,
+      "riccati_real_block_scaled_residual": 8.871396570100837e-17,
+      "riccati_symmetry_error": 0.0,
+      "sylvester_scaled_residual": 6.321752184243787e-17
+    }
+  },
+  "neutral_zero": {
+    "per_direction": {
+      "automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 2.8755545084122127e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 2.7663024350460463e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_negative": {
+        "cancellation_index_impact": 2.8365964361489433e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_positive": {
+        "cancellation_index_impact": 5.498560408347738e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 4.755084455394069e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 1.1097010896858772e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 2.6970565914011035e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 2.971173991673497e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 1.6908926934425305e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 2.0830418801606404e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 2.8755545084122127e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 2.7663024350460463e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_negative": {
+        "cancellation_index_impact": 2.8365964361489433e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_positive": {
+        "cancellation_index_impact": 5.498560408347738e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 4.755084455394069e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 1.1097010896858772e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 2.6970565914011035e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 2.971173991673497e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 1.6908926934425305e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 2.0830418801606404e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 2.0525221326204398e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 4.026840334377479e-17,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::output_neutral_automation_negative": {
+        "cancellation_index_impact": 5.477321896736951e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::output_neutral_automation_positive": {
+        "cancellation_index_impact": 3.3389358645305677e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 1.2329922155064609e-15,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 1.9123613153632346e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 1.9081995677617076e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 2.29664471981354e-17,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 7.606475968352225e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 5.112214626496821e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 2.0525221326204398e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 4.026840334377479e-17,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_negative": {
+        "cancellation_index_impact": 5.477321896736951e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_positive": {
+        "cancellation_index_impact": 3.3389358645305677e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 1.2329922155064609e-15,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 1.9123613153632346e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 1.9081995677617076e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 2.29664471981354e-17,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 7.606475968352225e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 5.112214626496821e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 2.0525221326204398e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 4.026840334377479e-17,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_negative": {
+        "cancellation_index_impact": 5.477321896736951e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_positive": {
+        "cancellation_index_impact": 3.3389358645305677e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 1.2329922155064609e-15,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 1.9123613153632346e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 1.9081995677617076e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 2.29664471981354e-17,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 7.606475968352225e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 5.112214626496821e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 2.0525221326204398e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 4.026840334377479e-17,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::output_neutral_automation_negative": {
+        "cancellation_index_impact": 5.477321896736951e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::output_neutral_automation_positive": {
+        "cancellation_index_impact": 3.3389358645305677e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 1.2329922155064609e-15,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 1.9123613153632346e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 1.9081995677617076e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 2.29664471981354e-17,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 7.606475968352225e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 5.112214626496821e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 6.979108841314538e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 1.4291433761254396e-17,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_negative": {
+        "cancellation_index_impact": 4.726224165594719e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_positive": {
+        "cancellation_index_impact": 1.7202808273136884e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 6.599792752740296e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 1.6817664114424744e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 6.887863663965891e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 9.772478011788108e-18,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 1.4387279128077364e-15,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 2.646203737506681e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 6.979108841314538e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 1.4291433761254396e-17,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_negative": {
+        "cancellation_index_impact": 4.726224165594719e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_positive": {
+        "cancellation_index_impact": 1.7202808273136884e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 6.599792752740296e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 1.6817664114424744e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 6.887863663965891e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 9.772478011788108e-18,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 1.4387279128077364e-15,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 2.646203737506681e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 2.0525221326204398e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 4.026840334377479e-17,
+        "object": "claim_loading_state_functional"
+      },
+      "automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::output_neutral_automation_negative": {
+        "cancellation_index_impact": 5.477321896736951e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::output_neutral_automation_positive": {
+        "cancellation_index_impact": 3.3389358645305677e-16,
+        "object": "output_deviation_linear"
+      },
+      "automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 1.2329922155064609e-15,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 1.9123613153632346e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 1.9081995677617076e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 2.29664471981354e-17,
+        "object": "rental_rate_deviation_linear"
+      },
+      "automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 7.606475968352225e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 5.112214626496821e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 2.0525221326204398e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "baseline::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 4.026840334377479e-17,
+        "object": "claim_loading_state_functional"
+      },
+      "baseline::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_negative": {
+        "cancellation_index_impact": 5.477321896736951e-16,
+        "object": "output_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_positive": {
+        "cancellation_index_impact": 3.3389358645305677e-16,
+        "object": "output_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 1.2329922155064609e-15,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 1.9123613153632346e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 1.9081995677617076e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 2.29664471981354e-17,
+        "object": "rental_rate_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 7.606475968352225e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 5.112214626496821e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 2.0525221326204398e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "baseline::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 4.026840334377479e-17,
+        "object": "claim_loading_state_functional"
+      },
+      "baseline::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_negative": {
+        "cancellation_index_impact": 5.477321896736951e-16,
+        "object": "output_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_positive": {
+        "cancellation_index_impact": 3.3389358645305677e-16,
+        "object": "output_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 1.2329922155064609e-15,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 1.9123613153632346e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 1.9081995677617076e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 2.29664471981354e-17,
+        "object": "rental_rate_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 7.606475968352225e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "baseline::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 5.112214626496821e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "baseline::finite_window_ou_state_displacement::no_inherited_payoff::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 2.360087470097616e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "baseline::finite_window_ou_state_displacement::no_inherited_payoff::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 5.1925658524309594e-17,
+        "object": "claim_loading_state_functional"
+      },
+      "baseline::finite_window_ou_state_displacement::no_inherited_payoff::output_neutral_automation_negative": {
+        "cancellation_index_impact": 6.100999433678813e-16,
+        "object": "output_deviation_linear"
+      },
+      "baseline::finite_window_ou_state_displacement::no_inherited_payoff::output_neutral_automation_positive": {
+        "cancellation_index_impact": 3.1185802392006787e-16,
+        "object": "output_deviation_linear"
+      },
+      "baseline::finite_window_ou_state_displacement::no_inherited_payoff::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 1.2523433203474435e-15,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "baseline::finite_window_ou_state_displacement::no_inherited_payoff::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 8.30409995922965e-17,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "baseline::finite_window_ou_state_displacement::no_inherited_payoff::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 2.2374878260273677e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "baseline::finite_window_ou_state_displacement::no_inherited_payoff::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 3.646378493203132e-17,
+        "object": "rental_rate_deviation_linear"
+      },
+      "baseline::finite_window_ou_state_displacement::no_inherited_payoff::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 7.892082244376284e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "baseline::finite_window_ou_state_displacement::no_inherited_payoff::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 4.2025469184676195e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "baseline::matched_deterministic_state_displacement::no_inherited_payoff::claim_payoff_neutral_automation_negative": {
+        "cancellation_index_impact": 2.0525221326204398e-16,
+        "object": "claim_loading_state_functional"
+      },
+      "baseline::matched_deterministic_state_displacement::no_inherited_payoff::claim_payoff_neutral_automation_positive": {
+        "cancellation_index_impact": 4.026840334377479e-17,
+        "object": "claim_loading_state_functional"
+      },
+      "baseline::matched_deterministic_state_displacement::no_inherited_payoff::output_neutral_automation_negative": {
+        "cancellation_index_impact": 5.477321896736951e-16,
+        "object": "output_deviation_linear"
+      },
+      "baseline::matched_deterministic_state_displacement::no_inherited_payoff::output_neutral_automation_positive": {
+        "cancellation_index_impact": 3.3389358645305677e-16,
+        "object": "output_deviation_linear"
+      },
+      "baseline::matched_deterministic_state_displacement::no_inherited_payoff::primary_resource_neutral_automation_negative": {
+        "cancellation_index_impact": 1.2329922155064609e-15,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "baseline::matched_deterministic_state_displacement::no_inherited_payoff::primary_resource_neutral_automation_positive": {
+        "cancellation_index_impact": 1.9123613153632346e-16,
+        "object": "fiscal_resources_deviation_linear"
+      },
+      "baseline::matched_deterministic_state_displacement::no_inherited_payoff::rental_tax_base_neutral_automation_negative": {
+        "cancellation_index_impact": 1.9081995677617076e-16,
+        "object": "rental_rate_deviation_linear"
+      },
+      "baseline::matched_deterministic_state_displacement::no_inherited_payoff::rental_tax_base_neutral_automation_positive": {
+        "cancellation_index_impact": 2.29664471981354e-17,
+        "object": "rental_rate_deviation_linear"
+      },
+      "baseline::matched_deterministic_state_displacement::no_inherited_payoff::worker_income_neutral_automation_negative": {
+        "cancellation_index_impact": 7.606475968352225e-16,
+        "object": "wage_income_deviation_linear"
+      },
+      "baseline::matched_deterministic_state_displacement::no_inherited_payoff::worker_income_neutral_automation_positive": {
+        "cancellation_index_impact": 5.112214626496821e-16,
+        "object": "wage_income_deviation_linear"
+      }
+    },
+    "tolerance": 1e-11,
+    "worst_cancellation_index": 1.4387279128077364e-15
+  },
+  "no_jump": {
+    "count": 438,
+    "max_abs_capital_or_tax_impact_displacement": 0.0
+  },
+  "nonfinite_rows": 0,
+  "outcome": "pass",
+  "row_builder_cross_check": {
+    "compared_rows": 2093,
+    "locator": "baseline::brownian_innovation_short_window::optimal_inherited_position::theta_115.952@0.25:safe_position_level",
+    "max_abs_difference": 5.551115123125783e-17
+  },
+  "scaling": [
+    {
+      "error": 0.0,
+      "factors": [
+        0.5,
+        2.0
+      ],
+      "locator": "baseline::brownian_innovation_short_window::optimal_inherited_position::theta_000.000"
+    },
+    {
+      "error": 0.0,
+      "factors": [
+        0.5,
+        2.0
+      ],
+      "locator": "baseline::brownian_innovation_short_window::optimal_inherited_position::theta_045.000"
+    },
+    {
+      "error": 0.0,
+      "factors": [
+        0.5,
+        2.0
+      ],
+      "locator": "baseline::brownian_innovation_short_window::optimal_inherited_position::theta_077.400"
+    },
+    {
+      "error": 0.0,
+      "factors": [
+        0.5,
+        2.0
+      ],
+      "locator": "baseline::brownian_innovation_short_window::optimal_inherited_position::theta_090.000"
+    },
+    {
+      "error": 0.0,
+      "factors": [
+        0.5,
+        2.0
+      ],
+      "locator": "baseline::brownian_innovation_short_window::optimal_inherited_position::theta_101.548"
+    },
+    {
+      "error": 0.0,
+      "factors": [
+        0.5,
+        2.0
+      ],
+      "locator": "baseline::brownian_innovation_short_window::optimal_inherited_position::theta_115.952"
+    },
+    {
+      "error": 0.0,
+      "factors": [
+        0.5,
+        2.0
+      ],
+      "locator": "baseline::brownian_innovation_short_window::optimal_inherited_position::theta_151.805"
+    },
+    {
+      "error": 0.0,
+      "factors": [
+        0.5,
+        2.0
+      ],
+      "locator": "baseline::brownian_innovation_short_window::optimal_inherited_position::theta_180.000"
+    }
+  ],
+  "sign_symmetry": {
+    "automation_persistence_0.50": {
+      "error": 2.6889218733011983e-15,
+      "locator": "automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::theta_163.533",
+      "pairs": 36,
+      "unpaired": []
+    },
+    "automation_persistence_0.81": {
+      "error": 1.4813805833175024e-15,
+      "locator": "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::theta_151.805",
+      "pairs": 36,
+      "unpaired": []
+    },
+    "automation_persistence_0.95": {
+      "error": 5.024440458761267e-15,
+      "locator": "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::theta_132.624",
+      "pairs": 36,
+      "unpaired": []
+    },
+    "baseline": {
+      "error": 6.8154830596384275e-15,
+      "locator": "baseline::finite_window_ou_state_displacement::no_inherited_payoff::theta_150.000",
+      "pairs": 330,
+      "unpaired": []
+    }
+  },
+  "superposition": {
+    "automation_persistence_0.50": {
+      "component_split": {
+        "error": 4.140768674946568e-16,
+        "locator": "automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::theta_151.805"
+      },
+      "cos_sin_basis": {
+        "count": 36,
+        "error": 1.3691008901694597e-15,
+        "locator": "automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::theta_163.533"
+      }
+    },
+    "automation_persistence_0.81": {
+      "component_split": {
+        "error": 7.632733338153331e-16,
+        "locator": "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::theta_331.805"
+      },
+      "cos_sin_basis": {
+        "count": 36,
+        "error": 2.244516035329549e-15,
+        "locator": "automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::theta_331.805"
+      }
+    },
+    "automation_persistence_0.95": {
+      "component_split": {
+        "error": 9.347796202346538e-16,
+        "locator": "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::theta_312.624"
+      },
+      "cos_sin_basis": {
+        "count": 36,
+        "error": 1.5190168828813132e-15,
+        "locator": "automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::theta_132.624"
+      }
+    },
+    "baseline": {
+      "component_split": {
+        "error": 8.973558171549302e-16,
+        "locator": "baseline::finite_window_ou_state_displacement::no_inherited_payoff::theta_155.000"
+      },
+      "cos_sin_basis": {
+        "count": 320,
+        "error": 2.459737197037086e-15,
+        "locator": "baseline::brownian_innovation_short_window::optimal_inherited_position::theta_155.000"
+      }
+    }
+  },
+  "timing_distinction": {
+    "compared_paths": 160,
+    "optimal_x_gap_constancy_max_abs": 1.4094628242311558e-17,
+    "optimal_x_gap_minus_payoff_max_abs": 1.0625181290357943e-17,
+    "physical_state_max_abs_difference": 2.168404344971009e-19,
+    "worst_locator": "baseline::brownian_innovation_short_window::optimal_inherited_position::theta_015.000",
+    "zero_position_vs_matched_max_abs": 0.0
+  }
+}

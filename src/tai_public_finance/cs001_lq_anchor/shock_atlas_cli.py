@@ -548,7 +548,7 @@ def main(argv: list[str] | None = None) -> int:
     elif args.resume:
         manifest.setdefault("resume_events", []).append({"utc": _now(), "command": command, "git": git})
         atomic_write_json(manifest_path, manifest)
-    atomic_write_text(output_dir / ".gitignore", "# large or regenerable per-run artifacts: hash-referenced from the run record\natlas_raw_quarterly.csv.gz\nparts/\nfigures/\n*.tmp\n")
+    atomic_write_text(output_dir / ".gitignore", "# large or regenerable per-run artifacts: hash-referenced from the run record\natlas_raw_quarterly.csv.gz\natlas_raw.csv\npersistence_named_paths.csv\nparts/\nfigures/\n*.tmp\n")
 
     outcome = "fail"
     failure = None

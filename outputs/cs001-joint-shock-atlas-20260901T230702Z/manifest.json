@@ -1,0 +1,92 @@
+{
+  "atlas_fingerprint": {
+    "atlas_settings_sha256": "cb9da78b9ae4d58d103e2f6c80a3ccd08a68446afd7c172ddeece344c775d96f",
+    "commit": "ee48affef15034e74f9e3af3d2533ce51f57f1fe",
+    "complete_input_sha256": "e521c69dc3fd1a3e92d1ecf603f7449a7c96becd5c0c636abde72ef0024a32a4",
+    "shock_atlas_source_sha256": "eaaf6b8174e98275a969b0c687a351a13fc3aa86c495b8e488030e011b51eec4"
+  },
+  "command": "uv run python -m tai_public_finance.cs001_lq_anchor.shock_atlas_cli --config configs/cs001/lq_farhi_smoke.json --output-dir outputs/cs001-joint-shock-atlas-20260901T230702Z --mode full --preflight-tests-status passed",
+  "config_paths": {
+    "experiment": "/Users/nathanbarnard/Documents/TAI public finnace claude-cs001-joint-shock-atlas/configs/cs001/lq_farhi_smoke.json",
+    "primitives": "/Users/nathanbarnard/Documents/TAI public finnace claude-cs001-joint-shock-atlas/configs/primitives/lq_farhi_annual_v1.json"
+  },
+  "failure": null,
+  "figures_seconds": 1.2128155000100378,
+  "finalized_utc": "2026-09-02T13:44:48Z",
+  "fingerprints": {
+    "complete_input_sha256": "e521c69dc3fd1a3e92d1ecf603f7449a7c96becd5c0c636abde72ef0024a32a4",
+    "experiment_sha256": "9c4b5e3b627e8fb031ad07649d4fdc80d1b1956ce1c251bc1bc2d94b02024570",
+    "primitive_sha256": "78837354ee416984183ef0eed43c54105c60c8a31b6a75c2f6f84c58f924917f"
+  },
+  "finished_utc": "2026-09-01T23:07:22Z",
+  "git": {
+    "branch": "cs001/joint-shock-atlas",
+    "commit": "ee48affef15034e74f9e3af3d2533ce51f57f1fe",
+    "dirty_worktree_at_run_start": false
+  },
+  "maintained_setup": {
+    "automation_persistence_annual_baseline": 0.81,
+    "finite_ou_window_years": 1.0,
+    "firm_branch": "interior smooth full-specialisation branch is maintained and checked locally, not globally selected by this solve",
+    "future_innovations": "future innovations switched off for conditional-mean IRFs",
+    "government_risky_asset": "one external international claim, not domestic public equity",
+    "installed_capital_price_q_D": 1.0,
+    "international_pricing_closure": "infinitesimal price-taking domestic government with a residual foreign counterparty; domestic positions do not change sigma_I=lambda_I or beta_I",
+    "productivity_persistence_annual": 0.81,
+    "public_net_worth_anchor_N_bar": 0.0,
+    "shock_covariance_law": "unchanged: two orthogonal Brownian innovations; a joint direction is a joint realization, not a correlated law",
+    "short_brownian_window_years": 0.003968253968253968,
+    "tax_adjustment_scale": 0.5,
+    "welfare": "representative workers only; domestic capitalists and foreigners receive zero direct welfare weight"
+  },
+  "mode": "full",
+  "naming": {
+    "J": "planner-resource wealth (worker fiscal-endowment wealth; includes future worker wages)",
+    "X": "worker comprehensive resources N + J",
+    "portfolio_classification": "unconstrained local desired portfolio; genuine fiscal-capacity feasibility unverified",
+    "s_star": "unconstrained leading small-risk portfolio"
+  },
+  "outcome": "pass",
+  "parameter_set_id": "lq_farhi_illustrative_smoke_v1",
+  "resume_events": [],
+  "run_record": "/Users/nathanbarnard/Documents/TAI public finnace claude-cs001-joint-shock-atlas/runs/RUN-20260901T230703Z-CS001-ATLAS-ee48affe-01.yaml",
+  "settings": {
+    "accounting_identity_absolute_tolerance": 1e-14,
+    "angular_step_degrees": 5.0,
+    "coordinate_conversion_tolerance_degrees": 1e-09,
+    "cumulative_expm_integral_horizon_years": 1500.0,
+    "cumulative_expm_integral_relative_tolerance": 1e-09,
+    "fixed_share_reproduction_absolute_tolerance": 1e-12,
+    "horizon_end_years": 40.0,
+    "horizon_step_years": 0.25,
+    "key_horizons": [
+      0.0,
+      0.25,
+      0.5,
+      1.0,
+      2.0,
+      3.0,
+      5.0,
+      7.5,
+      10.0,
+      15.0,
+      20.0,
+      30.0,
+      40.0
+    ],
+    "neutral_zero_relative_tolerance": 1e-11,
+    "neutrality_unravel_fraction": 0.1,
+    "ode_cross_check": "all",
+    "persistence_cases": [
+      0.5,
+      0.81,
+      0.95
+    ],
+    "row_builder_cross_check_absolute_tolerance": 1e-12,
+    "scaling_relative_tolerance": 1e-09,
+    "sign_symmetry_relative_tolerance": 1e-09,
+    "superposition_relative_tolerance": 1e-09,
+    "timing_distinction_absolute_tolerance": 1e-13
+  },
+  "started_utc": "2026-09-01T23:07:03Z"
+}

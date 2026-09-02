@@ -1,0 +1,1616 @@
+{
+  "automation_persistence_0.50": {
+    "acceptance_outcome": "pass",
+    "anchor": {
+      "alpha_bar": 0.33999999999999997,
+      "alpha_x_bar": 0.075,
+      "alpha_xx_bar": 0.0,
+      "capital_bar": 1.0,
+      "chi": 1.411896637001644,
+      "comprehensive_resources_bar": 12.569150319683768,
+      "ell_x_bar": 0.2984603015998875,
+      "ell_xx_bar": -0.07372601446995912,
+      "eta_output_alpha": 1.0382942174102645,
+      "fiscal_resources_bar": 0.2539308651384774,
+      "fiscal_wealth_bar": 12.569150319683768,
+      "fiscal_wealth_normalized_bar": 12.569150319683768,
+      "gamma": 0.03973378682956285,
+      "h_international_bar": 3.9794706879985,
+      "output_bar": 0.35413357245599686,
+      "public_net_worth_bar": 0.0,
+      "rental_rate_bar": 0.12040541463503893,
+      "specialisation_margin_automation_composite": 1.0382942174102645,
+      "specialisation_margin_new_task_composite": 0.5867057825897356,
+      "tax_base_bar": 0.040405414635038925,
+      "tax_rate_bar": 0.5,
+      "transfer_bar": 0.02020270731751947,
+      "wage_income_bar": 0.23372815782095793,
+      "worker_consumption_bar": 0.2539308651384774,
+      "x_bar": 0.0,
+      "z_bar": -1.806616591576036
+    },
+    "anchor_separate_accounts_and_planner_resource_wealth_decomposition": {
+      "capital_tax_receipts_tauB": 0.020202707317519462,
+      "capital_tax_resource_value_tauB_over_rho": 0.9999999999999998,
+      "caveat": "Constant-flow anchor decomposition with r_I = rho and Psi = 0; not automatically the full state-dependent decomposition away from the anchor. J includes future worker wages and is not government borrowing capacity.",
+      "decomposition_residual": 0.0,
+      "government_primary_cash_flow_tauB_minus_T_minus_Psi": -6.938893903907228e-18,
+      "planner_resource_wealth_J": 12.569150319683768,
+      "portfolio_classification": "unconstrained local desired portfolio; genuine fiscal-capacity feasibility unverified",
+      "public_net_worth_N": 0.0,
+      "sum_of_values": 12.569150319683768,
+      "tax_adjustment_cost_Psi": 0.0,
+      "transfer_T": 0.02020270731751947,
+      "unconstrained_leading_position_s_star": 0.17338412284233762,
+      "unconstrained_safe_position_N_minus_s_star": -0.17338412284233762,
+      "wage_income_W": 0.23372815782095793,
+      "worker_comprehensive_resources_X": 12.569150319683768,
+      "worker_wage_endowment_value_W_over_rho": 11.569150319683768
+    },
+    "brownian_magnitudes": [
+      0.001635794186284235,
+      0.018542464944826823
+    ],
+    "diagnostics": {
+      "anchor_identity_errors": {
+        "capital_growth_vs_zero": 3.469446951953614e-18,
+        "capital_law_vs_rho": 3.469446951953614e-18,
+        "fiscal_envelope_vs_rho": 3.469446951953614e-18,
+        "fiscal_resources_vs_consumption": 0.0,
+        "specialisation_margins_positive": 0.5867057825897356
+      },
+      "closed_form_vs_invariant_subspace_relative_error": 7.6911497824421e-16,
+      "closed_loop": {
+        "full_closed_loop_eigenvalues": [
+          {
+            "imag": 0.07826517598312624,
+            "real": -0.07602777647898668
+          },
+          {
+            "imag": -0.07826517598312624,
+            "real": -0.07602777647898668
+          },
+          {
+            "imag": 0.0,
+            "real": -0.21072103131565253
+          },
+          {
+            "imag": 0.0,
+            "real": -0.6931471805599453
+          }
+        ],
+        "full_closed_loop_hurwitz": true,
+        "full_closed_loop_stability_margin": 0.07602777647898668,
+        "real_closed_loop_eigenvalues": [
+          {
+            "imag": 0.07826517598312624,
+            "real": -0.07602777647898668
+          },
+          {
+            "imag": -0.07826517598312624,
+            "real": -0.07602777647898668
+          }
+        ],
+        "real_closed_loop_hurwitz": true,
+        "real_closed_loop_stability_margin": 0.07602777647898668
+      },
+      "discounted_lyapunov_scaled_residual": 1.6321887404763557e-18,
+      "feedback_construction_errors": {
+        "A_c_relative_error": 0.0,
+        "A_rc_relative_error": 0.0,
+        "F_relative_error": 0.0
+      },
+      "finite_difference_checks": {
+        "output": {
+          "gradient_relative_error": 4.298832835181538e-10,
+          "hessian_relative_error": 1.4911433754375695e-08
+        },
+        "rental_rate": {
+          "gradient_relative_error": 1.8402272509071505e-10,
+          "hessian_relative_error": 7.012741734184383e-09
+        },
+        "safe_rate": {
+          "gradient_relative_error": 3.346755624220145e-10,
+          "hessian_relative_error": 4.912007754109313e-10
+        },
+        "wage_income": {
+          "gradient_relative_error": 3.1264529229335784e-10,
+          "hessian_relative_error": 1.0682349299140796e-08
+        }
+      },
+      "hamiltonian": {
+        "eigenvalues": [
+          {
+            "imag": 0.07826517598312635,
+            "real": -0.08612913013774637
+          },
+          {
+            "imag": -0.07826517598312635,
+            "real": -0.08612913013774637
+          },
+          {
+            "imag": 0.07826517598312634,
+            "real": 0.08612913013774631
+          },
+          {
+            "imag": -0.07826517598312634,
+            "real": 0.08612913013774631
+          }
+        ],
+        "hyperbolic": true,
+        "imaginary_axis_distance": 0.08612913013774631,
+        "tolerance": 2.4119690268177432e-12
+      },
+      "linear_fiscal_wealth_identity_errors": {
+        "j_k_vs_one": 2.220446049250313e-16,
+        "j_t_vs_zero": 1.87110417367505e-16,
+        "j_x_closed_form_relative_error": 1.8962740989810694e-16,
+        "j_z_closed_form_relative_error": 1.2685480010985897e-16
+      },
+      "popov_strict": true,
+      "portfolio_identity_errors": {
+        "zeta_perp_orthogonal_to_lambda_hat": 2.1738253558334364e-17
+      },
+      "q_rr_cancellation_relative_error": 1.1331722378074404e-17,
+      "raw_solve_symmetry_errors": {
+        "H_ee": 0.0,
+        "H_rr": 6.070623396823833e-16,
+        "stationary_covariance_y": 2.1644399957810355e-19
+      },
+      "real_block_scalar_residuals": [
+        7.968646412134013e-17,
+        0.0,
+        5.776263516808786e-17
+      ],
+      "resolvent_identity_residual": 2.7105448578828717e-16,
+      "riccati_full_scaled_residual": 1.0999193798510896e-16,
+      "riccati_real_block_scaled_residual": 8.871396570100837e-17,
+      "riccati_symmetry_error": 0.0,
+      "stationary_covariance": {
+        "exogenous_block_closed_form_relative_error": 2.0408118174028925e-19,
+        "min_eigenvalue": 0.0004765568085476665,
+        "scaled_residual": 3.043289930295029e-19
+      },
+      "sylvester_scaled_residual": 5.88688580720406e-17
+    },
+    "direction_count": 80,
+    "failed_checks": [],
+    "full_closed_loop_hurwitz": true,
+    "invariant_line": {
+      "capital_growth_alignment_relative_error": 0.0,
+      "capital_growth_loading_x_over_z": 0.2984603015998875,
+      "h_I_minus_eta_plus_one_over_alpha": 0.0,
+      "k_I_minus_log_capital_labour": 0.0,
+      "kappa_z_minus_kappa_x": -0.4824261492442927,
+      "rental_gradient_x_over_z": 0.2984603015998875,
+      "tax_speed_feedback_alignment_relative_error": 0.5875924539638795,
+      "tax_speed_feedback_x_over_z": 0.12308728057201002
+    },
+    "kappa_x": 0.6931471805599453,
+    "kappa_z": 0.21072103131565253,
+    "lambda_hat": [
+      0.0259674276779601,
+      0.08785253760667473
+    ],
+    "leading_unconstrained_position": 0.17338412284233762,
+    "named_direction_angles_deg": {
+      "theta_000.000": {
+        "dz_per_dalpha": null,
+        "labels": [
+          "pure_productivity_positive"
+        ],
+        "theta_deg": 0.0
+      },
+      "theta_067.932": {
+        "dz_per_dalpha": 0.47685729774125063,
+        "labels": [
+          "worker_income_neutral_automation_positive"
+        ],
+        "theta_deg": 67.93214783872038
+      },
+      "theta_090.000": {
+        "dz_per_dalpha": 0.0,
+        "labels": [
+          "pure_automation_positive"
+        ],
+        "theta_deg": 90.0
+      },
+      "theta_110.333": {
+        "dz_per_dalpha": -0.4358845788560477,
+        "labels": [
+          "primary_resource_neutral_automation_positive"
+        ],
+        "theta_deg": 110.33325097829892
+      },
+      "theta_131.435": {
+        "dz_per_dalpha": -1.0382942174102645,
+        "labels": [
+          "output_neutral_automation_positive"
+        ],
+        "theta_deg": 131.4353271261626
+      },
+      "theta_163.533": {
+        "dz_per_dalpha": -3.9794706879985,
+        "labels": [
+          "claim_payoff_neutral_automation_positive",
+          "rental_tax_base_neutral_automation_positive"
+        ],
+        "theta_deg": 163.53338971460084
+      },
+      "theta_180.000": {
+        "dz_per_dalpha": null,
+        "labels": [
+          "pure_productivity_negative"
+        ],
+        "theta_deg": 180.0
+      },
+      "theta_247.932": {
+        "dz_per_dalpha": 0.47685729774125063,
+        "labels": [
+          "worker_income_neutral_automation_negative"
+        ],
+        "theta_deg": 247.93214783872037
+      },
+      "theta_270.000": {
+        "dz_per_dalpha": 0.0,
+        "labels": [
+          "pure_automation_negative"
+        ],
+        "theta_deg": 270.0
+      },
+      "theta_290.333": {
+        "dz_per_dalpha": -0.4358845788560477,
+        "labels": [
+          "primary_resource_neutral_automation_negative"
+        ],
+        "theta_deg": 290.3332509782989
+      },
+      "theta_311.435": {
+        "dz_per_dalpha": -1.0382942174102645,
+        "labels": [
+          "output_neutral_automation_negative"
+        ],
+        "theta_deg": 311.43532712616263
+      },
+      "theta_343.533": {
+        "dz_per_dalpha": -3.9794706879985,
+        "labels": [
+          "claim_payoff_neutral_automation_negative",
+          "rental_tax_base_neutral_automation_negative"
+        ],
+        "theta_deg": 343.53338971460084
+      }
+    },
+    "named_direction_coincidences": [
+      {
+        "dz_per_dalpha": -3.9794706879985,
+        "named_labels": [
+          "claim_payoff_neutral_automation_positive",
+          "rental_tax_base_neutral_automation_positive"
+        ],
+        "theta_deg": 163.53338971460084
+      },
+      {
+        "dz_per_dalpha": -3.9794706879985,
+        "named_labels": [
+          "claim_payoff_neutral_automation_negative",
+          "rental_tax_base_neutral_automation_negative"
+        ],
+        "theta_deg": 343.53338971460084
+      }
+    ],
+    "named_direction_slopes": {
+      "claim_payoff_neutral_automation": -3.9794706879985,
+      "output_neutral_automation": -1.0382942174102645,
+      "primary_resource_neutral_automation": -0.4358845788560477,
+      "pure_automation": 0.0,
+      "pure_productivity": null,
+      "rental_tax_base_neutral_automation": -3.9794706879985,
+      "worker_income_neutral_automation": 0.47685729774125063
+    },
+    "naming": {
+      "J": "planner-resource wealth (worker fiscal-endowment wealth; includes future worker wages); code attribute fiscal_wealth_bar",
+      "N_minus_s_star": "unconstrained safe position; negative means a desired debt-financed risky holding conditional on slack genuine transfer/solvency boundaries, not established borrowing capacity",
+      "X": "worker comprehensive resources N + J; code attribute comprehensive_resources_bar",
+      "s_star": "unconstrained leading small-risk portfolio; code attribute leading_unconstrained_position"
+    },
+    "ou_window_magnitudes": [
+      0.023457195058233196,
+      0.21650635094610965
+    ],
+    "overrides": {
+      "automation_persistence_annual": 0.5
+    },
+    "portfolio": {
+      "access_consumption_equivalent_leading": 3.952320536289293e-05,
+      "access_source_gain_q": 3.952320536289293e-05,
+      "access_value_leading": 0.0019563321262699796,
+      "beta_hat": 0.008392375664142287,
+      "comprehensive_resources": 12.569150319683768,
+      "fiscal_hedge_component": -12.39576619684143,
+      "fiscal_wealth": 12.569150319683768,
+      "g2_anchor": 0.0013621121598003283,
+      "hedge_consumption_equivalent_leading": 0.20201343807337488,
+      "hedge_source_gain_q": 0.20201343807337488,
+      "hedge_value_leading": 9.999325085415263,
+      "lambda_hat": [
+        0.0259674276779601,
+        0.08785253760667473
+      ],
+      "leading_constrained_position": 0.17338412284233762,
+      "leading_unconstrained_position": 0.17338412284233762,
+      "marketed_fiscal_wealth_amount": 12.39576619684143,
+      "merton_comparator_feasible": true,
+      "merton_position": 12.569150319683768,
+      "portfolio_bounds": [
+        -20.0,
+        20.0
+      ],
+      "portfolio_curvature": -0.0026294414408377944,
+      "portfolio_gradient_y": [
+        -12.865824635775219,
+        -3.6698125235367316,
+        -1.0264153092479311,
+        0.045348476050633434
+      ],
+      "portfolio_lower_slack": 20.173384122842336,
+      "portfolio_upper_slack": 19.826615877157664,
+      "public_net_worth": 0.0,
+      "return_demand_component": 12.569150319683768,
+      "risk_scale_epsilon": 1.0,
+      "safe_rate_order_two_anchor": -0.007390124023557012,
+      "v2_anchor": 0.06742225872960732,
+      "varpi_ee": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          3.5968954164616416
+        ]
+      ],
+      "zero_position_feasible": true,
+      "zeta_j": [
+        0.33765631945205354,
+        1.0843381774569771
+      ],
+      "zeta_j_perp": [
+        0.015770157222671166,
+        -0.0046613385145819475
+      ]
+    },
+    "portfolio_classification": "unconstrained local desired portfolio; genuine fiscal-capacity feasibility unverified",
+    "real_closed_loop_eigenvalues": [
+      {
+        "imag": 0.07826517598312624,
+        "real": -0.07602777647898668
+      },
+      {
+        "imag": -0.07826517598312624,
+        "real": -0.07602777647898668
+      }
+    ],
+    "real_closed_loop_hurwitz": true,
+    "sigma_x_hat": 0.29435250562886867,
+    "sigma_z_hat": 0.0259674276779601,
+    "zeta_j": [
+      0.33765631945205354,
+      1.0843381774569771
+    ],
+    "zeta_j_perp": [
+      0.015770157222671166,
+      -0.0046613385145819475
+    ]
+  },
+  "automation_persistence_0.81": {
+    "acceptance_outcome": "pass",
+    "anchor": {
+      "alpha_bar": 0.33999999999999997,
+      "alpha_x_bar": 0.075,
+      "alpha_xx_bar": 0.0,
+      "capital_bar": 1.0,
+      "chi": 1.411896637001644,
+      "comprehensive_resources_bar": 12.569150319683768,
+      "ell_x_bar": 0.2984603015998875,
+      "ell_xx_bar": -0.07372601446995912,
+      "eta_output_alpha": 1.0382942174102645,
+      "fiscal_resources_bar": 0.2539308651384774,
+      "fiscal_wealth_bar": 12.569150319683768,
+      "fiscal_wealth_normalized_bar": 12.569150319683768,
+      "gamma": 0.03973378682956285,
+      "h_international_bar": 3.9794706879985,
+      "output_bar": 0.35413357245599686,
+      "public_net_worth_bar": 0.0,
+      "rental_rate_bar": 0.12040541463503893,
+      "specialisation_margin_automation_composite": 1.0382942174102645,
+      "specialisation_margin_new_task_composite": 0.5867057825897356,
+      "tax_base_bar": 0.040405414635038925,
+      "tax_rate_bar": 0.5,
+      "transfer_bar": 0.02020270731751947,
+      "wage_income_bar": 0.23372815782095793,
+      "worker_consumption_bar": 0.2539308651384774,
+      "x_bar": 0.0,
+      "z_bar": -1.806616591576036
+    },
+    "anchor_separate_accounts_and_planner_resource_wealth_decomposition": {
+      "capital_tax_receipts_tauB": 0.020202707317519462,
+      "capital_tax_resource_value_tauB_over_rho": 0.9999999999999998,
+      "caveat": "Constant-flow anchor decomposition with r_I = rho and Psi = 0; not automatically the full state-dependent decomposition away from the anchor. J includes future worker wages and is not government borrowing capacity.",
+      "decomposition_residual": 0.0,
+      "government_primary_cash_flow_tauB_minus_T_minus_Psi": -6.938893903907228e-18,
+      "planner_resource_wealth_J": 12.569150319683768,
+      "portfolio_classification": "unconstrained local desired portfolio; genuine fiscal-capacity feasibility unverified",
+      "public_net_worth_N": 0.0,
+      "sum_of_values": 12.569150319683768,
+      "tax_adjustment_cost_Psi": 0.0,
+      "transfer_T": 0.02020270731751947,
+      "unconstrained_leading_position_s_star": 0.4464893494362947,
+      "unconstrained_safe_position_N_minus_s_star": -0.4464893494362947,
+      "wage_income_W": 0.23372815782095793,
+      "worker_comprehensive_resources_X": 12.569150319683768,
+      "worker_wage_endowment_value_W_over_rho": 11.569150319683768
+    },
+    "brownian_magnitudes": [
+      0.001635794186284235,
+      0.01022371366427647
+    ],
+    "diagnostics": {
+      "anchor_identity_errors": {
+        "capital_growth_vs_zero": 3.469446951953614e-18,
+        "capital_law_vs_rho": 3.469446951953614e-18,
+        "fiscal_envelope_vs_rho": 3.469446951953614e-18,
+        "fiscal_resources_vs_consumption": 0.0,
+        "specialisation_margins_positive": 0.5867057825897356
+      },
+      "closed_form_vs_invariant_subspace_relative_error": 7.6911497824421e-16,
+      "closed_loop": {
+        "full_closed_loop_eigenvalues": [
+          {
+            "imag": 0.07826517598312624,
+            "real": -0.07602777647898668
+          },
+          {
+            "imag": -0.07826517598312624,
+            "real": -0.07602777647898668
+          },
+          {
+            "imag": 0.0,
+            "real": -0.21072103131565253
+          },
+          {
+            "imag": 0.0,
+            "real": -0.21072103131565253
+          }
+        ],
+        "full_closed_loop_hurwitz": true,
+        "full_closed_loop_stability_margin": 0.07602777647898668,
+        "real_closed_loop_eigenvalues": [
+          {
+            "imag": 0.07826517598312624,
+            "real": -0.07602777647898668
+          },
+          {
+            "imag": -0.07826517598312624,
+            "real": -0.07602777647898668
+          }
+        ],
+        "real_closed_loop_hurwitz": true,
+        "real_closed_loop_stability_margin": 0.07602777647898668
+      },
+      "discounted_lyapunov_scaled_residual": 1.608195049684813e-17,
+      "feedback_construction_errors": {
+        "A_c_relative_error": 0.0,
+        "A_rc_relative_error": 0.0,
+        "F_relative_error": 0.0
+      },
+      "finite_difference_checks": {
+        "output": {
+          "gradient_relative_error": 4.298832835181538e-10,
+          "hessian_relative_error": 1.4911433754375695e-08
+        },
+        "rental_rate": {
+          "gradient_relative_error": 1.8402272509071505e-10,
+          "hessian_relative_error": 7.012741734184383e-09
+        },
+        "safe_rate": {
+          "gradient_relative_error": 1.080284801406793e-10,
+          "hessian_relative_error": 1.0962529613560733e-10
+        },
+        "wage_income": {
+          "gradient_relative_error": 3.1264529229335784e-10,
+          "hessian_relative_error": 1.0682349299140796e-08
+        }
+      },
+      "hamiltonian": {
+        "eigenvalues": [
+          {
+            "imag": 0.07826517598312635,
+            "real": -0.08612913013774637
+          },
+          {
+            "imag": -0.07826517598312635,
+            "real": -0.08612913013774637
+          },
+          {
+            "imag": 0.07826517598312634,
+            "real": 0.08612913013774631
+          },
+          {
+            "imag": -0.07826517598312634,
+            "real": 0.08612913013774631
+          }
+        ],
+        "hyperbolic": true,
+        "imaginary_axis_distance": 0.08612913013774631,
+        "tolerance": 2.4119690268177432e-12
+      },
+      "linear_fiscal_wealth_identity_errors": {
+        "j_k_vs_one": 2.220446049250313e-16,
+        "j_t_vs_zero": 1.87110417367505e-16,
+        "j_x_closed_form_relative_error": 0.0,
+        "j_z_closed_form_relative_error": 1.2685480010985897e-16
+      },
+      "popov_strict": true,
+      "portfolio_identity_errors": {
+        "zeta_perp_orthogonal_to_lambda_hat": 1.5178830414797062e-18
+      },
+      "q_rr_cancellation_relative_error": 1.1331722378074404e-17,
+      "raw_solve_symmetry_errors": {
+        "H_ee": 8.104075354342283e-17,
+        "H_rr": 6.070623396823833e-16,
+        "stationary_covariance_y": 2.16262049446251e-19
+      },
+      "real_block_scalar_residuals": [
+        7.968646412134013e-17,
+        0.0,
+        5.776263516808786e-17
+      ],
+      "resolvent_identity_residual": 2.7094432538502835e-16,
+      "riccati_full_scaled_residual": 1.159309242606376e-16,
+      "riccati_real_block_scaled_residual": 8.871396570100837e-17,
+      "riccati_symmetry_error": 0.0,
+      "stationary_covariance": {
+        "exogenous_block_closed_form_relative_error": 2.0408118174028925e-19,
+        "min_eigenvalue": 0.0010439370423858854,
+        "scaled_residual": 4.291583170489191e-19
+      },
+      "sylvester_scaled_residual": 6.321752184243787e-17
+    },
+    "direction_count": 80,
+    "failed_checks": [],
+    "full_closed_loop_hurwitz": true,
+    "invariant_line": {
+      "capital_growth_alignment_relative_error": 0.0,
+      "capital_growth_loading_x_over_z": 0.2984603015998875,
+      "h_I_minus_eta_plus_one_over_alpha": 0.0,
+      "k_I_minus_log_capital_labour": 0.0,
+      "kappa_z_minus_kappa_x": 0.0,
+      "rental_gradient_x_over_z": 0.2984603015998875,
+      "tax_speed_feedback_alignment_relative_error": 9.299587069652474e-16,
+      "tax_speed_feedback_x_over_z": 0.29846030159988723
+    },
+    "kappa_x": 0.21072103131565253,
+    "kappa_z": 0.21072103131565253,
+    "lambda_hat": [
+      0.0259674276779601,
+      0.048439039353357735
+    ],
+    "leading_unconstrained_position": 0.4464893494362947,
+    "named_direction_angles_deg": {
+      "theta_000.000": {
+        "dz_per_dalpha": null,
+        "labels": [
+          "pure_productivity_positive"
+        ],
+        "theta_deg": 0.0
+      },
+      "theta_077.400": {
+        "dz_per_dalpha": 0.47685729774125063,
+        "labels": [
+          "worker_income_neutral_automation_positive"
+        ],
+        "theta_deg": 77.39997951365545
+      },
+      "theta_090.000": {
+        "dz_per_dalpha": 0.0,
+        "labels": [
+          "pure_automation_positive"
+        ],
+        "theta_deg": 90.0
+      },
+      "theta_101.548": {
+        "dz_per_dalpha": -0.4358845788560477,
+        "labels": [
+          "primary_resource_neutral_automation_positive"
+        ],
+        "theta_deg": 101.54778070317035
+      },
+      "theta_115.952": {
+        "dz_per_dalpha": -1.0382942174102645,
+        "labels": [
+          "output_neutral_automation_positive"
+        ],
+        "theta_deg": 115.95220609217762
+      },
+      "theta_151.805": {
+        "dz_per_dalpha": -3.9794706879985,
+        "labels": [
+          "claim_payoff_neutral_automation_positive",
+          "rental_tax_base_neutral_automation_positive"
+        ],
+        "theta_deg": 151.80492206398452
+      },
+      "theta_180.000": {
+        "dz_per_dalpha": null,
+        "labels": [
+          "pure_productivity_negative"
+        ],
+        "theta_deg": 180.0
+      },
+      "theta_257.400": {
+        "dz_per_dalpha": 0.47685729774125063,
+        "labels": [
+          "worker_income_neutral_automation_negative"
+        ],
+        "theta_deg": 257.39997951365547
+      },
+      "theta_270.000": {
+        "dz_per_dalpha": 0.0,
+        "labels": [
+          "pure_automation_negative"
+        ],
+        "theta_deg": 270.0
+      },
+      "theta_281.548": {
+        "dz_per_dalpha": -0.4358845788560477,
+        "labels": [
+          "primary_resource_neutral_automation_negative"
+        ],
+        "theta_deg": 281.54778070317036
+      },
+      "theta_295.952": {
+        "dz_per_dalpha": -1.0382942174102645,
+        "labels": [
+          "output_neutral_automation_negative"
+        ],
+        "theta_deg": 295.9522060921776
+      },
+      "theta_331.805": {
+        "dz_per_dalpha": -3.9794706879985,
+        "labels": [
+          "claim_payoff_neutral_automation_negative",
+          "rental_tax_base_neutral_automation_negative"
+        ],
+        "theta_deg": 331.8049220639845
+      }
+    },
+    "named_direction_coincidences": [
+      {
+        "dz_per_dalpha": -3.9794706879985,
+        "named_labels": [
+          "claim_payoff_neutral_automation_positive",
+          "rental_tax_base_neutral_automation_positive"
+        ],
+        "theta_deg": 151.80492206398452
+      },
+      {
+        "dz_per_dalpha": -3.9794706879985,
+        "named_labels": [
+          "claim_payoff_neutral_automation_negative",
+          "rental_tax_base_neutral_automation_negative"
+        ],
+        "theta_deg": 331.8049220639845
+      }
+    ],
+    "named_direction_slopes": {
+      "claim_payoff_neutral_automation": -3.9794706879985,
+      "output_neutral_automation": -1.0382942174102645,
+      "primary_resource_neutral_automation": -0.4358845788560477,
+      "pure_automation": 0.0,
+      "pure_productivity": null,
+      "rental_tax_base_neutral_automation": -3.9794706879985,
+      "worker_income_neutral_automation": 0.47685729774125063
+    },
+    "naming": {
+      "J": "planner-resource wealth (worker fiscal-endowment wealth; includes future worker wages); code attribute fiscal_wealth_bar",
+      "N_minus_s_star": "unconstrained safe position; negative means a desired debt-financed risky holding conditional on slack genuine transfer/solvency boundaries, not established borrowing capacity",
+      "X": "worker comprehensive resources N + J; code attribute comprehensive_resources_bar",
+      "s_star": "unconstrained leading small-risk portfolio; code attribute leading_unconstrained_position"
+    },
+    "ou_window_magnitudes": [
+      0.023457195058233196,
+      0.14660746911395747
+    ],
+    "overrides": {
+      "automation_persistence_annual": 0.81
+    },
+    "portfolio": {
+      "access_consumption_equivalent_leading": 9.433457444551234e-05,
+      "access_source_gain_q": 9.433457444551234e-05,
+      "access_value_leading": 0.004669402618316749,
+      "beta_hat": 0.0030206478336862273,
+      "comprehensive_resources": 12.569150319683768,
+      "fiscal_hedge_component": -12.122660970247473,
+      "fiscal_wealth": 12.569150319683768,
+      "g2_anchor": 0.0013857054666591765,
+      "hedge_consumption_equivalent_leading": 0.0695415884419857,
+      "hedge_source_gain_q": 0.0695415884419857,
+      "hedge_value_leading": 3.4421915513115584,
+      "lambda_hat": [
+        0.0259674276779601,
+        0.048439039353357735
+      ],
+      "leading_constrained_position": 0.4464893494362947,
+      "leading_unconstrained_position": 0.4464893494362947,
+      "marketed_fiscal_wealth_amount": 12.122660970247473,
+      "merton_comparator_feasible": true,
+      "merton_position": 12.569150319683768,
+      "portfolio_bounds": [
+        -20.0,
+        20.0
+      ],
+      "portfolio_curvature": -0.0009464086106163626,
+      "portfolio_gradient_y": [
+        -12.642322214106523,
+        -3.557382767559386,
+        -1.032551156410937,
+        0.09866532271011884
+      ],
+      "portfolio_lower_slack": 20.446489349436295,
+      "portfolio_upper_slack": 19.553510650563705,
+      "public_net_worth": 0.0,
+      "return_demand_component": 12.569150319683768,
+      "risk_scale_epsilon": 1.0,
+      "safe_rate_order_two_anchor": -0.0024813002795870203,
+      "v2_anchor": 0.06859008769866773,
+      "varpi_ee": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          3.48237849358059
+        ]
+      ],
+      "zero_position_feasible": true,
+      "zeta_j": [
+        0.33765631945205354,
+        0.5749540848601218
+      ],
+      "zeta_j_perp": [
+        0.02286199744272266,
+        -0.012255966945109442
+      ]
+    },
+    "portfolio_classification": "unconstrained local desired portfolio; genuine fiscal-capacity feasibility unverified",
+    "real_closed_loop_eigenvalues": [
+      {
+        "imag": 0.07826517598312624,
+        "real": -0.07602777647898668
+      },
+      {
+        "imag": -0.07826517598312624,
+        "real": -0.07602777647898668
+      }
+    ],
+    "real_closed_loop_hurwitz": true,
+    "sigma_x_hat": 0.1622964229872506,
+    "sigma_z_hat": 0.0259674276779601,
+    "zeta_j": [
+      0.33765631945205354,
+      0.5749540848601218
+    ],
+    "zeta_j_perp": [
+      0.02286199744272266,
+      -0.012255966945109442
+    ]
+  },
+  "automation_persistence_0.95": {
+    "acceptance_outcome": "pass",
+    "anchor": {
+      "alpha_bar": 0.33999999999999997,
+      "alpha_x_bar": 0.075,
+      "alpha_xx_bar": 0.0,
+      "capital_bar": 1.0,
+      "chi": 1.411896637001644,
+      "comprehensive_resources_bar": 12.569150319683768,
+      "ell_x_bar": 0.2984603015998875,
+      "ell_xx_bar": -0.07372601446995912,
+      "eta_output_alpha": 1.0382942174102645,
+      "fiscal_resources_bar": 0.2539308651384774,
+      "fiscal_wealth_bar": 12.569150319683768,
+      "fiscal_wealth_normalized_bar": 12.569150319683768,
+      "gamma": 0.03973378682956285,
+      "h_international_bar": 3.9794706879985,
+      "output_bar": 0.35413357245599686,
+      "public_net_worth_bar": 0.0,
+      "rental_rate_bar": 0.12040541463503893,
+      "specialisation_margin_automation_composite": 1.0382942174102645,
+      "specialisation_margin_new_task_composite": 0.5867057825897356,
+      "tax_base_bar": 0.040405414635038925,
+      "tax_rate_bar": 0.5,
+      "transfer_bar": 0.02020270731751947,
+      "wage_income_bar": 0.23372815782095793,
+      "worker_consumption_bar": 0.2539308651384774,
+      "x_bar": 0.0,
+      "z_bar": -1.806616591576036
+    },
+    "anchor_separate_accounts_and_planner_resource_wealth_decomposition": {
+      "capital_tax_receipts_tauB": 0.020202707317519462,
+      "capital_tax_resource_value_tauB_over_rho": 0.9999999999999998,
+      "caveat": "Constant-flow anchor decomposition with r_I = rho and Psi = 0; not automatically the full state-dependent decomposition away from the anchor. J includes future worker wages and is not government borrowing capacity.",
+      "decomposition_residual": 0.0,
+      "government_primary_cash_flow_tauB_minus_T_minus_Psi": -6.938893903907228e-18,
+      "planner_resource_wealth_J": 12.569150319683768,
+      "portfolio_classification": "unconstrained local desired portfolio; genuine fiscal-capacity feasibility unverified",
+      "public_net_worth_N": 0.0,
+      "sum_of_values": 12.569150319683768,
+      "tax_adjustment_cost_Psi": 0.0,
+      "transfer_T": 0.02020270731751947,
+      "unconstrained_leading_position_s_star": 0.8011569589487202,
+      "unconstrained_safe_position_N_minus_s_star": -0.8011569589487202,
+      "wage_income_W": 0.23372815782095793,
+      "worker_comprehensive_resources_X": 12.569150319683768,
+      "worker_wage_endowment_value_W_over_rho": 11.569150319683768
+    },
+    "brownian_magnitudes": [
+      0.001635794186284235,
+      0.005044115618696411
+    ],
+    "diagnostics": {
+      "anchor_identity_errors": {
+        "capital_growth_vs_zero": 3.469446951953614e-18,
+        "capital_law_vs_rho": 3.469446951953614e-18,
+        "fiscal_envelope_vs_rho": 3.469446951953614e-18,
+        "fiscal_resources_vs_consumption": 0.0,
+        "specialisation_margins_positive": 0.5867057825897356
+      },
+      "closed_form_vs_invariant_subspace_relative_error": 7.6911497824421e-16,
+      "closed_loop": {
+        "full_closed_loop_eigenvalues": [
+          {
+            "imag": 0.07826517598312624,
+            "real": -0.07602777647898668
+          },
+          {
+            "imag": -0.07826517598312624,
+            "real": -0.07602777647898668
+          },
+          {
+            "imag": 0.0,
+            "real": -0.21072103131565253
+          },
+          {
+            "imag": 0.0,
+            "real": -0.05129329438755058
+          }
+        ],
+        "full_closed_loop_hurwitz": true,
+        "full_closed_loop_stability_margin": 0.05129329438755058,
+        "real_closed_loop_eigenvalues": [
+          {
+            "imag": 0.07826517598312624,
+            "real": -0.07602777647898668
+          },
+          {
+            "imag": -0.07826517598312624,
+            "real": -0.07602777647898668
+          }
+        ],
+        "real_closed_loop_hurwitz": true,
+        "real_closed_loop_stability_margin": 0.07602777647898668
+      },
+      "discounted_lyapunov_scaled_residual": 2.3668707516699766e-17,
+      "feedback_construction_errors": {
+        "A_c_relative_error": 0.0,
+        "A_rc_relative_error": 0.0,
+        "F_relative_error": 0.0
+      },
+      "finite_difference_checks": {
+        "output": {
+          "gradient_relative_error": 4.298832835181538e-10,
+          "hessian_relative_error": 1.4911433754375695e-08
+        },
+        "rental_rate": {
+          "gradient_relative_error": 1.8402272509071505e-10,
+          "hessian_relative_error": 7.012741734184383e-09
+        },
+        "safe_rate": {
+          "gradient_relative_error": 2.6479278160803005e-11,
+          "hessian_relative_error": 4.753673567468982e-12
+        },
+        "wage_income": {
+          "gradient_relative_error": 3.1264529229335784e-10,
+          "hessian_relative_error": 1.0682349299140796e-08
+        }
+      },
+      "hamiltonian": {
+        "eigenvalues": [
+          {
+            "imag": 0.07826517598312635,
+            "real": -0.08612913013774637
+          },
+          {
+            "imag": -0.07826517598312635,
+            "real": -0.08612913013774637
+          },
+          {
+            "imag": 0.07826517598312634,
+            "real": 0.08612913013774631
+          },
+          {
+            "imag": -0.07826517598312634,
+            "real": 0.08612913013774631
+          }
+        ],
+        "hyperbolic": true,
+        "imaginary_axis_distance": 0.08612913013774631,
+        "tolerance": 2.4119690268177432e-12
+      },
+      "linear_fiscal_wealth_identity_errors": {
+        "j_k_vs_one": 2.220446049250313e-16,
+        "j_t_vs_zero": 1.87110417367505e-16,
+        "j_x_closed_form_relative_error": 0.0,
+        "j_z_closed_form_relative_error": 1.2685480010985897e-16
+      },
+      "popov_strict": true,
+      "portfolio_identity_errors": {
+        "zeta_perp_orthogonal_to_lambda_hat": 3.686287386450715e-18
+      },
+      "q_rr_cancellation_relative_error": 1.1331722378074404e-17,
+      "raw_solve_symmetry_errors": {
+        "H_ee": 0.0,
+        "H_rr": 6.070623396823833e-16,
+        "stationary_covariance_y": 3.050709540505561e-18
+      },
+      "real_block_scalar_residuals": [
+        7.968646412134013e-17,
+        0.0,
+        5.776263516808786e-17
+      ],
+      "resolvent_identity_residual": 3.0401865161553453e-16,
+      "riccati_full_scaled_residual": 1.2157752280391473e-16,
+      "riccati_real_block_scaled_residual": 8.871396570100837e-17,
+      "riccati_symmetry_error": 0.0,
+      "stationary_covariance": {
+        "exogenous_block_closed_form_relative_error": 2.0408118174028925e-19,
+        "min_eigenvalue": 0.0012163738817840119,
+        "scaled_residual": 4.97857718443232e-19
+      },
+      "sylvester_scaled_residual": 6.476727763383809e-17
+    },
+    "direction_count": 80,
+    "failed_checks": [],
+    "full_closed_loop_hurwitz": true,
+    "invariant_line": {
+      "capital_growth_alignment_relative_error": 0.0,
+      "capital_growth_loading_x_over_z": 0.2984603015998875,
+      "h_I_minus_eta_plus_one_over_alpha": 0.0,
+      "k_I_minus_log_capital_labour": 0.0,
+      "kappa_z_minus_kappa_x": 0.15942773692810197,
+      "rental_gradient_x_over_z": 0.2984603015998875,
+      "tax_speed_feedback_alignment_relative_error": 0.7120567981441251,
+      "tax_speed_feedback_x_over_z": 0.5109809883302333
+    },
+    "kappa_x": 0.05129329438755058,
+    "kappa_z": 0.21072103131565253,
+    "lambda_hat": [
+      0.0259674276779601,
+      0.023898567876628144
+    ],
+    "leading_unconstrained_position": 0.8011569589487202,
+    "named_direction_angles_deg": {
+      "theta_000.000": {
+        "dz_per_dalpha": null,
+        "labels": [
+          "pure_productivity_positive"
+        ],
+        "theta_deg": 0.0
+      },
+      "theta_083.707": {
+        "dz_per_dalpha": 0.47685729774125063,
+        "labels": [
+          "worker_income_neutral_automation_positive"
+        ],
+        "theta_deg": 83.70671712222395
+      },
+      "theta_090.000": {
+        "dz_per_dalpha": 0.0,
+        "labels": [
+          "pure_automation_positive"
+        ],
+        "theta_deg": 90.0
+      },
+      "theta_095.756": {
+        "dz_per_dalpha": -0.4358845788560477,
+        "labels": [
+          "primary_resource_neutral_automation_positive"
+        ],
+        "theta_deg": 95.75634895537293
+      },
+      "theta_103.503": {
+        "dz_per_dalpha": -1.0382942174102645,
+        "labels": [
+          "output_neutral_automation_positive"
+        ],
+        "theta_deg": 103.50252576102054
+      },
+      "theta_132.624": {
+        "dz_per_dalpha": -3.9794706879985,
+        "labels": [
+          "claim_payoff_neutral_automation_positive",
+          "rental_tax_base_neutral_automation_positive"
+        ],
+        "theta_deg": 132.62425292319114
+      },
+      "theta_180.000": {
+        "dz_per_dalpha": null,
+        "labels": [
+          "pure_productivity_negative"
+        ],
+        "theta_deg": 180.0
+      },
+      "theta_263.707": {
+        "dz_per_dalpha": 0.47685729774125063,
+        "labels": [
+          "worker_income_neutral_automation_negative"
+        ],
+        "theta_deg": 263.70671712222395
+      },
+      "theta_270.000": {
+        "dz_per_dalpha": 0.0,
+        "labels": [
+          "pure_automation_negative"
+        ],
+        "theta_deg": 270.0
+      },
+      "theta_275.756": {
+        "dz_per_dalpha": -0.4358845788560477,
+        "labels": [
+          "primary_resource_neutral_automation_negative"
+        ],
+        "theta_deg": 275.7563489553729
+      },
+      "theta_283.503": {
+        "dz_per_dalpha": -1.0382942174102645,
+        "labels": [
+          "output_neutral_automation_negative"
+        ],
+        "theta_deg": 283.50252576102054
+      },
+      "theta_312.624": {
+        "dz_per_dalpha": -3.9794706879985,
+        "labels": [
+          "claim_payoff_neutral_automation_negative",
+          "rental_tax_base_neutral_automation_negative"
+        ],
+        "theta_deg": 312.62425292319114
+      }
+    },
+    "named_direction_coincidences": [
+      {
+        "dz_per_dalpha": -3.9794706879985,
+        "named_labels": [
+          "claim_payoff_neutral_automation_positive",
+          "rental_tax_base_neutral_automation_positive"
+        ],
+        "theta_deg": 132.62425292319114
+      },
+      {
+        "dz_per_dalpha": -3.9794706879985,
+        "named_labels": [
+          "claim_payoff_neutral_automation_negative",
+          "rental_tax_base_neutral_automation_negative"
+        ],
+        "theta_deg": 312.62425292319114
+      }
+    ],
+    "named_direction_slopes": {
+      "claim_payoff_neutral_automation": -3.9794706879985,
+      "output_neutral_automation": -1.0382942174102645,
+      "primary_resource_neutral_automation": -0.4358845788560477,
+      "pure_automation": 0.0,
+      "pure_productivity": null,
+      "rental_tax_base_neutral_automation": -3.9794706879985,
+      "worker_income_neutral_automation": 0.47685729774125063
+    },
+    "naming": {
+      "J": "planner-resource wealth (worker fiscal-endowment wealth; includes future worker wages); code attribute fiscal_wealth_bar",
+      "N_minus_s_star": "unconstrained safe position; negative means a desired debt-financed risky holding conditional on slack genuine transfer/solvency boundaries, not established borrowing capacity",
+      "X": "worker comprehensive resources N + J; code attribute comprehensive_resources_bar",
+      "s_star": "unconstrained leading small-risk portfolio; code attribute leading_unconstrained_position"
+    },
+    "ou_window_magnitudes": [
+      0.023457195058233196,
+      0.07806247497997999
+    ],
+    "overrides": {
+      "automation_persistence_annual": 0.95
+    },
+    "portfolio": {
+      "access_consumption_equivalent_leading": 0.00012523038203035954,
+      "access_source_gain_q": 0.00012523038203035954,
+      "access_value_leading": 0.006198693079207347,
+      "beta_hat": 0.001245448846763891,
+      "comprehensive_resources": 12.569150319683768,
+      "fiscal_hedge_component": -11.767993360735048,
+      "fiscal_wealth": 12.569150319683768,
+      "g2_anchor": 0.001134538845344655,
+      "hedge_consumption_equivalent_leading": 0.027019624928759662,
+      "hedge_source_gain_q": 0.027019624928759662,
+      "hedge_value_leading": 1.3374259451518498,
+      "lambda_hat": [
+        0.0259674276779601,
+        0.023898567876628144
+      ],
+      "leading_constrained_position": 0.8011569589487202,
+      "leading_unconstrained_position": 0.8011569589487202,
+      "marketed_fiscal_wealth_amount": 11.767993360735048,
+      "merton_comparator_feasible": true,
+      "merton_position": 12.569150319683768,
+      "portfolio_bounds": [
+        -20.0,
+        20.0
+      ],
+      "portfolio_curvature": -0.0003902154695144128,
+      "portfolio_gradient_y": [
+        -12.318952062955022,
+        -3.3385214106255794,
+        -1.0005929587511597,
+        0.13088320838914821
+      ],
+      "portfolio_lower_slack": 20.80115695894872,
+      "portfolio_upper_slack": 19.19884304105128,
+      "public_net_worth": 0.0,
+      "return_demand_component": 12.569150319683768,
+      "risk_scale_epsilon": 1.0,
+      "safe_rate_order_two_anchor": -0.0008590775586462221,
+      "v2_anchor": 0.05615776279453403,
+      "varpi_ee": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          3.0488865479034404
+        ]
+      ],
+      "zero_position_feasible": true,
+      "zeta_j": [
+        0.33765631945205354,
+        0.24638998181283453
+      ],
+      "zeta_j_perp": [
+        0.0320718029424516,
+        -0.034848206290401335
+      ]
+    },
+    "portfolio_classification": "unconstrained local desired portfolio; genuine fiscal-capacity feasibility unverified",
+    "real_closed_loop_eigenvalues": [
+      {
+        "imag": 0.07826517598312624,
+        "real": -0.07602777647898668
+      },
+      {
+        "imag": -0.07826517598312624,
+        "real": -0.07602777647898668
+      }
+    ],
+    "real_closed_loop_hurwitz": true,
+    "sigma_x_hat": 0.08007285306796444,
+    "sigma_z_hat": 0.0259674276779601,
+    "zeta_j": [
+      0.33765631945205354,
+      0.24638998181283453
+    ],
+    "zeta_j_perp": [
+      0.0320718029424516,
+      -0.034848206290401335
+    ]
+  },
+  "baseline": {
+    "acceptance_outcome": "pass",
+    "anchor": {
+      "alpha_bar": 0.33999999999999997,
+      "alpha_x_bar": 0.075,
+      "alpha_xx_bar": 0.0,
+      "capital_bar": 1.0,
+      "chi": 1.411896637001644,
+      "comprehensive_resources_bar": 12.569150319683768,
+      "ell_x_bar": 0.2984603015998875,
+      "ell_xx_bar": -0.07372601446995912,
+      "eta_output_alpha": 1.0382942174102645,
+      "fiscal_resources_bar": 0.2539308651384774,
+      "fiscal_wealth_bar": 12.569150319683768,
+      "fiscal_wealth_normalized_bar": 12.569150319683768,
+      "gamma": 0.03973378682956285,
+      "h_international_bar": 3.9794706879985,
+      "output_bar": 0.35413357245599686,
+      "public_net_worth_bar": 0.0,
+      "rental_rate_bar": 0.12040541463503893,
+      "specialisation_margin_automation_composite": 1.0382942174102645,
+      "specialisation_margin_new_task_composite": 0.5867057825897356,
+      "tax_base_bar": 0.040405414635038925,
+      "tax_rate_bar": 0.5,
+      "transfer_bar": 0.02020270731751947,
+      "wage_income_bar": 0.23372815782095793,
+      "worker_consumption_bar": 0.2539308651384774,
+      "x_bar": 0.0,
+      "z_bar": -1.806616591576036
+    },
+    "anchor_separate_accounts_and_planner_resource_wealth_decomposition": {
+      "capital_tax_receipts_tauB": 0.020202707317519462,
+      "capital_tax_resource_value_tauB_over_rho": 0.9999999999999998,
+      "caveat": "Constant-flow anchor decomposition with r_I = rho and Psi = 0; not automatically the full state-dependent decomposition away from the anchor. J includes future worker wages and is not government borrowing capacity.",
+      "decomposition_residual": 0.0,
+      "government_primary_cash_flow_tauB_minus_T_minus_Psi": -6.938893903907228e-18,
+      "planner_resource_wealth_J": 12.569150319683768,
+      "portfolio_classification": "unconstrained local desired portfolio; genuine fiscal-capacity feasibility unverified",
+      "public_net_worth_N": 0.0,
+      "sum_of_values": 12.569150319683768,
+      "tax_adjustment_cost_Psi": 0.0,
+      "transfer_T": 0.02020270731751947,
+      "unconstrained_leading_position_s_star": 0.4464893494362947,
+      "unconstrained_safe_position_N_minus_s_star": -0.4464893494362947,
+      "wage_income_W": 0.23372815782095793,
+      "worker_comprehensive_resources_X": 12.569150319683768,
+      "worker_wage_endowment_value_W_over_rho": 11.569150319683768
+    },
+    "brownian_magnitudes": [
+      0.001635794186284235,
+      0.01022371366427647
+    ],
+    "diagnostics": {
+      "anchor_identity_errors": {
+        "capital_growth_vs_zero": 3.469446951953614e-18,
+        "capital_law_vs_rho": 3.469446951953614e-18,
+        "fiscal_envelope_vs_rho": 3.469446951953614e-18,
+        "fiscal_resources_vs_consumption": 0.0,
+        "specialisation_margins_positive": 0.5867057825897356
+      },
+      "closed_form_vs_invariant_subspace_relative_error": 7.6911497824421e-16,
+      "closed_loop": {
+        "full_closed_loop_eigenvalues": [
+          {
+            "imag": 0.07826517598312624,
+            "real": -0.07602777647898668
+          },
+          {
+            "imag": -0.07826517598312624,
+            "real": -0.07602777647898668
+          },
+          {
+            "imag": 0.0,
+            "real": -0.21072103131565253
+          },
+          {
+            "imag": 0.0,
+            "real": -0.21072103131565253
+          }
+        ],
+        "full_closed_loop_hurwitz": true,
+        "full_closed_loop_stability_margin": 0.07602777647898668,
+        "real_closed_loop_eigenvalues": [
+          {
+            "imag": 0.07826517598312624,
+            "real": -0.07602777647898668
+          },
+          {
+            "imag": -0.07826517598312624,
+            "real": -0.07602777647898668
+          }
+        ],
+        "real_closed_loop_hurwitz": true,
+        "real_closed_loop_stability_margin": 0.07602777647898668
+      },
+      "discounted_lyapunov_scaled_residual": 1.608195049684813e-17,
+      "feedback_construction_errors": {
+        "A_c_relative_error": 0.0,
+        "A_rc_relative_error": 0.0,
+        "F_relative_error": 0.0
+      },
+      "finite_difference_checks": {
+        "output": {
+          "gradient_relative_error": 4.298832835181538e-10,
+          "hessian_relative_error": 1.4911433754375695e-08
+        },
+        "rental_rate": {
+          "gradient_relative_error": 1.8402272509071505e-10,
+          "hessian_relative_error": 7.012741734184383e-09
+        },
+        "safe_rate": {
+          "gradient_relative_error": 1.080284801406793e-10,
+          "hessian_relative_error": 1.0962529613560733e-10
+        },
+        "wage_income": {
+          "gradient_relative_error": 3.1264529229335784e-10,
+          "hessian_relative_error": 1.0682349299140796e-08
+        }
+      },
+      "hamiltonian": {
+        "eigenvalues": [
+          {
+            "imag": 0.07826517598312635,
+            "real": -0.08612913013774637
+          },
+          {
+            "imag": -0.07826517598312635,
+            "real": -0.08612913013774637
+          },
+          {
+            "imag": 0.07826517598312634,
+            "real": 0.08612913013774631
+          },
+          {
+            "imag": -0.07826517598312634,
+            "real": 0.08612913013774631
+          }
+        ],
+        "hyperbolic": true,
+        "imaginary_axis_distance": 0.08612913013774631,
+        "tolerance": 2.4119690268177432e-12
+      },
+      "linear_fiscal_wealth_identity_errors": {
+        "j_k_vs_one": 2.220446049250313e-16,
+        "j_t_vs_zero": 1.87110417367505e-16,
+        "j_x_closed_form_relative_error": 0.0,
+        "j_z_closed_form_relative_error": 1.2685480010985897e-16
+      },
+      "popov_strict": true,
+      "portfolio_identity_errors": {
+        "zeta_perp_orthogonal_to_lambda_hat": 1.5178830414797062e-18
+      },
+      "q_rr_cancellation_relative_error": 1.1331722378074404e-17,
+      "raw_solve_symmetry_errors": {
+        "H_ee": 8.104075354342283e-17,
+        "H_rr": 6.070623396823833e-16,
+        "stationary_covariance_y": 2.16262049446251e-19
+      },
+      "real_block_scalar_residuals": [
+        7.968646412134013e-17,
+        0.0,
+        5.776263516808786e-17
+      ],
+      "resolvent_identity_residual": 2.7094432538502835e-16,
+      "riccati_full_scaled_residual": 1.159309242606376e-16,
+      "riccati_real_block_scaled_residual": 8.871396570100837e-17,
+      "riccati_symmetry_error": 0.0,
+      "stationary_covariance": {
+        "exogenous_block_closed_form_relative_error": 2.0408118174028925e-19,
+        "min_eigenvalue": 0.0010439370423858854,
+        "scaled_residual": 4.291583170489191e-19
+      },
+      "sylvester_scaled_residual": 6.321752184243787e-17
+    },
+    "direction_count": 80,
+    "failed_checks": [],
+    "full_closed_loop_hurwitz": true,
+    "invariant_line": {
+      "capital_growth_alignment_relative_error": 0.0,
+      "capital_growth_loading_x_over_z": 0.2984603015998875,
+      "h_I_minus_eta_plus_one_over_alpha": 0.0,
+      "k_I_minus_log_capital_labour": 0.0,
+      "kappa_z_minus_kappa_x": 0.0,
+      "rental_gradient_x_over_z": 0.2984603015998875,
+      "tax_speed_feedback_alignment_relative_error": 9.299587069652474e-16,
+      "tax_speed_feedback_x_over_z": 0.29846030159988723
+    },
+    "kappa_x": 0.21072103131565253,
+    "kappa_z": 0.21072103131565253,
+    "lambda_hat": [
+      0.0259674276779601,
+      0.048439039353357735
+    ],
+    "leading_unconstrained_position": 0.4464893494362947,
+    "named_direction_angles_deg": {
+      "theta_000.000": {
+        "dz_per_dalpha": null,
+        "labels": [
+          "pure_productivity_positive"
+        ],
+        "theta_deg": 0.0
+      },
+      "theta_077.400": {
+        "dz_per_dalpha": 0.47685729774125063,
+        "labels": [
+          "worker_income_neutral_automation_positive"
+        ],
+        "theta_deg": 77.39997951365545
+      },
+      "theta_090.000": {
+        "dz_per_dalpha": 0.0,
+        "labels": [
+          "pure_automation_positive"
+        ],
+        "theta_deg": 90.0
+      },
+      "theta_101.548": {
+        "dz_per_dalpha": -0.4358845788560477,
+        "labels": [
+          "primary_resource_neutral_automation_positive"
+        ],
+        "theta_deg": 101.54778070317035
+      },
+      "theta_115.952": {
+        "dz_per_dalpha": -1.0382942174102645,
+        "labels": [
+          "output_neutral_automation_positive"
+        ],
+        "theta_deg": 115.95220609217762
+      },
+      "theta_151.805": {
+        "dz_per_dalpha": -3.9794706879985,
+        "labels": [
+          "claim_payoff_neutral_automation_positive",
+          "rental_tax_base_neutral_automation_positive"
+        ],
+        "theta_deg": 151.80492206398452
+      },
+      "theta_180.000": {
+        "dz_per_dalpha": null,
+        "labels": [
+          "pure_productivity_negative"
+        ],
+        "theta_deg": 180.0
+      },
+      "theta_257.400": {
+        "dz_per_dalpha": 0.47685729774125063,
+        "labels": [
+          "worker_income_neutral_automation_negative"
+        ],
+        "theta_deg": 257.39997951365547
+      },
+      "theta_270.000": {
+        "dz_per_dalpha": 0.0,
+        "labels": [
+          "pure_automation_negative"
+        ],
+        "theta_deg": 270.0
+      },
+      "theta_281.548": {
+        "dz_per_dalpha": -0.4358845788560477,
+        "labels": [
+          "primary_resource_neutral_automation_negative"
+        ],
+        "theta_deg": 281.54778070317036
+      },
+      "theta_295.952": {
+        "dz_per_dalpha": -1.0382942174102645,
+        "labels": [
+          "output_neutral_automation_negative"
+        ],
+        "theta_deg": 295.9522060921776
+      },
+      "theta_331.805": {
+        "dz_per_dalpha": -3.9794706879985,
+        "labels": [
+          "claim_payoff_neutral_automation_negative",
+          "rental_tax_base_neutral_automation_negative"
+        ],
+        "theta_deg": 331.8049220639845
+      }
+    },
+    "named_direction_coincidences": [
+      {
+        "dz_per_dalpha": -3.9794706879985,
+        "named_labels": [
+          "claim_payoff_neutral_automation_positive",
+          "rental_tax_base_neutral_automation_positive"
+        ],
+        "theta_deg": 151.80492206398452
+      },
+      {
+        "dz_per_dalpha": -3.9794706879985,
+        "named_labels": [
+          "claim_payoff_neutral_automation_negative",
+          "rental_tax_base_neutral_automation_negative"
+        ],
+        "theta_deg": 331.8049220639845
+      }
+    ],
+    "named_direction_slopes": {
+      "claim_payoff_neutral_automation": -3.9794706879985,
+      "output_neutral_automation": -1.0382942174102645,
+      "primary_resource_neutral_automation": -0.4358845788560477,
+      "pure_automation": 0.0,
+      "pure_productivity": null,
+      "rental_tax_base_neutral_automation": -3.9794706879985,
+      "worker_income_neutral_automation": 0.47685729774125063
+    },
+    "naming": {
+      "J": "planner-resource wealth (worker fiscal-endowment wealth; includes future worker wages); code attribute fiscal_wealth_bar",
+      "N_minus_s_star": "unconstrained safe position; negative means a desired debt-financed risky holding conditional on slack genuine transfer/solvency boundaries, not established borrowing capacity",
+      "X": "worker comprehensive resources N + J; code attribute comprehensive_resources_bar",
+      "s_star": "unconstrained leading small-risk portfolio; code attribute leading_unconstrained_position"
+    },
+    "ou_window_magnitudes": [
+      0.023457195058233196,
+      0.14660746911395747
+    ],
+    "overrides": {},
+    "portfolio": {
+      "access_consumption_equivalent_leading": 9.433457444551234e-05,
+      "access_source_gain_q": 9.433457444551234e-05,
+      "access_value_leading": 0.004669402618316749,
+      "beta_hat": 0.0030206478336862273,
+      "comprehensive_resources": 12.569150319683768,
+      "fiscal_hedge_component": -12.122660970247473,
+      "fiscal_wealth": 12.569150319683768,
+      "g2_anchor": 0.0013857054666591765,
+      "hedge_consumption_equivalent_leading": 0.0695415884419857,
+      "hedge_source_gain_q": 0.0695415884419857,
+      "hedge_value_leading": 3.4421915513115584,
+      "lambda_hat": [
+        0.0259674276779601,
+        0.048439039353357735
+      ],
+      "leading_constrained_position": 0.4464893494362947,
+      "leading_unconstrained_position": 0.4464893494362947,
+      "marketed_fiscal_wealth_amount": 12.122660970247473,
+      "merton_comparator_feasible": true,
+      "merton_position": 12.569150319683768,
+      "portfolio_bounds": [
+        -20.0,
+        20.0
+      ],
+      "portfolio_curvature": -0.0009464086106163626,
+      "portfolio_gradient_y": [
+        -12.642322214106523,
+        -3.557382767559386,
+        -1.032551156410937,
+        0.09866532271011884
+      ],
+      "portfolio_lower_slack": 20.446489349436295,
+      "portfolio_upper_slack": 19.553510650563705,
+      "public_net_worth": 0.0,
+      "return_demand_component": 12.569150319683768,
+      "risk_scale_epsilon": 1.0,
+      "safe_rate_order_two_anchor": -0.0024813002795870203,
+      "v2_anchor": 0.06859008769866773,
+      "varpi_ee": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          3.48237849358059
+        ]
+      ],
+      "zero_position_feasible": true,
+      "zeta_j": [
+        0.33765631945205354,
+        0.5749540848601218
+      ],
+      "zeta_j_perp": [
+        0.02286199744272266,
+        -0.012255966945109442
+      ]
+    },
+    "portfolio_classification": "unconstrained local desired portfolio; genuine fiscal-capacity feasibility unverified",
+    "real_closed_loop_eigenvalues": [
+      {
+        "imag": 0.07826517598312624,
+        "real": -0.07602777647898668
+      },
+      {
+        "imag": -0.07826517598312624,
+        "real": -0.07602777647898668
+      }
+    ],
+    "real_closed_loop_hurwitz": true,
+    "sigma_x_hat": 0.1622964229872506,
+    "sigma_z_hat": 0.0259674276779601,
+    "zeta_j": [
+      0.33765631945205354,
+      0.5749540848601218
+    ],
+    "zeta_j_perp": [
+      0.02286199744272266,
+      -0.012255966945109442
+    ]
+  }
+}

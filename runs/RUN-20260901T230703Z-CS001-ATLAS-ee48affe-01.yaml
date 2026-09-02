@@ -1,0 +1,812 @@
+schema_version: '1.0'
+run_id: RUN-20260901T230703Z-CS001-ATLAS-ee48affe-01
+created_utc: '2026-09-02T13:44:48Z'
+status: completed
+purpose: 'CS001 joint productivity-automation shock atlas (exploratory local-LQ evidence
+  on the illustrative Farhi-based vector): one standardized joint Brownian innovation
+  scanned over the full direction circle at five-degree resolution plus every analytically
+  constructed direction, with matched deterministic state displacements, finite-window
+  OU displacements, and a persistence-unravelling experiment. Exploratory CS001 tranche;
+  CS001 remains draft/unfingerprinted.'
+specification:
+  id: CS001
+  version: '0.1'
+  status: draft
+  fingerprint_sha256: null
+problem_id: CP001
+approach_id: CA001
+based_on_run: RUN-20260901T194938Z-CS001-d876a61e-01
+implementation:
+  repository_url: https://github.com/Nathan-Barnard/tai-public-finance
+  local_path: /Users/nathanbarnard/Documents/TAI public finnace claude-cs001-joint-shock-atlas
+  commit: ee48affef15034e74f9e3af3d2533ce51f57f1fe
+  branch: cs001/joint-shock-atlas
+  dirty_worktree_at_run_start: false
+  implementer: claude_code
+  entrypoint: python3 -m tai_public_finance.cs001_lq_anchor.shock_atlas_cli
+  command: uv run python -m tai_public_finance.cs001_lq_anchor.shock_atlas_cli --config
+    configs/cs001/lq_farhi_smoke.json --output-dir outputs/cs001-joint-shock-atlas-20260901T230702Z
+    --mode full --preflight-tests-status passed
+  resume_events: []
+input_fingerprints:
+  complete_input_sha256: e521c69dc3fd1a3e92d1ecf603f7449a7c96becd5c0c636abde72ef0024a32a4
+  experiment_sha256: 9c4b5e3b627e8fb031ad07649d4fdc80d1b1956ce1c251bc1bc2d94b02024570
+  primitive_sha256: 78837354ee416984183ef0eed43c54105c60c8a31b6a75c2f6f84c58f924917f
+atlas_fingerprint:
+  atlas_settings_sha256: cb9da78b9ae4d58d103e2f6c80a3ccd08a68446afd7c172ddeece344c775d96f
+  commit: ee48affef15034e74f9e3af3d2533ce51f57f1fe
+  complete_input_sha256: e521c69dc3fd1a3e92d1ecf603f7449a7c96becd5c0c636abde72ef0024a32a4
+  shock_atlas_source_sha256: eaaf6b8174e98275a969b0c687a351a13fc3aa86c495b8e488030e011b51eec4
+atlas_settings:
+  accounting_identity_absolute_tolerance: 1.0e-14
+  angular_step_degrees: 5.0
+  coordinate_conversion_tolerance_degrees: 1.0e-09
+  cumulative_expm_integral_horizon_years: 1500.0
+  cumulative_expm_integral_relative_tolerance: 1.0e-09
+  fixed_share_reproduction_absolute_tolerance: 1.0e-12
+  horizon_end_years: 40.0
+  horizon_step_years: 0.25
+  key_horizons:
+  - 0.0
+  - 0.25
+  - 0.5
+  - 1.0
+  - 2.0
+  - 3.0
+  - 5.0
+  - 7.5
+  - 10.0
+  - 15.0
+  - 20.0
+  - 30.0
+  - 40.0
+  neutral_zero_relative_tolerance: 1.0e-11
+  neutrality_unravel_fraction: 0.1
+  ode_cross_check: all
+  persistence_cases:
+  - 0.5
+  - 0.81
+  - 0.95
+  row_builder_cross_check_absolute_tolerance: 1.0e-12
+  scaling_relative_tolerance: 1.0e-09
+  sign_symmetry_relative_tolerance: 1.0e-09
+  superposition_relative_tolerance: 1.0e-09
+  timing_distinction_absolute_tolerance: 1.0e-13
+environment:
+  operating_system: macOS-15.6.1-arm64-arm-64bit-Mach-O
+  architecture: arm64
+  runtime_versions:
+    python: 3.13.5
+    numpy: 2.5.2
+    scipy: 1.18.1
+    matplotlib: 3.11.1
+    pyyaml: 6.0.3
+  dependency_lock_path: uv.lock
+  dependency_lock_sha256: 3c59dc4b381ad68cd634a6f917f1ce4fa1080d9ce43e2344064acb6109f76c4a
+hardware:
+  resource_lane: L2_local_batch
+  machine_label: local_mac
+  cpu: arm
+  logical_cores: 10
+  memory_gb: 16.0
+  accelerator: null
+budget:
+  wall_seconds_limit: 7200
+  cash_limit_usd: 0
+  actual_cash_usd: 0
+  early_stop_rule: Stop on a reproducible failure of baseline reproduction, superposition,
+    sign symmetry, coordinate conversion, budget accounting, or the Brownian/state-displacement
+    timing distinction; retain all rows.
+randomness:
+  deterministic_requested: true
+  seeds: []
+  nondeterminism_notes: Dense deterministic float64 linear algebra; no simulation
+    draws.
+inputs:
+  parameter_set_id: lq_farhi_illustrative_smoke_v1
+  experiment_ids:
+  - E07
+  - E08
+  - E01
+  - E02
+  - E03
+  - E04
+  models:
+    automation_persistence_0.50:
+      overrides:
+        automation_persistence_annual: 0.5
+      acceptance_outcome: pass
+      direction_count: 80
+    automation_persistence_0.81:
+      overrides:
+        automation_persistence_annual: 0.81
+      acceptance_outcome: pass
+      direction_count: 80
+    automation_persistence_0.95:
+      overrides:
+        automation_persistence_annual: 0.95
+      acceptance_outcome: pass
+      direction_count: 80
+    baseline:
+      overrides: {}
+      acceptance_outcome: pass
+      direction_count: 80
+  maintained_setup:
+    automation_persistence_annual_baseline: 0.81
+    finite_ou_window_years: 1.0
+    firm_branch: interior smooth full-specialisation branch is maintained and checked
+      locally, not globally selected by this solve
+    future_innovations: future innovations switched off for conditional-mean IRFs
+    government_risky_asset: one external international claim, not domestic public
+      equity
+    installed_capital_price_q_D: 1.0
+    international_pricing_closure: infinitesimal price-taking domestic government
+      with a residual foreign counterparty; domestic positions do not change sigma_I=lambda_I
+      or beta_I
+    productivity_persistence_annual: 0.81
+    public_net_worth_anchor_N_bar: 0.0
+    shock_covariance_law: 'unchanged: two orthogonal Brownian innovations; a joint
+      direction is a joint realization, not a correlated law'
+    short_brownian_window_years: 0.003968253968253968
+    tax_adjustment_scale: 0.5
+    welfare: representative workers only; domestic capitalists and foreigners receive
+      zero direct welfare weight
+preflight:
+  tests_command: uv run pytest
+  tests_status: passed
+result:
+  outcome: pass
+  failures: []
+  wall_seconds_computation: 10.427329541067593
+  wall_seconds_by_chunk:
+    atlas_brownian_innovation: 3.509325916005764
+    atlas_finite_window_ou_displacement: 1.7722655410179868
+    atlas_fixed_share_check: 0.2150027910247445
+    atlas_matched_state_displacement: 1.7296927090210374
+    independent_checks: 0.6507270839938428
+    models: 0.2176502500078641
+    persistence_unravelling: 2.332665249996353
+  wall_seconds_figures: 1.2128155000100378
+  feasibility:
+    classification: genuine economic conditions (specialisation branch, transfer floor,
+      positive consumption and worker comprehensive resources, tau<1) are reported
+      separately from numerical-scaffolding slack; neither establishes government
+      borrowing capacity, which this calculation does not verify
+    min_economic_slack: 0.0085653924728753
+    min_economic_slack_locator: baseline::finite_window_ou_state_displacement::no_inherited_payoff::theta_265.000
+    min_numerical_scaffolding_slack: 0.4384673327417469
+    min_numerical_scaffolding_slack_locator: baseline::finite_window_ou_state_displacement::no_inherited_payoff::theta_240.000
+    min_slack_overall: 0.0085653924728753
+    rows: 70518
+    rows_failing_economic_conditions: 0
+    rows_failing_numerical_scaffolding: 0
+  worst_checks:
+    matrix_exponential_vs_ode:
+      locator: baseline::matched_deterministic_state_displacement::no_inherited_payoff::theta_151.805
+      max_relative_error: 1.7825048546173148e-12
+      paths_checked: 438
+    timing_distinction:
+      compared_paths: 160
+      optimal_x_gap_constancy_max_abs: 1.4094628242311558e-17
+      optimal_x_gap_minus_payoff_max_abs: 1.0625181290357943e-17
+      physical_state_max_abs_difference: 2.168404344971009e-19
+      worst_locator: baseline::brownian_innovation_short_window::optimal_inherited_position::theta_015.000
+      zero_position_vs_matched_max_abs: 0.0
+    accounting_identities:
+      F_minus_c_equals_tauB_minus_T: 2.6020852139652106e-18
+      dJ_equals_wage_component_plus_capital_tax_component: 2.220446049250313e-16
+      dT_equals_dc_minus_dW: 1.734723475976807e-18
+      dX_equals_dN_plus_dJ: 6.938893903907228e-18
+      dX_equals_domestic_contribution_plus_payoff_at_impact: 0.0
+      dc_equals_rho_dX: 0.0
+      locator: baseline::finite_window_ou_state_displacement::no_inherited_payoff::theta_345.000@2.25:primary_cash_flow_equals_tauB_minus_T_minus_Psi
+      primary_cash_flow_equals_tauB_minus_T_minus_Psi: 1.951563910473908e-18
+    first_order_budget_identity:
+      locator: baseline::finite_window_ou_state_displacement::no_inherited_payoff::theta_240.000@0.5
+      max_abs_residual: 3.642919299551295e-17
+      rows: 70518
+    discounted_cumulative_resolvent:
+      locator: baseline::finite_window_ou_state_displacement::no_inherited_payoff::theta_235.000
+      max_probe_residual: 1.3790588712495998e-16
+    discounted_cumulative_expm_integral:
+      horizon_years: 1500.0
+      locator: baseline::brownian_innovation_short_window::zero_inherited_position::theta_115.952
+      max_relative_error: 1.7848980479371738e-13
+    fixed_share_reproduction:
+      compared_rows: 644
+      locator: baseline::fixed_share_displacement_check::no_inherited_payoff::theta_077.400@0.75:public_net_worth_deviation
+        vs constructed_worker_income_neutral:public_net_worth_deviation
+      max_abs_difference: 5.551115123125783e-17
+      missing: []
+    row_builder_cross_check:
+      compared_rows: 2093
+      locator: baseline::brownian_innovation_short_window::optimal_inherited_position::theta_115.952@0.25:safe_position_level
+      max_abs_difference: 5.551115123125783e-17
+    neutral_zero:
+      per_direction:
+        ? automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_negative
+        : cancellation_index_impact: 2.8755545084122127e-16
+          object: claim_loading_state_functional
+        ? automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_positive
+        : cancellation_index_impact: 2.7663024350460463e-16
+          object: claim_loading_state_functional
+        ? automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_negative
+        : cancellation_index_impact: 2.8365964361489433e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_positive
+        : cancellation_index_impact: 5.498560408347738e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_negative
+        : cancellation_index_impact: 4.755084455394069e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_positive
+        : cancellation_index_impact: 1.1097010896858772e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_negative
+        : cancellation_index_impact: 2.6970565914011035e-16
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_positive
+        : cancellation_index_impact: 2.971173991673497e-16
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_negative
+        : cancellation_index_impact: 1.6908926934425305e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_positive
+        : cancellation_index_impact: 2.0830418801606404e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_negative
+        : cancellation_index_impact: 2.8755545084122127e-16
+          object: claim_loading_state_functional
+        ? automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_positive
+        : cancellation_index_impact: 2.7663024350460463e-16
+          object: claim_loading_state_functional
+        automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_negative:
+          cancellation_index_impact: 2.8365964361489433e-16
+          object: output_deviation_linear
+        automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_positive:
+          cancellation_index_impact: 5.498560408347738e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_negative
+        : cancellation_index_impact: 4.755084455394069e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_positive
+        : cancellation_index_impact: 1.1097010896858772e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_negative
+        : cancellation_index_impact: 2.6970565914011035e-16
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_positive
+        : cancellation_index_impact: 2.971173991673497e-16
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_negative
+        : cancellation_index_impact: 1.6908926934425305e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.50::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_positive
+        : cancellation_index_impact: 2.0830418801606404e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::claim_payoff_neutral_automation_negative
+        : cancellation_index_impact: 2.0525221326204398e-16
+          object: claim_loading_state_functional
+        ? automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::claim_payoff_neutral_automation_positive
+        : cancellation_index_impact: 4.026840334377479e-17
+          object: claim_loading_state_functional
+        ? automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::output_neutral_automation_negative
+        : cancellation_index_impact: 5.477321896736951e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::output_neutral_automation_positive
+        : cancellation_index_impact: 3.3389358645305677e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::primary_resource_neutral_automation_negative
+        : cancellation_index_impact: 1.2329922155064609e-15
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::primary_resource_neutral_automation_positive
+        : cancellation_index_impact: 1.9123613153632346e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::rental_tax_base_neutral_automation_negative
+        : cancellation_index_impact: 1.9081995677617076e-16
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::rental_tax_base_neutral_automation_positive
+        : cancellation_index_impact: 2.29664471981354e-17
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::worker_income_neutral_automation_negative
+        : cancellation_index_impact: 7.606475968352225e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.50::fixed_initial_displacement_across_persistence::no_inherited_payoff::worker_income_neutral_automation_positive
+        : cancellation_index_impact: 5.112214626496821e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_negative
+        : cancellation_index_impact: 2.0525221326204398e-16
+          object: claim_loading_state_functional
+        ? automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_positive
+        : cancellation_index_impact: 4.026840334377479e-17
+          object: claim_loading_state_functional
+        ? automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_negative
+        : cancellation_index_impact: 5.477321896736951e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_positive
+        : cancellation_index_impact: 3.3389358645305677e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_negative
+        : cancellation_index_impact: 1.2329922155064609e-15
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_positive
+        : cancellation_index_impact: 1.9123613153632346e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_negative
+        : cancellation_index_impact: 1.9081995677617076e-16
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_positive
+        : cancellation_index_impact: 2.29664471981354e-17
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_negative
+        : cancellation_index_impact: 7.606475968352225e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_positive
+        : cancellation_index_impact: 5.112214626496821e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_negative
+        : cancellation_index_impact: 2.0525221326204398e-16
+          object: claim_loading_state_functional
+        ? automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_positive
+        : cancellation_index_impact: 4.026840334377479e-17
+          object: claim_loading_state_functional
+        automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_negative:
+          cancellation_index_impact: 5.477321896736951e-16
+          object: output_deviation_linear
+        automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_positive:
+          cancellation_index_impact: 3.3389358645305677e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_negative
+        : cancellation_index_impact: 1.2329922155064609e-15
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_positive
+        : cancellation_index_impact: 1.9123613153632346e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_negative
+        : cancellation_index_impact: 1.9081995677617076e-16
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_positive
+        : cancellation_index_impact: 2.29664471981354e-17
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_negative
+        : cancellation_index_impact: 7.606475968352225e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.81::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_positive
+        : cancellation_index_impact: 5.112214626496821e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::claim_payoff_neutral_automation_negative
+        : cancellation_index_impact: 2.0525221326204398e-16
+          object: claim_loading_state_functional
+        ? automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::claim_payoff_neutral_automation_positive
+        : cancellation_index_impact: 4.026840334377479e-17
+          object: claim_loading_state_functional
+        ? automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::output_neutral_automation_negative
+        : cancellation_index_impact: 5.477321896736951e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::output_neutral_automation_positive
+        : cancellation_index_impact: 3.3389358645305677e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::primary_resource_neutral_automation_negative
+        : cancellation_index_impact: 1.2329922155064609e-15
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::primary_resource_neutral_automation_positive
+        : cancellation_index_impact: 1.9123613153632346e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::rental_tax_base_neutral_automation_negative
+        : cancellation_index_impact: 1.9081995677617076e-16
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::rental_tax_base_neutral_automation_positive
+        : cancellation_index_impact: 2.29664471981354e-17
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::worker_income_neutral_automation_negative
+        : cancellation_index_impact: 7.606475968352225e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.81::fixed_initial_displacement_across_persistence::no_inherited_payoff::worker_income_neutral_automation_positive
+        : cancellation_index_impact: 5.112214626496821e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_negative
+        : cancellation_index_impact: 6.979108841314538e-16
+          object: claim_loading_state_functional
+        ? automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_positive
+        : cancellation_index_impact: 1.4291433761254396e-17
+          object: claim_loading_state_functional
+        ? automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_negative
+        : cancellation_index_impact: 4.726224165594719e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_positive
+        : cancellation_index_impact: 1.7202808273136884e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_negative
+        : cancellation_index_impact: 6.599792752740296e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_positive
+        : cancellation_index_impact: 1.6817664114424744e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_negative
+        : cancellation_index_impact: 6.887863663965891e-16
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_positive
+        : cancellation_index_impact: 9.772478011788108e-18
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_negative
+        : cancellation_index_impact: 1.4387279128077364e-15
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_positive
+        : cancellation_index_impact: 2.646203737506681e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_negative
+        : cancellation_index_impact: 6.979108841314538e-16
+          object: claim_loading_state_functional
+        ? automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_positive
+        : cancellation_index_impact: 1.4291433761254396e-17
+          object: claim_loading_state_functional
+        automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_negative:
+          cancellation_index_impact: 4.726224165594719e-16
+          object: output_deviation_linear
+        automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_positive:
+          cancellation_index_impact: 1.7202808273136884e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_negative
+        : cancellation_index_impact: 6.599792752740296e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_positive
+        : cancellation_index_impact: 1.6817664114424744e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_negative
+        : cancellation_index_impact: 6.887863663965891e-16
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_positive
+        : cancellation_index_impact: 9.772478011788108e-18
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_negative
+        : cancellation_index_impact: 1.4387279128077364e-15
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.95::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_positive
+        : cancellation_index_impact: 2.646203737506681e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::claim_payoff_neutral_automation_negative
+        : cancellation_index_impact: 2.0525221326204398e-16
+          object: claim_loading_state_functional
+        ? automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::claim_payoff_neutral_automation_positive
+        : cancellation_index_impact: 4.026840334377479e-17
+          object: claim_loading_state_functional
+        ? automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::output_neutral_automation_negative
+        : cancellation_index_impact: 5.477321896736951e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::output_neutral_automation_positive
+        : cancellation_index_impact: 3.3389358645305677e-16
+          object: output_deviation_linear
+        ? automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::primary_resource_neutral_automation_negative
+        : cancellation_index_impact: 1.2329922155064609e-15
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::primary_resource_neutral_automation_positive
+        : cancellation_index_impact: 1.9123613153632346e-16
+          object: fiscal_resources_deviation_linear
+        ? automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::rental_tax_base_neutral_automation_negative
+        : cancellation_index_impact: 1.9081995677617076e-16
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::rental_tax_base_neutral_automation_positive
+        : cancellation_index_impact: 2.29664471981354e-17
+          object: rental_rate_deviation_linear
+        ? automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::worker_income_neutral_automation_negative
+        : cancellation_index_impact: 7.606475968352225e-16
+          object: wage_income_deviation_linear
+        ? automation_persistence_0.95::fixed_initial_displacement_across_persistence::no_inherited_payoff::worker_income_neutral_automation_positive
+        : cancellation_index_impact: 5.112214626496821e-16
+          object: wage_income_deviation_linear
+        baseline::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_negative:
+          cancellation_index_impact: 2.0525221326204398e-16
+          object: claim_loading_state_functional
+        baseline::brownian_innovation_short_window::optimal_inherited_position::claim_payoff_neutral_automation_positive:
+          cancellation_index_impact: 4.026840334377479e-17
+          object: claim_loading_state_functional
+        baseline::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_negative:
+          cancellation_index_impact: 5.477321896736951e-16
+          object: output_deviation_linear
+        baseline::brownian_innovation_short_window::optimal_inherited_position::output_neutral_automation_positive:
+          cancellation_index_impact: 3.3389358645305677e-16
+          object: output_deviation_linear
+        baseline::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_negative:
+          cancellation_index_impact: 1.2329922155064609e-15
+          object: fiscal_resources_deviation_linear
+        baseline::brownian_innovation_short_window::optimal_inherited_position::primary_resource_neutral_automation_positive:
+          cancellation_index_impact: 1.9123613153632346e-16
+          object: fiscal_resources_deviation_linear
+        baseline::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_negative:
+          cancellation_index_impact: 1.9081995677617076e-16
+          object: rental_rate_deviation_linear
+        baseline::brownian_innovation_short_window::optimal_inherited_position::rental_tax_base_neutral_automation_positive:
+          cancellation_index_impact: 2.29664471981354e-17
+          object: rental_rate_deviation_linear
+        baseline::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_negative:
+          cancellation_index_impact: 7.606475968352225e-16
+          object: wage_income_deviation_linear
+        baseline::brownian_innovation_short_window::optimal_inherited_position::worker_income_neutral_automation_positive:
+          cancellation_index_impact: 5.112214626496821e-16
+          object: wage_income_deviation_linear
+        baseline::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_negative:
+          cancellation_index_impact: 2.0525221326204398e-16
+          object: claim_loading_state_functional
+        baseline::brownian_innovation_short_window::zero_inherited_position::claim_payoff_neutral_automation_positive:
+          cancellation_index_impact: 4.026840334377479e-17
+          object: claim_loading_state_functional
+        baseline::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_negative:
+          cancellation_index_impact: 5.477321896736951e-16
+          object: output_deviation_linear
+        baseline::brownian_innovation_short_window::zero_inherited_position::output_neutral_automation_positive:
+          cancellation_index_impact: 3.3389358645305677e-16
+          object: output_deviation_linear
+        baseline::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_negative:
+          cancellation_index_impact: 1.2329922155064609e-15
+          object: fiscal_resources_deviation_linear
+        baseline::brownian_innovation_short_window::zero_inherited_position::primary_resource_neutral_automation_positive:
+          cancellation_index_impact: 1.9123613153632346e-16
+          object: fiscal_resources_deviation_linear
+        baseline::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_negative:
+          cancellation_index_impact: 1.9081995677617076e-16
+          object: rental_rate_deviation_linear
+        baseline::brownian_innovation_short_window::zero_inherited_position::rental_tax_base_neutral_automation_positive:
+          cancellation_index_impact: 2.29664471981354e-17
+          object: rental_rate_deviation_linear
+        baseline::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_negative:
+          cancellation_index_impact: 7.606475968352225e-16
+          object: wage_income_deviation_linear
+        baseline::brownian_innovation_short_window::zero_inherited_position::worker_income_neutral_automation_positive:
+          cancellation_index_impact: 5.112214626496821e-16
+          object: wage_income_deviation_linear
+        baseline::finite_window_ou_state_displacement::no_inherited_payoff::claim_payoff_neutral_automation_negative:
+          cancellation_index_impact: 2.360087470097616e-16
+          object: claim_loading_state_functional
+        baseline::finite_window_ou_state_displacement::no_inherited_payoff::claim_payoff_neutral_automation_positive:
+          cancellation_index_impact: 5.1925658524309594e-17
+          object: claim_loading_state_functional
+        baseline::finite_window_ou_state_displacement::no_inherited_payoff::output_neutral_automation_negative:
+          cancellation_index_impact: 6.100999433678813e-16
+          object: output_deviation_linear
+        baseline::finite_window_ou_state_displacement::no_inherited_payoff::output_neutral_automation_positive:
+          cancellation_index_impact: 3.1185802392006787e-16
+          object: output_deviation_linear
+        baseline::finite_window_ou_state_displacement::no_inherited_payoff::primary_resource_neutral_automation_negative:
+          cancellation_index_impact: 1.2523433203474435e-15
+          object: fiscal_resources_deviation_linear
+        baseline::finite_window_ou_state_displacement::no_inherited_payoff::primary_resource_neutral_automation_positive:
+          cancellation_index_impact: 8.30409995922965e-17
+          object: fiscal_resources_deviation_linear
+        baseline::finite_window_ou_state_displacement::no_inherited_payoff::rental_tax_base_neutral_automation_negative:
+          cancellation_index_impact: 2.2374878260273677e-16
+          object: rental_rate_deviation_linear
+        baseline::finite_window_ou_state_displacement::no_inherited_payoff::rental_tax_base_neutral_automation_positive:
+          cancellation_index_impact: 3.646378493203132e-17
+          object: rental_rate_deviation_linear
+        baseline::finite_window_ou_state_displacement::no_inherited_payoff::worker_income_neutral_automation_negative:
+          cancellation_index_impact: 7.892082244376284e-16
+          object: wage_income_deviation_linear
+        baseline::finite_window_ou_state_displacement::no_inherited_payoff::worker_income_neutral_automation_positive:
+          cancellation_index_impact: 4.2025469184676195e-16
+          object: wage_income_deviation_linear
+        baseline::matched_deterministic_state_displacement::no_inherited_payoff::claim_payoff_neutral_automation_negative:
+          cancellation_index_impact: 2.0525221326204398e-16
+          object: claim_loading_state_functional
+        baseline::matched_deterministic_state_displacement::no_inherited_payoff::claim_payoff_neutral_automation_positive:
+          cancellation_index_impact: 4.026840334377479e-17
+          object: claim_loading_state_functional
+        baseline::matched_deterministic_state_displacement::no_inherited_payoff::output_neutral_automation_negative:
+          cancellation_index_impact: 5.477321896736951e-16
+          object: output_deviation_linear
+        baseline::matched_deterministic_state_displacement::no_inherited_payoff::output_neutral_automation_positive:
+          cancellation_index_impact: 3.3389358645305677e-16
+          object: output_deviation_linear
+        baseline::matched_deterministic_state_displacement::no_inherited_payoff::primary_resource_neutral_automation_negative:
+          cancellation_index_impact: 1.2329922155064609e-15
+          object: fiscal_resources_deviation_linear
+        baseline::matched_deterministic_state_displacement::no_inherited_payoff::primary_resource_neutral_automation_positive:
+          cancellation_index_impact: 1.9123613153632346e-16
+          object: fiscal_resources_deviation_linear
+        baseline::matched_deterministic_state_displacement::no_inherited_payoff::rental_tax_base_neutral_automation_negative:
+          cancellation_index_impact: 1.9081995677617076e-16
+          object: rental_rate_deviation_linear
+        baseline::matched_deterministic_state_displacement::no_inherited_payoff::rental_tax_base_neutral_automation_positive:
+          cancellation_index_impact: 2.29664471981354e-17
+          object: rental_rate_deviation_linear
+        baseline::matched_deterministic_state_displacement::no_inherited_payoff::worker_income_neutral_automation_negative:
+          cancellation_index_impact: 7.606475968352225e-16
+          object: wage_income_deviation_linear
+        baseline::matched_deterministic_state_displacement::no_inherited_payoff::worker_income_neutral_automation_positive:
+          cancellation_index_impact: 5.112214626496821e-16
+          object: wage_income_deviation_linear
+      tolerance: 1.0e-11
+      worst_cancellation_index: 1.4387279128077364e-15
+  reliable_region: Only the reported local paths with recorded positive specialisation
+    and transfer-floor slack; numerical-scaffolding slack is not economic feasibility.
+  portfolio_classification: unconstrained local desired portfolio; genuine fiscal-capacity
+    feasibility unverified
+artifacts:
+- role: review_packet
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/ECONOMIC_CORRECTION_HANDOFF.md
+  sha256: 5528308118e484d5022459c72db453d10c7e5d35996f967569ccd46d066ebe11
+  bytes: 7052
+- role: review_packet
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/ECONOMIC_REVIEW_PACKET.md
+  sha256: 1ebf65664718ffe4cc09180c3a605de981e7538544df06c2ccf3dca9e99c240f
+  bytes: 14014
+- role: review_packet
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/MORNING_REPORT.md
+  sha256: 5a19edd2939b4b330ae755a43f154551dbd4d43a07aa532a6caad5b86aa20c40
+  bytes: 12401
+- role: review_packet
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/NUMERICAL_REVIEW_PACKET.md
+  sha256: fde012152e37fc9171171abd5598106dc40cd6c871b5017ead721a4970f3e766
+  bytes: 17803
+- role: primary_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/atlas_raw.csv
+  sha256: c1e290eb0c3b7ee297b2082140020ae47ce249484451c027a3bc36f085d01321
+  bytes: 9087312
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/atlas_raw_quarterly.csv.gz
+  sha256: 1027727ee067c43c653a9dfb00ed7d6e878692dce458362a6466b1ebd898b5ae
+  bytes: 32203617
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/events.log
+  sha256: 0804273b923633383265a74237d3cfaae1b45015abfe64302c5ff06220fecbc0
+  bytes: 4720
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/failed_rows.csv
+  sha256: 9df4c099c4a5357db682595b0d518261c91b82d8a70e43b3191bba0086e506fd
+  bytes: 2040
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/figure_data/impact_incidence_by_angle.csv
+  sha256: 8c6b3f172b71245cb5c999a74b7bec5eee37fe26633b0169ed812155513b7faa
+  bytes: 16061
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/figure_data/path_features_by_angle.csv
+  sha256: d4a6d8b57cd5f23a141dbc5d66b0976e56f07a8bffd3fe608b882080b7890333
+  bytes: 12037
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/figure_data/persistence_unravelling_named_directions.csv
+  sha256: 046f3d3e75dce37a5efeab519a21006a2e22fdc2767561d8433bb0d169e3f003
+  bytes: 120536
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/figure_data/polar_impact_sign_map.csv
+  sha256: ce6929c1aeeb4b37e80eecd2b5f961926129ee2f9024c1161c3315d2857ac7d6
+  bytes: 22261
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/figure_data/resources_and_transfers_by_angle.csv
+  sha256: 692d2c8c4e76aa53b55352ee5a60b8ae98461ab88685f13b1da1fecbe65a3241
+  bytes: 13771
+- role: figure
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/figures/impact_incidence_by_angle.png
+  sha256: 41f596d330147e4026d290e64a8b3a233053e9ef9af5e64d2d9ebf4103d4d415
+  bytes: 251961
+- role: figure
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/figures/path_features_by_angle.png
+  sha256: 2bbcbb0ead19f6cb506f5d1e2168486c2be6191dd4e30e68ef4bddb7ae8169cb
+  bytes: 233427
+- role: figure
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/figures/persistence_unravelling_named_directions.png
+  sha256: 3d65573c804253c057d04a8f302e1dacb6aec53a9196ae5d9f5e0b87fdcac3df
+  bytes: 508832
+- role: figure
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/figures/polar_impact_sign_map.png
+  sha256: 90a72973f8733cf2be0fcc9bc02f865c3079a053f3594b0a8f47ce6ecc8edf53
+  bytes: 120774
+- role: figure
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/figures/resources_and_transfers_by_angle.png
+  sha256: 6a54e46813c0156a600167cd9f7034ede0aaaeb55c294c5c7831ea093b1218a6
+  bytes: 187698
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/impact_sign_regions.csv
+  sha256: 1be90d74687f7f20de6bf0707fc7ab7dd40d374f7ea246820f84a9850d4d60a3
+  bytes: 13955
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/manifest.json
+  sha256: a3dfcf236ae27a5e4aaf1916fb5b02139e37a530ebe477e5f140b92384c2d929
+  bytes: 4085
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/models.json
+  sha256: c66734888a25e4ff8fab5562dbf269e9af6ed709452045d1059898fed5563c8d
+  bytes: 56057
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/named_directions.csv
+  sha256: ddb7dc18e438e1d49d62e2b7c97da09bd9f7cae6226ab409e7495c43d472579b
+  bytes: 623451
+- role: primary_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/numerical_diagnostics.json
+  sha256: 52bc5b3de050afd59f4781425e2e1f0143165af87de7d41cd26abba3c9e9ef07
+  bytes: 53540
+- role: raw_part
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_brownian_innovation.features.csv
+  sha256: fe79a30fe93f18ca4e4e28d5fc5f4a280feb47a5bd959f16fb3ce94b785a5ed9
+  bytes: 587318
+- role: raw_part
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_brownian_innovation.rows.csv.gz
+  sha256: 801dfc8604c3687a934e4a369a814052b0e23c2d96c7d0def91273f59334c68e
+  bytes: 11747757
+- role: raw_part
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_finite_window_ou_displacement.features.csv
+  sha256: 456002e7722eb6a9f17c8413b264a26cb99cd95e8fc1f482783daaf27a1e5bae
+  bytes: 291612
+- role: raw_part
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_finite_window_ou_displacement.rows.csv.gz
+  sha256: 3391ae3b0fe577a32c0d24d3db154a1d0e4cf6e86b3c67f9ee1af2623ce4d6d9
+  bytes: 5899154
+- role: raw_part
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_fixed_share_check.features.csv
+  sha256: 99b75afb26c499843966287de53c5df64af4959de89a18ec250347fdc5d38673
+  bytes: 43390
+- role: raw_part
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_fixed_share_check.rows.csv.gz
+  sha256: f3bfe396c8b1fd5a4c4de5ee4d486163b4a331f1a13a85df0103e17d5f2403eb
+  bytes: 701266
+- role: raw_part
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_matched_state_displacement.features.csv
+  sha256: 08f8a25d946874caae404bdc9306c0ba98500fde5a3d1c991a8bf746fa46e453
+  bytes: 296078
+- role: raw_part
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_matched_state_displacement.rows.csv.gz
+  sha256: 01e9fe7d86fc8a01f425f1133cdf5372f0ab73217cb03829af787fc3e803a9fe
+  bytes: 5868820
+- role: raw_part
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/persistence_unravelling.features.csv
+  sha256: 79e2e6bc7e53eb3a514c47a6e1514d52c38531dd75160eb215a81fd05695fcf9
+  bytes: 406221
+- role: raw_part
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/persistence_unravelling.rows.csv.gz
+  sha256: 4ff1a5b40e63b01ebb93d4c3bded3ffbe285cf78d8bab0044a3027c502f38aa6
+  bytes: 7992556
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/path_features.csv
+  sha256: 625bccbf3e62356ea968e2ae7866880fca65ce25c45ddeede6ed98ba25f0c226
+  bytes: 1595863
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/persistence_named_paths.csv
+  sha256: 76f92aba87709337e3c2c2e9b308d9f6d7124d080d740e11da98bd0782b92d72
+  bytes: 2326321
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/persistence_unravelling.csv
+  sha256: 79e2e6bc7e53eb3a514c47a6e1514d52c38531dd75160eb215a81fd05695fcf9
+  bytes: 406221
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/runtime.json
+  sha256: de5600082a33a6b097f3eeab379c965559f0ce41822f13390122a1d13692b35a
+  bytes: 426
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/state.json
+  sha256: 5d4c13ff4a1a2b54dc791db26ec0c66753df19b302845e44be049b6c55501765
+  bytes: 3063
+- role: supporting_output
+  location: outputs/cs001-joint-shock-atlas-20260901T230702Z/zero_impact_thresholds.csv
+  sha256: c5d9f8fc288c07900d738e19efd3a22993cc422440908a30dd264ba5bcfd0f5a
+  bytes: 108376
+interpretation:
+  supports_result_ids:
+  - R13
+  - R14
+  - R15
+  - R20
+  - R23
+  - R24
+  hypothesis_ids:
+  - HYP001
+  - HYP002
+  - HYP003
+  - HYP004
+  - HYP005
+  question_ids:
+  - Q04
+  conclusion: See MORNING_REPORT.md and ECONOMIC_REVIEW_PACKET.md in the output directory;
+    NUMERICAL_REVIEW_PACKET.md carries the worst residuals with locators.
+  limitations:
+  - Local first-order LQ evidence on the illustrative Farhi-based vector; a directional
+    mechanism map, not a probability statement about shocks, a global constrained
+    solution, or an exact welfare calculation.
+  - J is planner-resource wealth (includes future worker wages), X = N + J is worker
+    comprehensive resources; the leading portfolio is unconstrained and genuine fiscal-capacity
+    feasibility is unverified; wide portfolio/debt caps are numerical scaffolding
+    only.
+  - No shock-specific welfare ranking or exact precautionary policy is computed; the
+    leading access coefficient is an ex-ante local object.
+  - CS001 remains draft and unfingerprinted in the codex registry; this is an exploratory
+    tranche under Nathan's direct commission.
+  next_decision: Route the fiscal-capacity object C_G(S) (attainable primary surpluses
+    with T=0, wages excluded) to an economic specification before any borrowing-capacity
+    claim; carry the impact-versus-path neutrality distinction into CS002/CS004 comparisons.

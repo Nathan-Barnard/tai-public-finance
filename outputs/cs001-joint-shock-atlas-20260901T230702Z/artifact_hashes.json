@@ -1,0 +1,239 @@
+{
+  "artifacts": [
+    {
+      "bytes": 7052,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/ECONOMIC_CORRECTION_HANDOFF.md",
+      "role": "review_packet",
+      "sha256": "5528308118e484d5022459c72db453d10c7e5d35996f967569ccd46d066ebe11"
+    },
+    {
+      "bytes": 14014,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/ECONOMIC_REVIEW_PACKET.md",
+      "role": "review_packet",
+      "sha256": "1ebf65664718ffe4cc09180c3a605de981e7538544df06c2ccf3dca9e99c240f"
+    },
+    {
+      "bytes": 12401,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/MORNING_REPORT.md",
+      "role": "review_packet",
+      "sha256": "5a19edd2939b4b330ae755a43f154551dbd4d43a07aa532a6caad5b86aa20c40"
+    },
+    {
+      "bytes": 17803,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/NUMERICAL_REVIEW_PACKET.md",
+      "role": "review_packet",
+      "sha256": "fde012152e37fc9171171abd5598106dc40cd6c871b5017ead721a4970f3e766"
+    },
+    {
+      "bytes": 9087312,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/atlas_raw.csv",
+      "role": "primary_output",
+      "sha256": "c1e290eb0c3b7ee297b2082140020ae47ce249484451c027a3bc36f085d01321"
+    },
+    {
+      "bytes": 32203617,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/atlas_raw_quarterly.csv.gz",
+      "role": "supporting_output",
+      "sha256": "1027727ee067c43c653a9dfb00ed7d6e878692dce458362a6466b1ebd898b5ae"
+    },
+    {
+      "bytes": 4720,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/events.log",
+      "role": "supporting_output",
+      "sha256": "0804273b923633383265a74237d3cfaae1b45015abfe64302c5ff06220fecbc0"
+    },
+    {
+      "bytes": 2040,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/failed_rows.csv",
+      "role": "supporting_output",
+      "sha256": "9df4c099c4a5357db682595b0d518261c91b82d8a70e43b3191bba0086e506fd"
+    },
+    {
+      "bytes": 16061,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/figure_data/impact_incidence_by_angle.csv",
+      "role": "supporting_output",
+      "sha256": "8c6b3f172b71245cb5c999a74b7bec5eee37fe26633b0169ed812155513b7faa"
+    },
+    {
+      "bytes": 12037,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/figure_data/path_features_by_angle.csv",
+      "role": "supporting_output",
+      "sha256": "d4a6d8b57cd5f23a141dbc5d66b0976e56f07a8bffd3fe608b882080b7890333"
+    },
+    {
+      "bytes": 120536,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/figure_data/persistence_unravelling_named_directions.csv",
+      "role": "supporting_output",
+      "sha256": "046f3d3e75dce37a5efeab519a21006a2e22fdc2767561d8433bb0d169e3f003"
+    },
+    {
+      "bytes": 22261,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/figure_data/polar_impact_sign_map.csv",
+      "role": "supporting_output",
+      "sha256": "ce6929c1aeeb4b37e80eecd2b5f961926129ee2f9024c1161c3315d2857ac7d6"
+    },
+    {
+      "bytes": 13771,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/figure_data/resources_and_transfers_by_angle.csv",
+      "role": "supporting_output",
+      "sha256": "692d2c8c4e76aa53b55352ee5a60b8ae98461ab88685f13b1da1fecbe65a3241"
+    },
+    {
+      "bytes": 251961,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/figures/impact_incidence_by_angle.png",
+      "role": "figure",
+      "sha256": "41f596d330147e4026d290e64a8b3a233053e9ef9af5e64d2d9ebf4103d4d415"
+    },
+    {
+      "bytes": 233427,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/figures/path_features_by_angle.png",
+      "role": "figure",
+      "sha256": "2bbcbb0ead19f6cb506f5d1e2168486c2be6191dd4e30e68ef4bddb7ae8169cb"
+    },
+    {
+      "bytes": 508832,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/figures/persistence_unravelling_named_directions.png",
+      "role": "figure",
+      "sha256": "3d65573c804253c057d04a8f302e1dacb6aec53a9196ae5d9f5e0b87fdcac3df"
+    },
+    {
+      "bytes": 120774,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/figures/polar_impact_sign_map.png",
+      "role": "figure",
+      "sha256": "90a72973f8733cf2be0fcc9bc02f865c3079a053f3594b0a8f47ce6ecc8edf53"
+    },
+    {
+      "bytes": 187698,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/figures/resources_and_transfers_by_angle.png",
+      "role": "figure",
+      "sha256": "6a54e46813c0156a600167cd9f7034ede0aaaeb55c294c5c7831ea093b1218a6"
+    },
+    {
+      "bytes": 13955,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/impact_sign_regions.csv",
+      "role": "supporting_output",
+      "sha256": "1be90d74687f7f20de6bf0707fc7ab7dd40d374f7ea246820f84a9850d4d60a3"
+    },
+    {
+      "bytes": 4085,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/manifest.json",
+      "role": "supporting_output",
+      "sha256": "a3dfcf236ae27a5e4aaf1916fb5b02139e37a530ebe477e5f140b92384c2d929"
+    },
+    {
+      "bytes": 56057,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/models.json",
+      "role": "supporting_output",
+      "sha256": "c66734888a25e4ff8fab5562dbf269e9af6ed709452045d1059898fed5563c8d"
+    },
+    {
+      "bytes": 623451,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/named_directions.csv",
+      "role": "supporting_output",
+      "sha256": "ddb7dc18e438e1d49d62e2b7c97da09bd9f7cae6226ab409e7495c43d472579b"
+    },
+    {
+      "bytes": 53540,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/numerical_diagnostics.json",
+      "role": "primary_output",
+      "sha256": "52bc5b3de050afd59f4781425e2e1f0143165af87de7d41cd26abba3c9e9ef07"
+    },
+    {
+      "bytes": 587318,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_brownian_innovation.features.csv",
+      "role": "raw_part",
+      "sha256": "fe79a30fe93f18ca4e4e28d5fc5f4a280feb47a5bd959f16fb3ce94b785a5ed9"
+    },
+    {
+      "bytes": 11747757,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_brownian_innovation.rows.csv.gz",
+      "role": "raw_part",
+      "sha256": "801dfc8604c3687a934e4a369a814052b0e23c2d96c7d0def91273f59334c68e"
+    },
+    {
+      "bytes": 291612,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_finite_window_ou_displacement.features.csv",
+      "role": "raw_part",
+      "sha256": "456002e7722eb6a9f17c8413b264a26cb99cd95e8fc1f482783daaf27a1e5bae"
+    },
+    {
+      "bytes": 5899154,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_finite_window_ou_displacement.rows.csv.gz",
+      "role": "raw_part",
+      "sha256": "3391ae3b0fe577a32c0d24d3db154a1d0e4cf6e86b3c67f9ee1af2623ce4d6d9"
+    },
+    {
+      "bytes": 43390,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_fixed_share_check.features.csv",
+      "role": "raw_part",
+      "sha256": "99b75afb26c499843966287de53c5df64af4959de89a18ec250347fdc5d38673"
+    },
+    {
+      "bytes": 701266,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_fixed_share_check.rows.csv.gz",
+      "role": "raw_part",
+      "sha256": "f3bfe396c8b1fd5a4c4de5ee4d486163b4a331f1a13a85df0103e17d5f2403eb"
+    },
+    {
+      "bytes": 296078,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_matched_state_displacement.features.csv",
+      "role": "raw_part",
+      "sha256": "08f8a25d946874caae404bdc9306c0ba98500fde5a3d1c991a8bf746fa46e453"
+    },
+    {
+      "bytes": 5868820,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/atlas_matched_state_displacement.rows.csv.gz",
+      "role": "raw_part",
+      "sha256": "01e9fe7d86fc8a01f425f1133cdf5372f0ab73217cb03829af787fc3e803a9fe"
+    },
+    {
+      "bytes": 406221,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/persistence_unravelling.features.csv",
+      "role": "raw_part",
+      "sha256": "79e2e6bc7e53eb3a514c47a6e1514d52c38531dd75160eb215a81fd05695fcf9"
+    },
+    {
+      "bytes": 7992556,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/parts/persistence_unravelling.rows.csv.gz",
+      "role": "raw_part",
+      "sha256": "4ff1a5b40e63b01ebb93d4c3bded3ffbe285cf78d8bab0044a3027c502f38aa6"
+    },
+    {
+      "bytes": 1595863,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/path_features.csv",
+      "role": "supporting_output",
+      "sha256": "625bccbf3e62356ea968e2ae7866880fca65ce25c45ddeede6ed98ba25f0c226"
+    },
+    {
+      "bytes": 2326321,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/persistence_named_paths.csv",
+      "role": "supporting_output",
+      "sha256": "76f92aba87709337e3c2c2e9b308d9f6d7124d080d740e11da98bd0782b92d72"
+    },
+    {
+      "bytes": 406221,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/persistence_unravelling.csv",
+      "role": "supporting_output",
+      "sha256": "79e2e6bc7e53eb3a514c47a6e1514d52c38531dd75160eb215a81fd05695fcf9"
+    },
+    {
+      "bytes": 426,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/runtime.json",
+      "role": "supporting_output",
+      "sha256": "de5600082a33a6b097f3eeab379c965559f0ce41822f13390122a1d13692b35a"
+    },
+    {
+      "bytes": 3063,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/state.json",
+      "role": "supporting_output",
+      "sha256": "5d4c13ff4a1a2b54dc791db26ec0c66753df19b302845e44be049b6c55501765"
+    },
+    {
+      "bytes": 108376,
+      "location": "outputs/cs001-joint-shock-atlas-20260901T230702Z/zero_impact_thresholds.csv",
+      "role": "supporting_output",
+      "sha256": "c5d9f8fc288c07900d738e19efd3a22993cc422440908a30dd264ba5bcfd0f5a"
+    }
+  ],
+  "run_id": "RUN-20260901T230703Z-CS001-ATLAS-ee48affe-01"
+}

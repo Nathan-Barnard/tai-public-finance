@@ -1,0 +1,12 @@
+{
+  "seconds_by_chunk": {
+    "atlas_brownian_innovation": 3.509325916005764,
+    "atlas_finite_window_ou_displacement": 1.7722655410179868,
+    "atlas_fixed_share_check": 0.2150027910247445,
+    "atlas_matched_state_displacement": 1.7296927090210374,
+    "independent_checks": 0.6507270839938428,
+    "models": 0.2176502500078641,
+    "persistence_unravelling": 2.332665249996353
+  },
+  "total_seconds": 10.427329541067593
+}
