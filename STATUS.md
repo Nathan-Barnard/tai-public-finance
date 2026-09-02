@@ -13,7 +13,7 @@ session directly before touching a branch someone else's row claims.
 | tai-public-finnace-claude-59 | `../claude-cs004-five-state-ramsey-pde-feasibility` | `cs004/five-state-ramsey-pde-feasibility` | CS004 Block 0 (repo binding, fingerprints) | active |
 | tai-public-finnace-claude-c6 | `../claude-emp001-uk-quasi-empirical-pilot` | `emp001/uk-quasi-empirical-pilot` | EMP001: UK quasi-empirical scenario pilot | active |
 | tai-public-finnace-claude-54 | primary checkout | `main` | Repo setup, literature, multi-session coordination | active |
-| tai-public-finnace-claude-27 | `../claude-cs001-joint-shock-atlas` | `cs001/joint-shock-atlas` | CS001 overnight joint productivity-automation shock atlas (new `shock_atlas.py`/`shock_atlas_cli.py`/`test_shock_atlas.py`, one new `outputs/cs001-joint-shock-atlas-*` dir, one run record; touches no shared module) | active, started 2026-09-01 22:25 UTC |
+| tai-public-finnace-claude-27 | `../claude-cs001-joint-shock-atlas` | `cs001/joint-shock-atlas` | CS001 overnight joint productivity-automation shock atlas (new `shock_atlas.py`/`shock_atlas_cli.py`/`test_shock_atlas.py`, one new `outputs/cs001-joint-shock-atlas-*` dir, one run record; touches no shared module) | done 2026-09-02 00:05 UTC: run `RUN-20260901T230703Z-CS001-ATLAS-ee48affe-01`, branch pushed (3 commits, new files only), PR not opened pending Nathan; see `outputs/cs001-joint-shock-atlas-20260901T230702Z/MORNING_REPORT.md` |
 
 *Seeded 2026-09-01 from a live `ListAgents` + status-check round; keep it
 current from here rather than trusting this snapshot.*
