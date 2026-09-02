@@ -1,0 +1,13 @@
+route,terminal_convention,horizon,amplitude,capital_0,tau_0,accepted,n_mesh_nodes,solver_max_rms_residual,failure_message
+lq_path_continuation,lq_stable_manifold,40.0,0.0,1.0,0.5,True,161,4.668695416704725e-16,
+lq_path_continuation,lq_stable_manifold,40.0,0.25,1.0025031276057952,0.5025,True,161,4.3878164677451255e-11,
+lq_path_continuation,lq_stable_manifold,40.0,0.5,1.005012520859401,0.505,True,161,8.583276370052114e-11,
+lq_path_continuation,lq_stable_manifold,40.0,1.0,1.010050167084168,0.51,True,215,9.861236223475055e-11,
+crude_direct,lq_stable_manifold,40.0,0.0,1.0,0.5,True,161,4.69390047230299e-16,
+crude_direct,lq_stable_manifold,40.0,0.25,1.0025031276057952,0.5025,True,161,4.387903449049488e-11,
+crude_direct,lq_stable_manifold,40.0,0.5,1.005012520859401,0.505,True,161,8.583423464843586e-11,
+crude_direct,lq_stable_manifold,40.0,1.0,1.010050167084168,0.51,True,215,9.861236228784945e-11,
+lq_path_continuation_crude_tail,crude,40.0,0.0,1.0,0.5,True,161,4.855474685194879e-16,
+lq_path_continuation_crude_tail,crude,40.0,0.25,1.0025031276057952,0.5025,True,161,4.382919069367313e-11,
+lq_path_continuation_crude_tail,crude,40.0,0.5,1.005012520859401,0.505,True,161,8.573570880687379e-11,
+lq_path_continuation_crude_tail,crude,40.0,1.0,1.010050167084168,0.51,True,214,9.990090965381943e-11,

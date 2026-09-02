@@ -1,0 +1,277 @@
+schema_version: '1.0'
+run_id: RUN-20260902T170932Z-CS002-D0D1-5c03b3fd-01
+created_utc: '2026-09-02T17:10:22Z'
+status: completed
+purpose: 'Exploratory CS002 D0-D1 prototype: frozen-common-state nonlinear deterministic
+  characteristic BVP, continuation, independent residuals, terminal-tail sensitivity,
+  boundary margins, LQ comparison. Bounded feasibility prototype under CS002 v0.2''s
+  draft-specification exception -- not an approved or completed CS002 result; does
+  not authorize Block D2.'
+specification:
+  id: CS002
+  version: '0.2'
+  status: draft
+  fingerprint_sha256: null
+input_fingerprints:
+  cs002_config_sha256: 1d2fb8c76f393e468309e63b5b618722b20ef040526e70ecfe87ac63a33d436f
+  cs001_primitive_sha256: 78837354ee416984183ef0eed43c54105c60c8a31b6a75c2f6f84c58f924917f
+  cs001_experiment_sha256: 9c4b5e3b627e8fb031ad07649d4fdc80d1b1956ce1c251bc1bc2d94b02024570
+  cs001_complete_input_sha256: e521c69dc3fd1a3e92d1ecf603f7449a7c96becd5c0c636abde72ef0024a32a4
+problem_id: CP002
+approach_id: CA002
+benchmark_id: null
+implementation:
+  repository_url: https://github.com/Nathan-Barnard/tai-public-finance
+  local_path: /Users/nathanbarnard/Documents/TAI public finnace claude/.claude/worktrees/cs002-deterministic-bvp-d0-d1
+  commit: 5c03b3fdf81d0a33e6688a7a8ce06a674f000009
+  branch: worktree-cs002-deterministic-bvp-d0-d1
+  dirty_worktree: false
+  dirty_worktree_at_run_start: false
+  implementer: claude_code
+  entrypoint: python3 -m tai_public_finance.cs002_nonlinear_transition.cli
+  command: uv run python -m tai_public_finance.cs002_nonlinear_transition.cli --config
+    configs/cs002/lq_farhi_d0_d1_frozen_v1.json --output-dir outputs/cs002-d0-d1-frozen-transition-20260902T170932Z
+    --run-id RUN-20260902T170932Z-CS002-D0D1-5c03b3fd-01
+environment:
+  operating_system: macOS-15.6.1-arm64-arm-64bit-Mach-O
+  architecture: arm64
+  runtime_versions:
+    python: 3.13.5
+    numpy: 2.5.2
+    scipy: 1.18.1
+    matplotlib: 3.11.1
+    pyyaml: 6.0.3
+  dependency_lock_path: uv.lock
+  dependency_lock_sha256: 3c59dc4b381ad68cd634a6f917f1ce4fa1080d9ce43e2344064acb6109f76c4a
+  container_or_image: null
+hardware:
+  resource_lane: L1_interactive
+  machine_label: local_mac
+  cpu: arm
+  logical_cores: 10
+  memory_gb: 16.0
+  accelerator: null
+  accelerator_memory_gb: null
+  detected_at_runtime: true
+budget:
+  wall_seconds_limit: 600
+  cash_limit_usd: 0
+  actual_cash_usd: 0
+  early_stop_rule: Stop and retain failure if any independent residual, horizon/mesh
+    stability, convergence-order, branch-agreement, or boundary-margin acceptance
+    check fails; solver-reported convergence alone never sets the outcome to pass.
+randomness:
+  deterministic_requested: true
+  seeds: []
+  nondeterminism_notes: Deterministic float64 BVP collocation and ODE quadrature;
+    no simulation draws.
+inputs:
+  parameter_set_id: lq_farhi_illustrative_smoke_v1
+  parameter_fingerprint_sha256: 78837354ee416984183ef0eed43c54105c60c8a31b6a75c2f6f84c58f924917f
+  cs002_config_id: lq_farhi_d0_d1_frozen_v1
+  input_artifacts:
+  - /Users/nathanbarnard/Documents/TAI public finnace claude/.claude/worktrees/cs002-deterministic-bvp-d0-d1/configs/cs002/lq_farhi_d0_d1_frozen_v1.json
+  - /Users/nathanbarnard/Documents/TAI public finnace claude/.claude/worktrees/cs002-deterministic-bvp-d0-d1/configs/cs001/lq_farhi_smoke.json
+  - /Users/nathanbarnard/Documents/TAI public finnace claude/.claude/worktrees/cs002-deterministic-bvp-d0-d1/configs/primitives/lq_farhi_annual_v1.json
+  displacement:
+    delta_k: 0.01
+    delta_tau: 0.01
+  continuation_amplitudes:
+  - 0.0
+  - 0.25
+  - 0.5
+  - 1.0
+  horizons_years:
+    baseline: 40.0
+    comparisons:
+    - 20.0
+    - 80.0
+solver:
+  packages_and_versions:
+    numpy: 2.5.2
+    scipy: 1.18.1
+  method: scipy.integrate.solve_bvp collocation, continuation in displacement amplitude
+    from an LQ-path warm start (route A) cross-checked against direct crude-guess
+    solves at every amplitude (route B); independent off-mesh finite-difference ODE
+    residual and re-applied terminal-condition boundary residual.
+  tolerances:
+    ode_residual_max: 1.0e-07
+    boundary_residual_max: 1.0e-08
+    horizon_mesh_effect_floor: 1.0e-07
+    horizon_mesh_effect_relative: 0.001
+    convergence_order_expected: 2.0
+    convergence_order_relative_tolerance: 0.15
+    branch_agreement_atol: 5.0e-06
+    branch_agreement_rtol: 1.0e-05
+  initialization: LQ closed-loop path (route A) / crude constant-anchor guess (route
+    B)
+  continuation: amplitude sequence [0.0, 0.25, 0.5, 1.0]
+  precision: float64
+preflight:
+  tests_command: uv run pytest
+  tests_status: passed
+  exact_or_manufactured_benchmark: Matrix-exponential manufactured BVP through the
+    same solver interface; R16 fixed-tax closed-form capital transition; zero-displacement
+    anchor fixed point.
+result:
+  outcome: computational_pass
+  wall_seconds: 3.5107635830063373
+  task_elapsed_seconds: 4500.0
+  peak_memory_gb: null
+  actual_cash_usd: 0
+  checkpoints_recovered: true
+  solver_reported_metrics: null
+  independent_diagnostics:
+    checks:
+      d0_anchor_is_fixed_point: true
+      d0_manufactured_bvp_recovered: true
+      zero_displacement_returns_anchor: true
+      route_a_all_amplitudes_converged: true
+      route_b_all_amplitudes_converged: true
+      ode_residual_within_tolerance: true
+      boundary_residual_within_tolerance: true
+      horizon_mesh_stability: true
+      lq_convergence_second_order: true
+      j_recovery_routes_agree: true
+      branch_agreement_route_a_vs_b: true
+      no_boundary_reached_on_baseline_path: true
+    ode_residual:
+      max_scaled_residual: 9.172041217838138e-10
+      per_state_max_scaled_residual:
+        k: 2.2457890669851318e-10
+        tau: 8.874192583379227e-10
+        ell: 1.1596079862796351e-10
+        m: 6.017153564552478e-11
+      n_off_mesh_points: 401
+      finite_difference_step: 0.004
+    boundary_residual:
+      initial_scaled_residual: 0.0
+      terminal_scaled_residual: 7.40136882910359e-17
+      max_scaled_residual: 7.40136882910359e-17
+    convergence_ratios_k:
+    - 4.009089504775511
+    - 4.004544831871422
+    - 4.002269222882552
+    - 4.001137246482422
+    convergence_ratios_tau:
+    - 4.01248693145037
+    - 4.006238623232075
+    - 4.003109101291125
+    - 4.001555356609305
+    horizon_mesh_comparisons:
+    - label: horizon_20y_vs_baseline
+      horizon: 20.0
+      n_mesh_points: 161
+      max_state_difference_from_baseline:
+        k: 3.344551077903349e-07
+        tau: 1.1807921120876586e-06
+        ell: 1.341848905322962e-07
+        m: 5.279955701202165e-08
+      tolerance: 1.1335500174238567e-05
+      within_tolerance: true
+    - label: horizon_80y_vs_baseline
+      horizon: 80.0
+      n_mesh_points: 161
+      max_state_difference_from_baseline:
+        k: 8.955718856394276e-10
+        tau: 7.937334345342606e-09
+        ell: 2.3463553322500275e-09
+        m: 1.0650939945007314e-09
+      tolerance: 1.1335500174238567e-05
+      within_tolerance: true
+    - label: mesh_321_vs_161
+      horizon: 40.0
+      n_mesh_points: 321
+      max_state_difference_from_baseline:
+        k: 2.3602083829010745e-12
+        tau: 9.749534513048275e-12
+        ell: 8.422151864806438e-13
+        m: 4.729043762488616e-13
+      tolerance: 1.1335500174238567e-05
+      within_tolerance: true
+  economic_quantities:
+    j0_quadratic_tail_hjb: 12.5791815447855
+    j0_quadratic_tail_flow: 12.579181568802502
+    j0_anchor_tail_hjb: 12.57939611625571
+    j0_anchor_tail_flow: 12.579396140283123
+  reliable_region: Only the reported baseline displacement path and net-worth grid,
+    with recorded positive branch and margin slack; small-displacement illustrative
+    benchmark, not a global feasibility or uniqueness claim.
+  failure_code: null
+  failure_detail: null
+artifacts:
+- role: primary_output
+  location: outputs/cs002-d0-d1-frozen-transition-20260902T170932Z/report.json
+  sha256: cec8e58b1d6a856c99597c517fd92740646632981354d668ad86027f11e771f6
+  bytes: 12455
+- role: supporting_output
+  location: outputs/cs002-d0-d1-frozen-transition-20260902T170932Z/complete_input.json
+  sha256: 78510312fcd77922bfed369f8302fb9da08b7245c00e0793940b8a3a0d9eefe4
+  bytes: 4179
+- role: supporting_output
+  location: outputs/cs002-d0-d1-frozen-transition-20260902T170932Z/summary.md
+  sha256: f80f8db54e45dfdb480bfbc1546298a7b55055a0d91b8054b118dfc65a37a2ba
+  bytes: 1195
+- role: supporting_output
+  location: outputs/cs002-d0-d1-frozen-transition-20260902T170932Z/baseline_path.csv
+  sha256: 25f41c3284b317ddce6ff497cc0ac314e49d96adb258d3570cadab1713ab65c1
+  bytes: 51494
+- role: supporting_output
+  location: outputs/cs002-d0-d1-frozen-transition-20260902T170932Z/net_worth_grid.csv
+  sha256: cf21ae084da1f62447865511bea78604a506b4d62529cae0aed9060ce8a81ebf
+  bytes: 1492
+- role: supporting_output
+  location: outputs/cs002-d0-d1-frozen-transition-20260902T170932Z/continuation_checkpoints.csv
+  sha256: 76a79a637d7c7e9557f0d76011758946d75a0a12d31634fe2314bb0ec4ccb3aa
+  bytes: 1313
+- role: figure
+  location: outputs/cs002-d0-d1-frozen-transition-20260902T170932Z/figures/baseline_path_and_lq_overlay.png
+  sha256: 9926f9893cacdd604040b02bf66022347512151606a386cac90866c02d348c12
+  bytes: 145531
+- role: figure
+  location: outputs/cs002-d0-d1-frozen-transition-20260902T170932Z/figures/lq_convergence_order.png
+  sha256: 566fc4cd4d967d7ba9833408b17e7cf5fd2489a1d0f71c898d04ff3b31f4502e
+  bytes: 61024
+interpretation:
+  supports_result_ids:
+  - R08
+  - R09
+  - R11
+  - R16
+  challenges_result_ids: []
+  question_ids:
+  - Q02
+  - Q03
+  - Q05
+  - Q06
+  - Q08
+  - Q17
+  assurance_or_review_artifacts:
+  - research-notes/nonlinear-deterministic-and-order-two-risk-development.md
+  - assurance/dossiers/deterministic-fiscal-wealth-opportunity-value-and-tax-speed--R08-R09-R11.md
+  conclusion: All D0-D1 acceptance checks passed. Exploratory prototype evidence only
+    -- not an approved CS002 result.
+  limitations:
+  - CS002 is registered as draft, unfingerprinted, in the codex research workspace;
+    this run is a bounded exploratory D0-D1 prototype under the draft-specification
+    exception recorded in CS002's own "Immediate implementation handoff" section,
+    not an approved or completed CS002 result.
+  - 'Frozen common states only (z=z_bar, x=x_bar): Block D2 (deterministic mean reversion)
+    is explicitly out of scope and not implemented here.'
+  - Illustrative solver/algebra benchmark on the Farhi-based smoke calibration, not
+    an empirical UK calibration.
+  - structural-solvency and comprehensive-resource margins are a reporting/labelling
+    choice (min(R^K-delta) and X respectively), not a change to any computed equation
+    or economic quantity -- see margins.py.
+  - The net-worth grid deliberately includes structurally infeasible low-N/J members
+    (negative_transfer), retained with explicit failure reasons rather than dropped,
+    mirroring CS001's own repaired baseline.
+  - 'No derivative service (Block D3), stochastic terms, or order-epsilon^2 correction:
+    this is the zeroth-order deterministic path only.'
+  - task_elapsed_seconds is the implementer's own end-to-end estimate of reading,
+    implementation, and debugging time, not an instrumented wall-clock measurement
+    (this environment exposes no reliable session-start timestamp); wall_seconds (this
+    material run's own compute time) is directly measured and exact.
+  next_decision: Research owner reviews the equation map, LQ stable-manifold terminal-condition
+    derivation, residual/branch evidence, and resource profile before CS002 may move
+    toward review_ready or Block D2 (deterministic mean reversion) is authorized.
