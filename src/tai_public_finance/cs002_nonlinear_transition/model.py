@@ -22,13 +22,25 @@ finite differences of evaluate_smooth_branch in test_model.py:
 All derivatives in the costate equation hold the current control nu fixed
 (the envelope theorem does the rest); nu itself is just a number computed
 from the current state and plugged in, not a quantity these derivatives
-differentiate through.
+differentiate through. `capital_derivatives` reads alpha off the STATE it is
+given (`state.alpha`, a function of x only), so it is already exact at any
+(z, x) -- no separate D2 form is needed.
+
+CS002 D2 extension: `characteristic_rates`/`characteristic_rhs_vectorized`
+now accept an OPTIONAL current (z, x) distinct from the anchor (z_bar,
+x_bar); omitting them (z=None, x=None) reproduces the D0-D1 frozen-state
+behaviour exactly (current_z=z_bar, current_x=x_bar), so every existing D0-D1
+call site is unchanged. Passing the exogenous state generalizes `evaluate_
+smooth_branch` and `safe_rate` (both already exact at any (z, x); only the
+D0-D1 callers pinned them to the anchor) to the deterministic mean-reverting
+transition.
 """
 
 from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from typing import Callable
 
 import numpy as np
 
@@ -104,8 +116,16 @@ def characteristic_rates(
     x_bar: float,
     capital_bar: float,
     p: PrimitiveParameters,
+    *,
+    z: float | None = None,
+    x: float | None = None,
 ) -> CharacteristicRates:
-    """Evaluate (k_dot, tau_dot, ell_dot, m_dot) at one point, frozen (z, x)=(z_bar, x_bar).
+    """Evaluate (k_dot, tau_dot, ell_dot, m_dot) at one point.
+
+    `z`/`x` are the CURRENT exogenous state, distinct from the anchor
+    (`z_bar`/`x_bar`) once D2's exogenous state is displaced from its mean;
+    omitting them (the D0-D1 call signature) evaluates at the frozen anchor
+    (z, x) = (z_bar, x_bar) exactly as before.
 
     kappa_tau is the primitive tax_adjustment_scale directly (the coefficient
     of the quadratic tax-speed adjustment cost Y*nu**2/(2*kappa_tau)); it is
@@ -113,12 +133,14 @@ def characteristic_rates(
     internally for its y-normalised local system.
     """
 
+    current_z = z_bar if z is None else z
+    current_x = x_bar if x is None else x
     capital = capital_from_log(k, capital_bar)
     _require_finite("K", capital)
-    state = evaluate_smooth_branch(z_bar, x_bar, capital, tau, p)
+    state = evaluate_smooth_branch(current_z, current_x, capital, tau, p)
     _require_finite("Y", state.output)
     derivs = capital_derivatives(state, p)
-    r0 = safe_rate(z_bar, x_bar, z_bar, x_bar, p)
+    r0 = safe_rate(current_z, current_x, z_bar, x_bar, p)
     kappa_tau = p.tax_adjustment_scale
     nu = kappa_tau * m / state.output
 
@@ -138,7 +160,14 @@ def characteristic_rates(
 
 
 def characteristic_rhs_vectorized(
-    y: np.ndarray, z_bar: float, x_bar: float, capital_bar: float, p: PrimitiveParameters
+    y: np.ndarray,
+    z_bar: float,
+    x_bar: float,
+    capital_bar: float,
+    p: PrimitiveParameters,
+    *,
+    t: np.ndarray | None = None,
+    exogenous_path: Callable[[np.ndarray], tuple[np.ndarray, np.ndarray]] | None = None,
 ) -> np.ndarray:
     """scipy.integrate.solve_bvp's `fun(x, y)` signature: y has shape (4, m).
 
@@ -149,13 +178,31 @@ def characteristic_rhs_vectorized(
     vectorised copy that could silently drift from it. Mesh sizes here (tens
     to low thousands of points) make the Python-level loop negligible next to
     the D0/D1 time budgets.
+
+    `exogenous_path`, if given, is a `t -> (z(t), x(t))` evaluator (e.g. an
+    `exogenous.ExogenousPath`) supplying the CURRENT exogenous state at each
+    mesh column's time `t`; the system is then genuinely non-autonomous and
+    `t` (the mesh solve_bvp already passes as its first argument) is
+    required. Omitting `exogenous_path` reproduces the D0-D1 frozen-state
+    RHS exactly (every column evaluated at (z_bar, x_bar), `t` unused).
     """
 
     m = y.shape[1]
     out = np.empty((4, m))
+    if exogenous_path is None:
+        z_cols = np.full(m, z_bar)
+        x_cols = np.full(m, x_bar)
+    else:
+        if t is None:
+            raise ValueError("characteristic_rhs_vectorized needs `t` to evaluate exogenous_path(t).")
+        z_at_t, x_at_t = exogenous_path(np.asarray(t, dtype=float))
+        z_cols = np.broadcast_to(np.asarray(z_at_t, dtype=float), (m,))
+        x_cols = np.broadcast_to(np.asarray(x_at_t, dtype=float), (m,))
     for col in range(m):
         k, tau, ell, ell_costate_m = y[:, col]
-        rates = characteristic_rates(k, tau, ell, ell_costate_m, z_bar, x_bar, capital_bar, p)
+        rates = characteristic_rates(
+            k, tau, ell, ell_costate_m, z_bar, x_bar, capital_bar, p, z=z_cols[col], x=x_cols[col]
+        )
         out[0, col] = rates.k_dot
         out[1, col] = rates.tau_dot
         out[2, col] = rates.ell_dot

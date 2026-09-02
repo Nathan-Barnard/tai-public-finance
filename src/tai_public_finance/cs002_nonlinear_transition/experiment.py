@@ -54,7 +54,11 @@ class NetWorthGridRow:
     net_worth_0: float
     comprehensive: ComprehensiveResourcesPath
     margins: PathMargins
-    feasible: bool
+    # D2 mandatory repair #1: this is a LOCAL slack check (all reported path
+    # margins strictly positive at this N_0), not a structural-solvency or
+    # global-feasibility verdict -- see margins.py's module docstring and
+    # PathMargins.structural_continuation_solvency.
+    reported_local_margins_slack: bool
 
 
 @dataclass(frozen=True)
@@ -139,6 +143,19 @@ def _peak_abs_response(checkpoint: Checkpoint, t: np.ndarray) -> dict[str, float
     return {name: float(np.max(np.abs(path[i, :] - anchor_center[i]))) for i, name in enumerate(names)}
 
 
+def _pairwise_common_grid(comparison_horizon: float, baseline_horizon: float, n_points: int = 401) -> np.ndarray:
+    """D2 mandatory repair #3: each horizon comparison gets ITS OWN common
+    interval 0 <= t <= min(comparison_horizon, baseline_horizon), not one
+    grid shared across every comparison capped at the smallest horizon in
+    the whole set. The previous shared-grid construction
+    (`np.linspace(0, min(config.comparison_horizons + [config.baseline_horizon]), ...)`)
+    silently restricted the 80-vs-40-year check to 0-20 instead of 0-40 --
+    see test_horizon_mesh_regression.py for a regression case that fails
+    under that old construction."""
+
+    return np.linspace(0.0, min(comparison_horizon, baseline_horizon), n_points)
+
+
 def _horizon_mesh_comparisons(config: Cs002Configuration, local_system: LocalSystem, solution: LqSolution, baseline: Checkpoint) -> list[HorizonMeshComparison]:
     tol_floor = config.acceptance_tolerances["horizon_mesh_effect_floor"]
     tol_relative = config.acceptance_tolerances["horizon_mesh_effect_relative"]
@@ -147,18 +164,18 @@ def _horizon_mesh_comparisons(config: Cs002Configuration, local_system: LocalSys
     tolerance = max(tol_floor, tol_relative * peak_overall)
 
     comparisons: list[HorizonMeshComparison] = []
-    shared_t = np.linspace(0.0, min(config.comparison_horizons + [config.baseline_horizon]), 401)
-    baseline_path = baseline.path_at(shared_t)
     names = ("k", "tau", "ell", "m")
 
     for horizon in config.comparison_horizons:
+        common_t = _pairwise_common_grid(horizon, config.baseline_horizon)
+        baseline_path_common = baseline.path_at(common_t)
         run = run_continuation(
             "lq_path_continuation", config.delta_k, config.delta_tau, [config.continuation_amplitudes[-1]], horizon,
             config.baseline_mesh_points, "lq_stable_manifold", local_system, solution, tol=config.solver_tolerance, max_nodes=config.max_nodes,
         )
         checkpoint = run.checkpoints[0]
-        path = checkpoint.path_at(shared_t)
-        max_diff = {names[i]: float(np.max(np.abs(path[i, :] - baseline_path[i, :]))) for i in range(4)}
+        path = checkpoint.path_at(common_t)
+        max_diff = {names[i]: float(np.max(np.abs(path[i, :] - baseline_path_common[i, :]))) for i in range(4)}
         comparisons.append(
             HorizonMeshComparison(
                 label=f"horizon_{horizon:g}y_vs_baseline", horizon=horizon, n_mesh_points=config.baseline_mesh_points,
@@ -265,8 +282,16 @@ def run_d0_d1_experiment(config: Cs002Configuration) -> ExperimentReport:
         net_worth_0 = ratio * anchor.fiscal_wealth_bar
         comprehensive = recover_comprehensive_resources(baseline.result, local_system, j_recovery_quadratic, net_worth_0)
         margins = evaluate_path_margins(baseline.result, local_system, comprehensive.consumption, comprehensive.x_0, config.numerical_scaffolding, margin_t)
-        feasible = comprehensive.x_0 > 0.0 and not margins.boundary_reached
-        net_worth_grid.append(NetWorthGridRow(net_worth_to_fiscal_wealth=ratio, net_worth_0=net_worth_0, comprehensive=comprehensive, margins=margins, feasible=feasible))
+        reported_local_margins_slack = comprehensive.x_0 > 0.0 and not margins.boundary_reached
+        net_worth_grid.append(
+            NetWorthGridRow(
+                net_worth_to_fiscal_wealth=ratio,
+                net_worth_0=net_worth_0,
+                comprehensive=comprehensive,
+                margins=margins,
+                reported_local_margins_slack=reported_local_margins_slack,
+            )
+        )
 
     # Path-only margins (independent of N_0: specialization, tax, tax-speed,
     # structural-solvency) gate the aggregate outcome. Transfer and
@@ -282,7 +307,7 @@ def run_d0_d1_experiment(config: Cs002Configuration) -> ExperimentReport:
         and baseline_path_margins.min_specialisation_margin_new_task_composite > 0.0
         and baseline_path_margins.min_tax_margin > 0.0
         and baseline_path_margins.min_tax_speed_margin > 0.0
-        and baseline_path_margins.min_structural_solvency_margin > 0.0
+        and baseline_path_margins.min_net_rental_tax_base_margin > 0.0
     )
 
     checks = {

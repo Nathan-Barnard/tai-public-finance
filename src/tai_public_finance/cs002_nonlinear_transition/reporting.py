@@ -79,14 +79,15 @@ def _net_worth_grid_rows(report: ExperimentReport) -> list[dict[str, Any]]:
                 "consumption": row.comprehensive.consumption,
                 "x_constancy_max_abs_deviation": row.comprehensive.x_constancy_max_abs_deviation,
                 "x_constancy_max_rel_deviation": row.comprehensive.x_constancy_max_rel_deviation,
-                "feasible": row.feasible,
+                "reported_local_margins_slack": row.reported_local_margins_slack,
                 "failure_reasons": ";".join(row.margins.failure_reasons),
                 "min_specialisation_margin_automation_composite": row.margins.min_specialisation_margin_automation_composite,
                 "min_specialisation_margin_new_task_composite": row.margins.min_specialisation_margin_new_task_composite,
                 "min_tax_margin": row.margins.min_tax_margin,
                 "min_tax_speed_margin": row.margins.min_tax_speed_margin,
                 "min_transfer_margin": row.margins.min_transfer_margin,
-                "min_structural_solvency_margin": row.margins.min_structural_solvency_margin,
+                "min_net_rental_tax_base_margin": row.margins.min_net_rental_tax_base_margin,
+                "structural_continuation_solvency": row.margins.structural_continuation_solvency,
             }
         )
     return rows
@@ -247,7 +248,7 @@ def write_bundle(
                 f"- LQ-vs-nonlinear convergence ratios (halving amplitude, target ~4.0): k={[round(r, 3) for r in report.convergence.ratios_k]}, tau={[round(r, 3) for r in report.convergence.ratios_tau]}",
                 f"- Route A vs route B branch agreement: `{outcome.checks.get('branch_agreement_route_a_vs_b')}`",
                 f"- J(0) recovery (quadratic tail): flow-integral=`{report.j_recovery_quadratic.j0_flow_integral:.6f}`, HJB-ODE=`{report.j_recovery_quadratic.j0_hjb:.6f}`, relative disagreement=`{report.j_recovery_quadratic.route_disagreement_relative:.3e}`",
-                f"- Net-worth grid: {sum(1 for r in report.net_worth_grid if r.feasible)}/{len(report.net_worth_grid)} feasible; infeasible members retained with failure reasons (see net_worth_grid.csv), not dropped.",
+                f"- Net-worth grid: {sum(1 for r in report.net_worth_grid if r.reported_local_margins_slack)}/{len(report.net_worth_grid)} rows have all reported local margins slack (not a structural-solvency or global-feasibility verdict; structural continuation solvency is `not_evaluated`); other members retained with failure reasons (see net_worth_grid.csv), not dropped.",
                 "",
                 "Interpretation: bounded exploratory D0-D1 prototype under CS002 v0.2's draft-specification "
                 "exception. It supports research review of the equation map, the LQ stable-manifold terminal "
@@ -387,10 +388,12 @@ def write_bundle(
                 "Frozen common states only (z=z_bar, x=x_bar): Block D2 (deterministic mean reversion) is explicitly "
                 "out of scope and not implemented here.",
                 "Illustrative solver/algebra benchmark on the Farhi-based smoke calibration, not an empirical UK calibration.",
-                "structural-solvency and comprehensive-resource margins are a reporting/labelling choice (min(R^K-delta) "
-                "and X respectively), not a change to any computed equation or economic quantity -- see margins.py.",
-                "The net-worth grid deliberately includes structurally infeasible low-N/J members (negative_transfer), "
-                "retained with explicit failure reasons rather than dropped, mirroring CS001's own repaired baseline.",
+                "min_net_rental_tax_base_margin (min(R^K-delta)) and comprehensive_resource_margin (X) are local "
+                "reporting margins, not a structural-solvency or global-feasibility calculation -- "
+                "structural_continuation_solvency is reported literally as not_evaluated (see margins.py).",
+                "The net-worth grid deliberately includes low-N/J members whose reported local margins are NOT all "
+                "slack (negative_transfer), retained with explicit failure reasons rather than dropped, mirroring "
+                "CS001's own repaired baseline.",
                 "No derivative service (Block D3), stochastic terms, or order-epsilon^2 correction: this is the "
                 "zeroth-order deterministic path only.",
                 "task_elapsed_seconds is the implementer's own end-to-end estimate of reading, implementation, "

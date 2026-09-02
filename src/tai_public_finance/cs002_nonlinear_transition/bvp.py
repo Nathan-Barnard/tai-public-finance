@@ -1,7 +1,8 @@
 """Two-point BVP scaffolding: a generic scipy.solve_bvp wrapper, shared
-verbatim by the manufactured-solution interface check and the real frozen-
-state economic characteristic system, plus the economic RHS/boundary-
-condition construction and an LQ-path initial guess.
+verbatim by the manufactured-solution interface check and the real
+economic characteristic system (frozen-state D0-D1 or D2's deterministic
+mean-reverting exogenous path), plus the economic RHS/boundary-condition
+construction and an LQ-path initial guess.
 
 Using the SAME `solve_two_point_bvp` wrapper for both the manufactured test
 and the economic solve is what makes the manufactured check real evidence
@@ -19,6 +20,7 @@ from scipy.integrate import solve_bvp
 
 from ..cs001_lq_anchor.equations import LocalSystem
 from ..cs001_lq_anchor.solver import LqSolution
+from .exogenous import ExogenousEvaluator
 from .model import capital_from_log, characteristic_rhs_vectorized, log_from_capital
 from .terminal import crude_costates, lq_linear_kt_path, lq_stable_manifold_costates
 
@@ -115,10 +117,59 @@ def lq_path_initial_guess(x_mesh: np.ndarray, k0: float, t0: float, local_system
     for i in range(x_mesh.size):
         k_t, tdev_t = kt_path[:, i]
         capital_t = capital_from_log(k_t, anchor.capital_bar)
-        tau_t = tdev_t + 0.5
+        tau_t = tdev_t + anchor.tax_rate_bar
         tail = lq_stable_manifold_costates(capital_t, tau_t, local_system, solution)
         y_guess[:, i] = [k_t, tau_t, tail.ell, tail.m]
     return y_guess
+
+
+def economic_rhs_with_exogenous_path(local_system: LocalSystem, exogenous_path: ExogenousEvaluator) -> Callable[[np.ndarray, np.ndarray], np.ndarray]:
+    """CS002 D2: the exogenous (z, x) follow a KNOWN closed-form path in t
+    rather than sitting frozen at (z_bar, x_bar), so the system is genuinely
+    non-autonomous (`t` is no longer discarded). Passing an `exogenous_path`
+    that returns (z_bar, x_bar) at every t reproduces `economic_rhs` exactly."""
+
+    anchor = local_system.anchor
+    p = local_system.parameters
+
+    def fun(t: np.ndarray, y: np.ndarray) -> np.ndarray:
+        return characteristic_rhs_vectorized(y, anchor.z_bar, anchor.x_bar, anchor.capital_bar, p, t=t, exogenous_path=exogenous_path)
+
+    return fun
+
+
+def economic_bc_with_exogenous_path(
+    capital_0: float,
+    tau_0: float,
+    horizon: float,
+    terminal_convention: TerminalConvention,
+    local_system: LocalSystem,
+    solution: LqSolution,
+    exogenous_path: ExogenousEvaluator,
+) -> Callable[[np.ndarray, np.ndarray], np.ndarray]:
+    """CS002 D2 generalization of `economic_bc`: the terminal LQ tail is read
+    at the ACTUAL terminal exogenous state (z(T), x(T)) from `exogenous_path`
+    -- generally nonzero, since T is finite -- rather than the D0-D1 (0, 0)
+    deviation. `crude_costates()` is unaffected (it has no state dependence
+    to generalize)."""
+
+    k0 = log_from_capital(capital_0, local_system.anchor.capital_bar)
+    z_T_arr, x_T_arr = exogenous_path(np.array([horizon]))
+    z_T = float(np.asarray(z_T_arr).reshape(-1)[0])
+    x_T = float(np.asarray(x_T_arr).reshape(-1)[0])
+
+    def bc(ya: np.ndarray, yb: np.ndarray) -> np.ndarray:
+        capital_T = capital_from_log(yb[0], local_system.anchor.capital_bar)
+        tau_T = yb[1]
+        if terminal_convention == "lq_stable_manifold":
+            tail = lq_stable_manifold_costates(capital_T, tau_T, local_system, solution, z=z_T, x=x_T)
+        elif terminal_convention == "crude":
+            tail = crude_costates()
+        else:
+            raise ValueError(f"Unknown terminal_convention: {terminal_convention!r}")
+        return np.array([ya[0] - k0, ya[1] - tau_0, yb[2] - tail.ell, yb[3] - tail.m])
+
+    return bc
 
 
 def crude_constant_initial_guess(x_mesh: np.ndarray, k0: float, tau0: float) -> np.ndarray:

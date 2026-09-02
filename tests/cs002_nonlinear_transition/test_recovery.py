@@ -46,7 +46,14 @@ def test_both_j_routes_agree_on_a_displaced_path(cs001_local_system, cs001_solut
 
 def test_comprehensive_resources_are_constant_along_a_frozen_state_path(cs001_local_system, cs001_solution):
     """Ẋ=(r0-rho)X=0 exactly when r0=rho (frozen common states): X(t)=N(t)+J(t)
-    must stay at X_0 even though N(t) and J(t) individually vary."""
+    must stay at X_0 even though N(t) and J(t) individually vary.
+
+    D2 mandatory repair #2 regression: the N ODE previously selected the
+    NEXT precomputed node via np.searchsorted instead of evaluating the
+    BVP's own continuous interpolant result.sol(t), which left an
+    unnecessary ~6.7e-6 relative step-function drift in this identity. The
+    repaired continuous-path evaluation must reject that drift outright --
+    target at most 1e-8 relative (the task's declared repair tolerance)."""
 
     anchor = cs001_local_system.anchor
     horizon = 40.0
@@ -57,7 +64,8 @@ def test_comprehensive_resources_are_constant_along_a_frozen_state_path(cs001_lo
     recovery = recover_j(result, cs001_local_system, "quadratic", tail, horizon)
 
     comprehensive = recover_comprehensive_resources(result, cs001_local_system, recovery, net_worth_0=0.0)
-    assert comprehensive.x_constancy_max_rel_deviation < 1e-5, comprehensive.x_path
+    assert comprehensive.x_constancy_max_rel_deviation < 1e-8, comprehensive.x_path
+    assert comprehensive.x_constancy_max_rel_deviation < 6.7e-6 / 10.0, "repair #2 must beat the old drift by a wide margin, not just barely"
     # N and J themselves are NOT constant -- otherwise the check above would be vacuous.
     assert np.ptp(comprehensive.n_path) > 1e-6
     assert np.ptp(comprehensive.j_path) > 1e-6

@@ -50,10 +50,49 @@ def test_small_displacement_stays_interior_on_every_margin(cs001_local_system, c
     # R^K - delta = 2*rho at the anchor exactly (anchor.py); a small displacement
     # should keep this near that level, not push it toward some large arbitrary bound.
     rho = cs001_local_system.parameters.rho
-    assert margins.min_structural_solvency_margin == pytest.approx(2.0 * rho, rel=0.2)
-    assert margins.min_structural_solvency_margin > 0.0
+    assert margins.min_net_rental_tax_base_margin == pytest.approx(2.0 * rho, rel=0.2)
+    assert margins.min_net_rental_tax_base_margin > 0.0
+    assert margins.structural_continuation_solvency == "not_evaluated"
     assert not margins.boundary_reached
     assert margins.failure_reasons == []
+
+
+def test_net_rental_tax_base_margin_is_not_labelled_structural_solvency(cs001_local_system):
+    """D2 mandatory repair #1 regression: min(R^K-delta) going non-positive
+    must be flagged as `net_rental_tax_base_boundary_reached`, never the old
+    `structural_solvency_boundary_reached` name, and
+    structural_continuation_solvency must always read `not_evaluated` --
+    this module performs no separate viability/no-Ponzi calculation."""
+
+    anchor = cs001_local_system.anchor
+    # A wildly large capital level drives R^K = alpha*Y/K towards zero
+    # (Y ~ K**alpha, alpha<1) well below depreciation_rate, without needing a
+    # real BVP solve -- only evaluate_path_margins's own path-evaluation
+    # logic is under test here.
+    huge_capital_k = np.log(1.0e6)
+
+    class _FakeResult:
+        @staticmethod
+        def sol(t):
+            n = np.atleast_1d(t).size
+            path = np.empty((4, n))
+            path[0, :] = huge_capital_k
+            path[1, :] = anchor.tax_rate_bar
+            path[2, :] = 1.0
+            path[3, :] = 0.0
+            return path
+
+    t_grid = np.linspace(0.0, 1.0, 5)
+    margins = evaluate_path_margins(
+        _FakeResult(), cs001_local_system, consumption=anchor.worker_consumption_bar, x_0=anchor.fiscal_wealth_bar,
+        numerical_scaffolding=SCAFFOLDING, t_grid=t_grid,
+    )
+
+    assert margins.min_net_rental_tax_base_margin < 0.0
+    assert margins.boundary_reached
+    assert "net_rental_tax_base_boundary_reached" in margins.failure_reasons
+    assert "structural_solvency_boundary_reached" not in margins.failure_reasons
+    assert margins.structural_continuation_solvency == "not_evaluated"
 
 
 def test_margins_flag_a_deliberately_infeasible_tax_scaffolding(cs001_local_system, cs001_solution):

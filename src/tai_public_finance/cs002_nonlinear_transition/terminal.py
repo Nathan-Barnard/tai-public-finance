@@ -1,13 +1,13 @@
-"""Terminal-tail conventions for the frozen-state characteristic BVP.
+"""Terminal-tail conventions for the characteristic BVP.
 
 Two costate tails (CS002 D0-D1 handoff):
 
 - "lq_stable_manifold" (preferred): read the costates off CS001's quadratic
   local value function J(y) ~= J_bar + j.y + 0.5 y'Hy, y=(z-z_bar, x-x_bar,
-  k, t), t=tau-1/2. Its k- and t-partials are USABLE DIRECTLY as J_k and
-  J_tau -- t=tau-1/2 is a pure shift so J_tau=J_t exactly -- but ell=J_K is
-  a derivative with respect to REAL capital, not log-capital: by the chain
-  rule k=log(K/K_bar) gives dJ/dk = K * dJ/dK, so
+  k, t), t=tau-tau_bar. Its k- and t-partials are USABLE DIRECTLY as J_k and
+  J_tau -- t=tau-tau_bar is a pure shift so J_tau=J_t exactly -- but ell=J_K
+  is a derivative with respect to REAL capital, not log-capital: by the
+  chain rule k=log(K/K_bar) gives dJ/dk = K * dJ/dK, so
 
       ell_lq(K, tau) = J_k(y) / K,        m_lq(K, tau) = J_t(y).
 
@@ -29,6 +29,18 @@ callback). For post-processing J itself, the analogous two TAIL VALUES are:
 Every function here takes the same (local_system, solution) pair CS001's own
 portfolio.py takes: local_system carries the anchor and the linear fiscal-
 wealth vector `j`, solution carries the quadratic coefficient `H`.
+
+CS002 D2 extension: `lq_deviation_vector` (and everything built on it) now
+reads `tau_bar` off `local_system.anchor.tax_rate_bar` instead of a literal
+`0.5`, and accepts an optional current (z, x) distinct from the anchor
+(z_bar, x_bar). D0-D1 mandatory-repair note: this D1 code previously
+hard-coded `tau - 0.5`, which happened to be numerically exact only because
+`compute_steady_state` currently always sets tax_rate_bar=0.5 -- the repair
+removes the hidden calibration-specific assumption (see
+test_terminal_generalizes_to_arbitrary_tau_bar_and_capital_bar for a
+synthetic anchor with tau_bar != 0.5, K_bar != 1). Omitting z/x (the D0-D1
+call signature) reproduces the exact previous frozen-state (z, x) = (z_bar,
+x_bar) behaviour.
 """
 
 from __future__ import annotations
@@ -46,6 +58,8 @@ assert COORDINATES == ("z", "x", "k", "tau_deviation"), (
     "CS002's terminal-condition mapping hard-codes indices 2 (k) and 3 (tau_deviation); "
     "CS001's coordinate order changed and this module must be updated to match."
 )
+_Z_INDEX = 0
+_X_INDEX = 1
 _K_INDEX = 2
 _TAU_INDEX = 3
 
@@ -56,16 +70,30 @@ class TerminalCostates:
     m: float
 
 
-def lq_deviation_vector(capital: float, tau: float, local_system: LocalSystem) -> np.ndarray:
-    """y=(z-z_bar, x-x_bar, k, tau-1/2) at frozen common states: only the
-    capital/tax components are ever nonzero here."""
+def lq_deviation_vector(
+    capital: float, tau: float, local_system: LocalSystem, *, z: float | None = None, x: float | None = None
+) -> np.ndarray:
+    """y=(z-z_bar, x-x_bar, k, tau-tau_bar). Omitting z/x evaluates the
+    exogenous components at the anchor (their D0-D1 frozen-state value of
+    exactly zero deviation)."""
 
-    k = log_from_capital(capital, local_system.anchor.capital_bar)
-    return np.array([0.0, 0.0, k, tau - 0.5])
+    anchor = local_system.anchor
+    k = log_from_capital(capital, anchor.capital_bar)
+    current_z = anchor.z_bar if z is None else z
+    current_x = anchor.x_bar if x is None else x
+    return np.array([current_z - anchor.z_bar, current_x - anchor.x_bar, k, tau - anchor.tax_rate_bar])
 
 
-def lq_stable_manifold_costates(capital: float, tau: float, local_system: LocalSystem, solution: LqSolution) -> TerminalCostates:
-    y = lq_deviation_vector(capital, tau, local_system)
+def lq_stable_manifold_costates(
+    capital: float,
+    tau: float,
+    local_system: LocalSystem,
+    solution: LqSolution,
+    *,
+    z: float | None = None,
+    x: float | None = None,
+) -> TerminalCostates:
+    y = lq_deviation_vector(capital, tau, local_system, z=z, x=x)
     gradient = local_system.linear_fiscal_wealth + solution.H @ y
     j_k = gradient[_K_INDEX]
     j_tau = gradient[_TAU_INDEX]
@@ -76,10 +104,18 @@ def crude_costates() -> TerminalCostates:
     return TerminalCostates(ell=1.0, m=0.0)
 
 
-def lq_quadratic_value_tail(capital: float, tau: float, local_system: LocalSystem, solution: LqSolution) -> float:
+def lq_quadratic_value_tail(
+    capital: float,
+    tau: float,
+    local_system: LocalSystem,
+    solution: LqSolution,
+    *,
+    z: float | None = None,
+    x: float | None = None,
+) -> float:
     """J(y) ~= J_bar + j.y + 0.5 y'Hy, evaluated in LEVEL units of fiscal wealth."""
 
-    y = lq_deviation_vector(capital, tau, local_system)
+    y = lq_deviation_vector(capital, tau, local_system, z=z, x=x)
     j = local_system.linear_fiscal_wealth
     return local_system.anchor.fiscal_wealth_bar + float(j @ y) + 0.5 * float(y @ solution.H @ y)
 
@@ -100,3 +136,20 @@ def lq_linear_kt_path(t_grid: np.ndarray, k0: float, t0: float, solution: LqSolu
     a_rc = solution.A_rc
     y0 = np.array([k0, t0])
     return np.stack([expm(a_rc * t) @ y0 for t in t_grid], axis=1)
+
+
+def lq_full_state_path(t_grid: np.ndarray, y0: np.ndarray, solution: LqSolution) -> np.ndarray:
+    """The full 4-coordinate LQ closed-loop path y(t)=expm(A_c*t)@y0,
+    y=(z-z_bar, x-x_bar, k, tau-tau_bar) -- CS002 D2's LQ-limit comparator.
+
+    D1's 2-state reduction (`lq_linear_kt_path`, using A_rc) is only valid
+    because frozen common states keep the (z, x) deviation at exactly zero
+    throughout; D2 displaces z and/or x, so the comparator needs the full
+    4x4 closed loop. A_c's (z, x) rows equal A's (z, x) rows exactly (the
+    control feedback chi*B*B^T*H only ever adds to the tau row, since
+    B=(0,0,0,1)), so this path's z- and x-components reduce to the same
+    exact OU exponential decay as the true exogenous path -- the LQ
+    approximation only affects the (k, tau) response to that path, exactly
+    mirroring D1's structure."""
+
+    return np.stack([expm(solution.A_c * t) @ y0 for t in t_grid], axis=1)
