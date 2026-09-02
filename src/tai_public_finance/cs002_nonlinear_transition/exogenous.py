@@ -58,6 +58,21 @@ class ExogenousPath:
         return self.z(t), self.x(t)
 
 
+def current_state(t: np.ndarray, z_bar: float, x_bar: float, exogenous_path: ExogenousEvaluator | None) -> tuple[np.ndarray, np.ndarray]:
+    """The current (z, x) at `t`: broadcast constants at (z_bar, x_bar) when
+    `exogenous_path` is None (the D0-D1 frozen-state case), otherwise
+    `exogenous_path(t)`. Shared by every D2 module (recovery, margins,
+    experiment orchestration) that needs "the current exogenous state, or
+    the frozen anchor if none was given" so there is exactly one place that
+    fallback is defined."""
+
+    n = np.atleast_1d(t).size
+    if exogenous_path is None:
+        return np.full(n, z_bar), np.full(n, x_bar)
+    z_t, x_t = exogenous_path(np.asarray(t, dtype=float))
+    return np.broadcast_to(np.asarray(z_t, dtype=float), (n,)), np.broadcast_to(np.asarray(x_t, dtype=float), (n,))
+
+
 def propagate_exogenous_numerically(
     t_grid: np.ndarray, z0: float, x0: float, z_bar: float, x_bar: float, kappa_z: float, kappa_x: float
 ) -> tuple[np.ndarray, np.ndarray]:

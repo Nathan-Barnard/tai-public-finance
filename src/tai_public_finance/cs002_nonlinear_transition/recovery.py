@@ -52,17 +52,9 @@ from scipy.integrate import cumulative_trapezoid, solve_ivp
 
 from ..cs001_lq_anchor.equations import LocalSystem
 from .bvp import BvpSolveResult
-from .exogenous import ExogenousEvaluator
+from .exogenous import ExogenousEvaluator, current_state
 from .model import capital_from_log
 from ..primitives import evaluate_smooth_branch, safe_rate
-
-
-def _current_zx(t: np.ndarray, z_bar: float, x_bar: float, exogenous_path: ExogenousEvaluator | None) -> tuple[np.ndarray, np.ndarray]:
-    n = np.atleast_1d(t).size
-    if exogenous_path is None:
-        return np.full(n, z_bar), np.full(n, x_bar)
-    z_t, x_t = exogenous_path(np.asarray(t, dtype=float))
-    return np.broadcast_to(np.asarray(z_t, dtype=float), (n,)), np.broadcast_to(np.asarray(x_t, dtype=float), (n,))
 
 
 def r0_along_path(t_grid: np.ndarray, local_system: LocalSystem, exogenous_path: ExogenousEvaluator | None = None) -> np.ndarray:
@@ -72,7 +64,7 @@ def r0_along_path(t_grid: np.ndarray, local_system: LocalSystem, exogenous_path:
 
     p = local_system.parameters
     anchor = local_system.anchor
-    z_t, x_t = _current_zx(t_grid, anchor.z_bar, anchor.x_bar, exogenous_path)
+    z_t, x_t = current_state(t_grid, anchor.z_bar, anchor.x_bar, exogenous_path)
     return np.array([safe_rate(z, x, anchor.z_bar, anchor.x_bar, p) for z, x in zip(z_t, x_t)])
 
 
@@ -106,7 +98,7 @@ def flow_integrand(
     kappa_tau = local_system.parameters.tax_adjustment_scale
     n = path.shape[1]
     t_for_zx = t_grid if t_grid is not None else np.zeros(n)
-    z_at_t, x_at_t = _current_zx(t_for_zx, anchor.z_bar, anchor.x_bar, exogenous_path)
+    z_at_t, x_at_t = current_state(t_for_zx, anchor.z_bar, anchor.x_bar, exogenous_path)
     out = np.empty(n)
     for i in range(n):
         k, tau, _ell, m = path[:, i]
@@ -148,7 +140,7 @@ def recover_j_path_via_hjb_ode(
 
     def rhs(t: float, j: np.ndarray) -> list[float]:
         k, tau, _ell, m = result.sol(np.array([t]))[:, 0]
-        z_t, x_t = _current_zx(np.array([t]), anchor.z_bar, anchor.x_bar, exogenous_path)
+        z_t, x_t = current_state(np.array([t]), anchor.z_bar, anchor.x_bar, exogenous_path)
         z_i, x_i = float(z_t[0]), float(x_t[0])
         nu, state = _nu_and_state(k, tau, m, local_system, z=z_i, x=x_i)
         r0 = safe_rate(z_i, x_i, anchor.z_bar, anchor.x_bar, p)
@@ -326,7 +318,7 @@ def recover_exogenous_resources(
 
     def n_rhs(t: float, n: np.ndarray) -> list[float]:
         k, tau, _ell, m = result.sol(np.array([t]))[:, 0]
-        z_t, x_t = _current_zx(np.array([t]), anchor.z_bar, anchor.x_bar, exogenous_path)
+        z_t, x_t = current_state(np.array([t]), anchor.z_bar, anchor.x_bar, exogenous_path)
         z_i, x_i = float(z_t[0]), float(x_t[0])
         nu, state = _nu_and_state(k, tau, m, local_system, z=z_i, x=x_i)
         r0_t = safe_rate(z_i, x_i, anchor.z_bar, anchor.x_bar, p)

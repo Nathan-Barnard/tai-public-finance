@@ -31,6 +31,7 @@ import numpy as np
 from ..cs001_lq_anchor.equations import LocalSystem
 from ..primitives import evaluate_smooth_branch
 from .bvp import BvpSolveResult
+from .exogenous import ExogenousEvaluator, current_state
 from .model import capital_from_log
 
 StructuralContinuationSolvencyLabel = Literal["not_evaluated"]
@@ -121,3 +122,59 @@ def evaluate_path_margins(
         boundary_reached=bool(failure_reasons),
         failure_reasons=failure_reasons,
     )
+
+
+def margins_time_series(
+    result: BvpSolveResult,
+    local_system: LocalSystem,
+    consumption_path: np.ndarray,
+    numerical_scaffolding: dict,
+    t_grid: np.ndarray,
+    exogenous_path: ExogenousEvaluator | None = None,
+) -> dict[str, np.ndarray]:
+    """Same per-point margin formulas as `evaluate_path_margins`, but
+    returning the FULL time series rather than reducing to a minimum --
+    CS002 D2 acceptance: 'specialization, tax, tax-speed, transfer, ...
+    margins are reported at every time point.' `consumption_path` is
+    time-varying in D2 (c(t)=rho*X(t)), unlike D0-D1's single scalar; pass
+    an array matching `t_grid`. Threading `exogenous_path` evaluates every
+    margin at the ACTUAL current (z(t), x(t)), not the frozen anchor --
+    omitting it reproduces the D0-D1 frozen-state evaluation exactly."""
+
+    anchor = local_system.anchor
+    p = local_system.parameters
+    tax_min = float(numerical_scaffolding["tax_min"])
+    tax_max = float(numerical_scaffolding["tax_max"])
+    tax_speed_abs_max = float(numerical_scaffolding["tax_speed_abs_max"])
+
+    path = result.sol(t_grid)
+    n = t_grid.size
+    z_at_t, x_at_t = current_state(t_grid, anchor.z_bar, anchor.x_bar, exogenous_path)
+    spec_auto = np.empty(n)
+    spec_new_task = np.empty(n)
+    tax_margin = np.empty(n)
+    tax_speed_margin = np.empty(n)
+    transfer_margin = np.empty(n)
+    net_rental_tax_base_margin = np.empty(n)
+
+    for i in range(n):
+        k, tau, _ell, m = path[:, i]
+        capital = capital_from_log(k, anchor.capital_bar)
+        state = evaluate_smooth_branch(float(z_at_t[i]), float(x_at_t[i]), capital, tau, p)
+        nu = p.tax_adjustment_scale * m / state.output
+
+        spec_auto[i] = state.specialisation_margin_automation_composite
+        spec_new_task[i] = state.specialisation_margin_new_task_composite
+        tax_margin[i] = min(tau - tax_min, tax_max - tau)
+        tax_speed_margin[i] = tax_speed_abs_max - abs(nu)
+        transfer_margin[i] = consumption_path[i] - state.wage_income
+        net_rental_tax_base_margin[i] = state.rental_rate - p.depreciation_rate
+
+    return {
+        "specialisation_margin_automation_composite": spec_auto,
+        "specialisation_margin_new_task_composite": spec_new_task,
+        "tax_margin": tax_margin,
+        "tax_speed_margin": tax_speed_margin,
+        "transfer_margin": transfer_margin,
+        "net_rental_tax_base_margin": net_rental_tax_base_margin,
+    }

@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 
 from tai_public_finance.cs002_nonlinear_transition.bvp import economic_bc, economic_rhs, lq_path_initial_guess, solve_two_point_bvp
-from tai_public_finance.cs002_nonlinear_transition.margins import evaluate_path_margins
+from tai_public_finance.cs002_nonlinear_transition.margins import evaluate_path_margins, margins_time_series
 from tai_public_finance.cs002_nonlinear_transition.model import capital_from_log
 
 SCAFFOLDING = {"tax_min": -0.5, "tax_max": 0.95, "tax_speed_abs_max": 0.5}
@@ -93,6 +93,27 @@ def test_net_rental_tax_base_margin_is_not_labelled_structural_solvency(cs001_lo
     assert "net_rental_tax_base_boundary_reached" in margins.failure_reasons
     assert "structural_solvency_boundary_reached" not in margins.failure_reasons
     assert margins.structural_continuation_solvency == "not_evaluated"
+
+
+def test_margins_time_series_matches_evaluate_path_margins_minimum(cs001_local_system, cs001_solution):
+    """The full-time-series margins (CS002 D2's 'reported at every time
+    point' requirement) must reduce to exactly the same minima
+    evaluate_path_margins itself computes on the identical grid/path."""
+
+    anchor = cs001_local_system.anchor
+    result = _solve(cs001_local_system, cs001_solution, 0.01, 0.01)
+    t_grid = np.linspace(0.0, 40.0, 161)
+    consumption_path = np.full(t_grid.size, anchor.worker_consumption_bar)
+    reduced = evaluate_path_margins(result, cs001_local_system, consumption=anchor.worker_consumption_bar, x_0=anchor.fiscal_wealth_bar, numerical_scaffolding=SCAFFOLDING, t_grid=t_grid)
+    series = margins_time_series(result, cs001_local_system, consumption_path, SCAFFOLDING, t_grid)
+
+    assert series["specialisation_margin_automation_composite"].shape == t_grid.shape
+    assert float(series["specialisation_margin_automation_composite"].min()) == pytest.approx(reduced.min_specialisation_margin_automation_composite)
+    assert float(series["specialisation_margin_new_task_composite"].min()) == pytest.approx(reduced.min_specialisation_margin_new_task_composite)
+    assert float(series["tax_margin"].min()) == pytest.approx(reduced.min_tax_margin)
+    assert float(series["tax_speed_margin"].min()) == pytest.approx(reduced.min_tax_speed_margin)
+    assert float(series["transfer_margin"].min()) == pytest.approx(reduced.min_transfer_margin)
+    assert float(series["net_rental_tax_base_margin"].min()) == pytest.approx(reduced.min_net_rental_tax_base_margin)
 
 
 def test_margins_flag_a_deliberately_infeasible_tax_scaffolding(cs001_local_system, cs001_solution):
