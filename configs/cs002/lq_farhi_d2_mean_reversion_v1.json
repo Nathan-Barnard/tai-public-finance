@@ -1,0 +1,47 @@
+{
+  "cs002_d2_config_id": "lq_farhi_d2_mean_reversion_v1",
+  "cs001_experiment_file": "../cs001/lq_farhi_smoke.json",
+  "mean_reverting_common_states": "z(t), x(t) follow their analytic OU paths toward (z_bar, x_bar); r_0(t) is state-dependent -- see the CS002 D2 handoff",
+  "internal_coordinates": "k=log(K/K_bar), tau in levels (K(0)=K_bar, tau(0)=tau_bar always -- the shock displaces the exogenous state, not the fiscal state)",
+  "shock_directions": {
+    "productivity": {"delta_z": 0.01, "description": "z(0)-z_bar=0.01, x(0)=x_bar"},
+    "automation": {"delta_alpha": 0.01, "description": "x(0) solves automation_share(x(0))-alpha_bar=0.01 via a numerical root-find, z(0)=z_bar"}
+  },
+  "continuation_amplitudes": [0.0, 0.25, 0.5, 1.0],
+  "horizons_years": {
+    "baseline": 40.0,
+    "comparisons": [20.0, 80.0]
+  },
+  "mesh": {
+    "baseline_points": 161,
+    "refined_points": 321
+  },
+  "solver_tolerance": 1e-10,
+  "max_nodes": 100000,
+  "numerical_scaffolding": {
+    "tax_min": -0.5,
+    "tax_max": 0.95,
+    "tax_speed_abs_max": 0.5
+  },
+  "initial_public_net_worth": 0.0,
+  "convergence_amplitude_sequence": [1.0, 0.5, 0.25, 0.125, 0.0625],
+  "varpi_tail_horizon_sequence": [40.0, 80.0, 200.0],
+  "acceptance_tolerances": {
+    "ode_residual_max": 1e-7,
+    "boundary_residual_max": 1e-8,
+    "horizon_mesh_effect_floor": 1e-7,
+    "horizon_mesh_effect_relative": 1e-3,
+    "convergence_order_expected": 2.0,
+    "convergence_order_relative_tolerance": 0.2,
+    "branch_agreement_atol": 5e-6,
+    "branch_agreement_rtol": 1e-5,
+    "route_disagreement_effect_factor": 10.0,
+    "budget_separation_residual_max": 1e-3,
+    "componentwise_rhs_tolerance": 1e-9
+  },
+  "provenance": {
+    "empirical_status": "Illustrative solver/algebra benchmark; not an empirical calibration.",
+    "specification_status": "CS002 v0.2, draft, unfingerprinted -- this run is an exploratory D2 prototype under the draft-specification exception documented in CS002's own \"Immediate implementation handoff\" section, extending the reviewed D0-D1 evidence per the D2 work-plan authorization. Not an approved CS002 result.",
+    "source": "nonlinear-deterministic-transition-d2-claude-handoff--CS002.md and nonlinear-deterministic-and-order-two-work-plan--CP002-CP003.md (TAI public finnace codex research workspace)"
+  }
+}
