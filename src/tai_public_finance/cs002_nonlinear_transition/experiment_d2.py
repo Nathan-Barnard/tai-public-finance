@@ -26,9 +26,12 @@ from .margins import margins_time_series
 from .model import capital_from_log
 from .outcome import AggregateOutcome, determine_outcome
 from .recovery import (
+    REPORTED_PATH_NAMES,
     ExogenousResourcesPath,
     JRecovery,
     OpportunityValueRecovery,
+    anchor_reference_values,
+    reconstruct_reported_paths,
     recover_exogenous_resources,
     recover_j,
     recover_varpi,
@@ -59,11 +62,22 @@ class OuPathCheck:
 
 @dataclass(frozen=True)
 class HorizonMeshComparisonD2:
+    """CS002 D2 review repair (finding 2): every field below is keyed by
+    REPORTED_PATH_NAMES -- the complete reconstructed solution (z, x, r0,
+    K, log-capital deviation, tau, nu, ell, m, output, fiscal resources, J,
+    X, N, c, varpi, and the LQ comparator k/tau paths), not only the four
+    raw BVP state variables. `tolerance` is evaluated SEPARATELY for each
+    path from that path's OWN peak absolute response on the baseline run
+    (never pooled across variables via a shared max()), and `within_tolerance`
+    is true only when every single path passes its own tolerance."""
+
     label: str
     horizon: float
     n_mesh_points: int
     max_state_difference_from_baseline: dict[str, float]
-    tolerance: float
+    tolerance: dict[str, float]
+    time_of_max_difference: dict[str, float]
+    within_tolerance_by_path: dict[str, bool]
     within_tolerance: bool
 
 
@@ -127,12 +141,41 @@ class ExperimentReportD2:
     outcome: AggregateOutcome
 
 
-def _peak_abs_response(checkpoint: ExogenousCheckpoint, t: np.ndarray, local_system: LocalSystem) -> dict[str, float]:
-    path = checkpoint.path_at(t)
-    anchor = local_system.anchor
-    names = ("k", "tau_deviation", "ell_deviation", "m")
-    anchor_center = np.array([0.0, anchor.tax_rate_bar, 1.0, 0.0])
-    return {name: float(np.max(np.abs(path[i, :] - anchor_center[i]))) for i, name in enumerate(names)}
+def _compare_reported_paths(
+    baseline_paths: dict[str, np.ndarray],
+    comparison_paths: dict[str, np.ndarray],
+    reference_values: dict[str, float],
+    common_t: np.ndarray,
+    tol_floor: float,
+    tol_relative: float,
+) -> tuple[dict[str, float], dict[str, float], dict[str, float], dict[str, bool]]:
+    """Score every REPORTED_PATH_NAMES path SEPARATELY: `tolerance[name] =
+    max(tol_floor, tol_relative * peak_absolute_response_of_that_path)`,
+    where the peak response is the baseline path's own max absolute
+    deviation from ITS OWN anchor/steady-state reference over `common_t` --
+    CS002 D2 review repair (finding 2): never use the largest response among
+    several variables to set one shared tolerance for all of them. Returns
+    (max_diff, tolerance, time_of_max_difference, within_tolerance_by_path),
+    each a dict keyed by REPORTED_PATH_NAMES."""
+
+    missing = [name for name in REPORTED_PATH_NAMES if name not in baseline_paths or name not in comparison_paths]
+    if missing:
+        raise ValueError(f"Horizon/mesh comparison is missing reconstructed path(s): {missing}")
+
+    max_diff: dict[str, float] = {}
+    tolerance: dict[str, float] = {}
+    time_of_max: dict[str, float] = {}
+    within_tolerance_by_path: dict[str, bool] = {}
+    for name in REPORTED_PATH_NAMES:
+        diff = np.abs(comparison_paths[name] - baseline_paths[name])
+        idx = int(np.argmax(diff))
+        max_diff[name] = float(diff[idx])
+        time_of_max[name] = float(common_t[idx])
+        peak_response = float(np.max(np.abs(baseline_paths[name] - reference_values[name])))
+        tol = max(tol_floor, tol_relative * peak_response)
+        tolerance[name] = tol
+        within_tolerance_by_path[name] = max_diff[name] <= tol
+    return max_diff, tolerance, time_of_max, within_tolerance_by_path
 
 
 def _horizon_mesh_comparisons(
@@ -143,31 +186,66 @@ def _horizon_mesh_comparisons(
     local_system: LocalSystem,
     solution: LqSolution,
     baseline: ExogenousCheckpoint,
+    baseline_j_recovery: JRecovery,
+    baseline_exogenous_resources: ExogenousResourcesPath,
+    baseline_varpi_recovery: OpportunityValueRecovery,
 ) -> list[HorizonMeshComparisonD2]:
+    """CS002 D2 review repair (finding 2): each comparison reconstructs the
+    COMPLETE reported solution for both runs (not only the raw BVP state)
+    on their full pairwise common interval, and scores every path against
+    its own effect-scaled tolerance. The comparison run's own J/X/N/c/varpi
+    are recovered FRESH here, at ITS OWN horizon-appropriate terminal tail
+    (same convention as the primary run -- quadratic LQ tail for J, tail_
+    value=0 for varpi -- evaluated at this run's own terminal state/horizon,
+    never reusing the baseline's tail value); the baseline side reuses the
+    ALREADY-recovered `baseline_j_recovery`/`baseline_exogenous_resources`/
+    `baseline_varpi_recovery` (the same objects the final report uses), only
+    interpolated onto each comparison's own common grid -- never a separate
+    shadow recomputation that could silently drift from the reported baseline."""
+
     tol_floor = config.acceptance_tolerances["horizon_mesh_effect_floor"]
     tol_relative = config.acceptance_tolerances["horizon_mesh_effect_relative"]
-    peak_response = _peak_abs_response(baseline, np.linspace(0.0, config.baseline_horizon, 401), local_system)
-    tolerance = max(tol_floor, tol_relative * max(peak_response.values()))
+    reference_values = anchor_reference_values(local_system)
+    anchor = local_system.anchor
+
+    def _compare_one(label: str, horizon: float, n_mesh_points: int, common_t: np.ndarray, checkpoint: ExogenousCheckpoint) -> HorizonMeshComparisonD2:
+        capital_T = capital_from_log(float(checkpoint.result.sol(np.array([horizon]))[0, 0]), anchor.capital_bar)
+        tau_T = float(checkpoint.result.sol(np.array([horizon]))[1, 0])
+        z_T = float(checkpoint.exogenous_path.z(horizon))
+        x_T = float(checkpoint.exogenous_path.x(horizon))
+        quad_tail = lq_quadratic_value_tail(capital_T, tau_T, local_system, solution, z=z_T, x=x_T)
+        comparison_j_recovery = recover_j(checkpoint.result, local_system, "quadratic", quad_tail, horizon, exogenous_path=checkpoint.exogenous_path)
+        comparison_exogenous_resources = recover_exogenous_resources(
+            checkpoint.result, local_system, comparison_j_recovery, config.initial_public_net_worth, checkpoint.exogenous_path
+        )
+        comparison_varpi_recovery = recover_varpi(local_system, checkpoint.exogenous_path, horizon, tail_value=0.0)
+
+        comparison_paths = reconstruct_reported_paths(
+            checkpoint.result, checkpoint.exogenous_path, local_system, solution,
+            comparison_j_recovery, comparison_exogenous_resources, comparison_varpi_recovery, common_t,
+        )
+        baseline_paths = reconstruct_reported_paths(
+            baseline.result, baseline.exogenous_path, local_system, solution,
+            baseline_j_recovery, baseline_exogenous_resources, baseline_varpi_recovery, common_t,
+        )
+        max_diff, tolerance, time_of_max, within_by_path = _compare_reported_paths(
+            baseline_paths, comparison_paths, reference_values, common_t, tol_floor, tol_relative
+        )
+        return HorizonMeshComparisonD2(
+            label=label, horizon=horizon, n_mesh_points=n_mesh_points,
+            max_state_difference_from_baseline=max_diff, tolerance=tolerance, time_of_max_difference=time_of_max,
+            within_tolerance_by_path=within_by_path, within_tolerance=all(within_by_path.values()),
+        )
 
     comparisons: list[HorizonMeshComparisonD2] = []
-    names = ("k", "tau", "ell", "m")
-
     for horizon in config.comparison_horizons:
         common_t = _pairwise_common_grid(horizon, config.baseline_horizon)
-        baseline_path_common = baseline.path_at(common_t)
         run = run_exogenous_shock_continuation(
             "warm_start", direction, z0_target, x0_target, [config.continuation_amplitudes[-1]], horizon,
             config.baseline_mesh_points, "lq_stable_manifold", local_system, solution, tol=config.solver_tolerance, max_nodes=config.max_nodes,
         )
         checkpoint = run.checkpoints[0]
-        path = checkpoint.path_at(common_t)
-        max_diff = {names[i]: float(np.max(np.abs(path[i, :] - baseline_path_common[i, :]))) for i in range(4)}
-        comparisons.append(
-            HorizonMeshComparisonD2(
-                label=f"horizon_{horizon:g}y_vs_baseline", horizon=horizon, n_mesh_points=config.baseline_mesh_points,
-                max_state_difference_from_baseline=max_diff, tolerance=tolerance, within_tolerance=max(max_diff.values()) <= tolerance,
-            )
-        )
+        comparisons.append(_compare_one(f"horizon_{horizon:g}y_vs_baseline", horizon, config.baseline_mesh_points, common_t, checkpoint))
 
     refined_run = run_exogenous_shock_continuation(
         "warm_start", direction, z0_target, x0_target, [config.continuation_amplitudes[-1]], config.baseline_horizon,
@@ -175,14 +253,10 @@ def _horizon_mesh_comparisons(
     )
     refined_checkpoint = refined_run.checkpoints[0]
     refined_t = np.linspace(0.0, config.baseline_horizon, 401)
-    refined_path = refined_checkpoint.path_at(refined_t)
-    base_path_full = baseline.path_at(refined_t)
-    max_diff = {names[i]: float(np.max(np.abs(refined_path[i, :] - base_path_full[i, :]))) for i in range(4)}
     comparisons.append(
-        HorizonMeshComparisonD2(
-            label=f"mesh_{config.refined_mesh_points}_vs_{config.baseline_mesh_points}", horizon=config.baseline_horizon,
-            n_mesh_points=config.refined_mesh_points, max_state_difference_from_baseline=max_diff, tolerance=tolerance,
-            within_tolerance=max(max_diff.values()) <= tolerance,
+        _compare_one(
+            f"mesh_{config.refined_mesh_points}_vs_{config.baseline_mesh_points}", config.baseline_horizon,
+            config.refined_mesh_points, refined_t, refined_checkpoint,
         )
     )
     return comparisons
@@ -271,7 +345,6 @@ def _run_shock_direction(
     max_diff_x = float(np.max(np.abs(x_analytic - x_numeric)))
     ou_path_check = OuPathCheck(max_abs_difference_z=max_diff_z, max_abs_difference_x=max_diff_x, within_tolerance=max(max_diff_z, max_diff_x) < 1e-6)
 
-    horizon_mesh_comparisons = _horizon_mesh_comparisons(config, direction, z0_target, x0_target, local_system, solution, baseline)
     convergence = _convergence_order(config, direction, anchor.z_bar, anchor.x_bar, z0_target, x0_target, local_system, solution)
 
     ode_residual = independent_ode_residual(baseline.result, local_system, exogenous_path=exogenous_path)
@@ -304,6 +377,17 @@ def _run_shock_direction(
     budget_separation = budget_separation_residual(exogenous_resources)
 
     varpi_recovery = recover_varpi(local_system, exogenous_path, horizon, tail_value=0.0)
+
+    # Required check #12/CS002 D2 review repair (finding 2): reconstruct and
+    # compare the COMPLETE reported solution (not just the raw BVP state) on
+    # each comparison's own full pairwise common interval, with a tolerance
+    # scored separately per path. Runs after j_recovery/exogenous_resources/
+    # varpi_recovery so the baseline side of every comparison reuses these
+    # SAME already-recovered objects (never a separate shadow recomputation).
+    horizon_mesh_comparisons = _horizon_mesh_comparisons(
+        config, direction, z0_target, x0_target, local_system, solution, baseline, j_recovery, exogenous_resources, varpi_recovery
+    )
+
     varpi_along_path_residual = independent_varpi_along_path_residual(varpi_recovery, local_system, exogenous_path)
     varpi_horizon_sensitivity = {h: recover_varpi(local_system, exogenous_path, h, tail_value=0.0).varpi_0 for h in config.varpi_tail_horizon_sequence}
 

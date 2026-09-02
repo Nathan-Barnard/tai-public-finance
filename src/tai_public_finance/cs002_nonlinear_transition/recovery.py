@@ -51,9 +51,11 @@ import numpy as np
 from scipy.integrate import cumulative_trapezoid, solve_ivp
 
 from ..cs001_lq_anchor.equations import LocalSystem
+from ..cs001_lq_anchor.solver import LqSolution
 from .bvp import BvpSolveResult
-from .exogenous import ExogenousEvaluator, current_state
-from .model import capital_from_log
+from .exogenous import ExogenousEvaluator, ExogenousPath, current_state
+from .model import capital_from_log, characteristic_rates
+from .terminal import lq_full_state_path
 from ..primitives import evaluate_smooth_branch, safe_rate
 
 
@@ -444,3 +446,127 @@ def recover_varpi(
         route_disagreement_max_rel=float(disagreement.max() / (1.0 + np.max(np.abs(varpi_path_ode)))),
         varpi_of_t=varpi_of_t,
     )
+
+
+REPORTED_PATH_NAMES: tuple[str, ...] = (
+    "z", "x", "r0", "capital", "log_capital_deviation", "tax_rate", "nu_tax_speed",
+    "ell_J_K", "m_J_tau", "output", "fiscal_resources", "J", "X", "N", "c", "varpi",
+    "lq_log_capital_deviation", "lq_tax_rate",
+)
+"""CS002 D2 review repair (finding 2): the complete set of paths this
+package reports as results (reporting_d2.py's per-direction CSV columns),
+used so the horizon/mesh stability check (experiment_d2.py) can be verified
+to cover every one of them, not only the four raw BVP state variables
+(k, tau, ell, m) the D0-D1-inherited check compared."""
+
+
+def anchor_reference_values(local_system: LocalSystem) -> dict[str, float]:
+    """The steady-state/anchor "center" value of each REPORTED_PATH_NAMES
+    entry, i.e. its value on the undisplaced (zero-shock) path -- used to
+    scale an effect-based tolerance (peak absolute RESPONSE to the shock,
+    not peak raw level). Literal constants (0.0 for a pure deviation
+    coordinate, 1.0 for ell=J_K, 0.0 for varpi since r0=rho identically
+    off-shock so its along-path ODE with a zero tail is identically zero)
+    mirror experiment_d2.py's existing peak-response convention for
+    k/tau/ell/m; every other value is read directly off CS001's own
+    SteadyState (anchor.py), which already computes each one at the
+    identical undisplaced point (z_bar, x_bar, K_bar, tau_bar, N_bar) --
+    no new economic derivation is introduced here."""
+
+    anchor = local_system.anchor
+    p = local_system.parameters
+    return {
+        "z": anchor.z_bar,
+        "x": anchor.x_bar,
+        "r0": p.rho,
+        "capital": anchor.capital_bar,
+        "log_capital_deviation": 0.0,
+        "tax_rate": anchor.tax_rate_bar,
+        "nu_tax_speed": 0.0,
+        "ell_J_K": 1.0,
+        "m_J_tau": 0.0,
+        "output": anchor.output_bar,
+        "fiscal_resources": anchor.fiscal_resources_bar,
+        "J": anchor.fiscal_wealth_bar,
+        "X": anchor.comprehensive_resources_bar,
+        "N": anchor.public_net_worth_bar,
+        "c": anchor.worker_consumption_bar,
+        "varpi": 0.0,
+        "lq_log_capital_deviation": 0.0,
+        "lq_tax_rate": anchor.tax_rate_bar,
+    }
+
+
+def reconstruct_reported_paths(
+    result: BvpSolveResult,
+    exogenous_path: ExogenousPath,
+    local_system: LocalSystem,
+    lq_solution: LqSolution,
+    j_recovery: JRecovery,
+    exogenous_resources: ExogenousResourcesPath,
+    varpi_recovery: OpportunityValueRecovery,
+    t_grid: np.ndarray,
+) -> dict[str, np.ndarray]:
+    """Every REPORTED_PATH_NAMES quantity, evaluated at `t_grid`, from one
+    solved BVP result plus its already-recovered J/X/N/c/varpi -- the same
+    reconstruction reporting_d2.py's `_direction_path_rows` performs for the
+    final CSV/figure output, factored out here so the horizon/mesh
+    stability check can compare the SAME complete set of paths rather than
+    only the four raw BVP state variables (CS002 D2 review repair, finding
+    2). `j_recovery`/`exogenous_resources`/`varpi_recovery` must already be
+    recovered with THIS run's own horizon-appropriate terminal tail
+    (recover_j's quad_tail evaluated at this run's own terminal state,
+    recover_varpi's tail_value at this run's own horizon) -- this function
+    only interpolates already-recovered paths onto `t_grid`, it does not
+    decide or apply any terminal convention itself."""
+
+    anchor = local_system.anchor
+    p = local_system.parameters
+    path = result.sol(t_grid)
+    z_t = np.asarray(exogenous_path.z(t_grid), dtype=float)
+    x_t = np.asarray(exogenous_path.x(t_grid), dtype=float)
+
+    n = t_grid.size
+    r0 = np.empty(n)
+    capital = np.empty(n)
+    nu = np.empty(n)
+    output = np.empty(n)
+    fiscal_resources = np.empty(n)
+    for i in range(n):
+        k, tau, ell, m = path[:, i]
+        rates = characteristic_rates(k, tau, ell, m, anchor.z_bar, anchor.x_bar, anchor.capital_bar, p, z=float(z_t[i]), x=float(x_t[i]))
+        capital[i] = capital_from_log(k, anchor.capital_bar)
+        r0[i] = rates.r0
+        nu[i] = rates.nu
+        output[i] = rates.state.output
+        fiscal_resources[i] = rates.state.fiscal_resources
+
+    j_t = np.interp(t_grid, j_recovery.t_grid, j_recovery.j_path_hjb)
+    x_resource_t = np.interp(t_grid, exogenous_resources.t_grid, exogenous_resources.x_path_ode)
+    n_t = np.interp(t_grid, exogenous_resources.t_grid, exogenous_resources.n_path_budget_ode)
+    c_t = np.interp(t_grid, exogenous_resources.t_grid, exogenous_resources.consumption_path)
+    varpi_t = np.interp(t_grid, varpi_recovery.t_grid, varpi_recovery.varpi_path_ode)
+
+    y0 = np.array([exogenous_path.z0 - anchor.z_bar, exogenous_path.x0 - anchor.x_bar, 0.0, 0.0])
+    lq_path = lq_full_state_path(t_grid, y0, lq_solution)
+
+    return {
+        "z": z_t,
+        "x": x_t,
+        "r0": r0,
+        "capital": capital,
+        "log_capital_deviation": path[0, :].copy(),
+        "tax_rate": path[1, :].copy(),
+        "nu_tax_speed": nu,
+        "ell_J_K": path[2, :].copy(),
+        "m_J_tau": path[3, :].copy(),
+        "output": output,
+        "fiscal_resources": fiscal_resources,
+        "J": j_t,
+        "X": x_resource_t,
+        "N": n_t,
+        "c": c_t,
+        "varpi": varpi_t,
+        "lq_log_capital_deviation": lq_path[2, :].copy(),
+        "lq_tax_rate": lq_path[3, :] + anchor.tax_rate_bar,
+    }

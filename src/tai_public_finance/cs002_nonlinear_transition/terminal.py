@@ -41,6 +41,19 @@ test_terminal_generalizes_to_arbitrary_tau_bar_and_capital_bar for a
 synthetic anchor with tau_bar != 0.5, K_bar != 1). Omitting z/x (the D0-D1
 call signature) reproduces the exact previous frozen-state (z, x) = (z_bar,
 x_bar) behaviour.
+
+D2 review repair (physical-unit terminal map): CS001's `linear_fiscal_wealth`
+(`j`) and `H` are NORMALIZED fiscal-wealth coefficients -- `j_k=1` at the
+anchor regardless of `K_bar` (CS001's own j[2]==1 diagnostic), not `j_k=
+K_bar`. Converting them to PHYSICAL units requires an explicit `K_bar`
+multiplier: `J_y^L = K_bar*(j + H@y)` for the gradient and `J^L = J_bar +
+K_bar*(j@y + 0.5 y'Hy)` for the level, exactly as the CS002 D2 handoff
+specifies. `lq_stable_manifold_costates` and `lq_quadratic_value_tail` below
+previously omitted this `K_bar` factor -- numerically invisible whenever
+K_bar=1 (every calibration used so far, per CS001's `K_bar=1` normalization
+anchor.py documents), but silently wrong at any other K_bar. See
+test_terminal_map_converts_normalized_coefficients_to_physical_units_when_capital_bar_is_not_one
+for the manufactured K_bar=2.5 regression.
 """
 
 from __future__ import annotations
@@ -94,7 +107,8 @@ def lq_stable_manifold_costates(
     x: float | None = None,
 ) -> TerminalCostates:
     y = lq_deviation_vector(capital, tau, local_system, z=z, x=x)
-    gradient = local_system.linear_fiscal_wealth + solution.H @ y
+    capital_bar = local_system.anchor.capital_bar
+    gradient = capital_bar * (local_system.linear_fiscal_wealth + solution.H @ y)
     j_k = gradient[_K_INDEX]
     j_tau = gradient[_TAU_INDEX]
     return TerminalCostates(ell=j_k / capital, m=j_tau)
@@ -117,7 +131,8 @@ def lq_quadratic_value_tail(
 
     y = lq_deviation_vector(capital, tau, local_system, z=z, x=x)
     j = local_system.linear_fiscal_wealth
-    return local_system.anchor.fiscal_wealth_bar + float(j @ y) + 0.5 * float(y @ solution.H @ y)
+    capital_bar = local_system.anchor.capital_bar
+    return local_system.anchor.fiscal_wealth_bar + capital_bar * (float(j @ y) + 0.5 * float(y @ solution.H @ y))
 
 
 def anchor_value_tail(local_system: LocalSystem) -> float:

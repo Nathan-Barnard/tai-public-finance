@@ -119,20 +119,29 @@ def _continuation_checkpoint_rows(report: ExperimentReportD2) -> list[dict[str, 
 
 
 def _horizon_mesh_rows(report: ExperimentReportD2) -> list[dict[str, Any]]:
+    """One row per (direction, comparison), with four columns per
+    REPORTED_PATH_NAMES path (max_diff/tolerance/time_of_max/within_tolerance)
+    -- CS002 D2 review repair (finding 2): every reported path gets its own
+    recorded max absolute difference, effect-scaled tolerance, pass/fail,
+    and the time its maximum difference occurs, not one pooled tolerance
+    over the four raw BVP state variables."""
+
     rows = []
     for direction, sub in (("productivity", report.productivity), ("automation", report.automation)):
         for comparison in sub.horizon_mesh_comparisons:
-            rows.append(
-                {
-                    "direction": direction,
-                    "label": comparison.label,
-                    "horizon": comparison.horizon,
-                    "n_mesh_points": comparison.n_mesh_points,
-                    "tolerance": comparison.tolerance,
-                    "within_tolerance": comparison.within_tolerance,
-                    **{f"max_diff_{name}": value for name, value in comparison.max_state_difference_from_baseline.items()},
-                }
-            )
+            row: dict[str, Any] = {
+                "direction": direction,
+                "label": comparison.label,
+                "horizon": comparison.horizon,
+                "n_mesh_points": comparison.n_mesh_points,
+                "within_tolerance": comparison.within_tolerance,
+            }
+            for name, max_diff in comparison.max_state_difference_from_baseline.items():
+                row[f"max_diff_{name}"] = max_diff
+                row[f"tolerance_{name}"] = comparison.tolerance[name]
+                row[f"time_of_max_{name}"] = comparison.time_of_max_difference[name]
+                row[f"within_tolerance_{name}"] = comparison.within_tolerance_by_path[name]
+            rows.append(row)
     return rows
 
 
