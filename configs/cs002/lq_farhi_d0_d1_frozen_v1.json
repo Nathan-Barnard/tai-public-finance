@@ -1,0 +1,47 @@
+{
+  "cs002_config_id": "lq_farhi_d0_d1_frozen_v1",
+  "cs001_experiment_file": "../cs001/lq_farhi_smoke.json",
+  "frozen_common_states": "z=z_bar, x=x_bar (hence r_0=rho); see the CS002 D0-D1 handoff",
+  "internal_coordinates": "k=log(K/K_bar), t=tau-1/2",
+  "initial_displacement": {
+    "delta_k": 0.01,
+    "delta_tau": 0.01
+  },
+  "diagnostic_basis_displacements": [
+    {"delta_k": 0.01, "delta_tau": 0.0},
+    {"delta_k": 0.0, "delta_tau": 0.01}
+  ],
+  "continuation_amplitudes": [0.0, 0.25, 0.5, 1.0],
+  "horizons_years": {
+    "baseline": 40.0,
+    "comparisons": [20.0, 80.0]
+  },
+  "mesh": {
+    "baseline_points": 161,
+    "refined_points": 321
+  },
+  "solver_tolerance": 1e-10,
+  "max_nodes": 100000,
+  "numerical_scaffolding": {
+    "tax_min": -0.5,
+    "tax_max": 0.95,
+    "tax_speed_abs_max": 0.5
+  },
+  "public_net_worth_to_fiscal_wealth_grid": [-0.5, -0.25, 0.0, 0.25, 0.5],
+  "convergence_amplitude_sequence": [1.0, 0.5, 0.25, 0.125, 0.0625],
+  "acceptance_tolerances": {
+    "ode_residual_max": 1e-7,
+    "boundary_residual_max": 1e-8,
+    "horizon_mesh_effect_floor": 1e-7,
+    "horizon_mesh_effect_relative": 1e-3,
+    "convergence_order_expected": 2.0,
+    "convergence_order_relative_tolerance": 0.15,
+    "branch_agreement_atol": 5e-6,
+    "branch_agreement_rtol": 1e-5
+  },
+  "provenance": {
+    "empirical_status": "Illustrative solver/algebra benchmark; not an empirical calibration.",
+    "specification_status": "CS002 v0.2, draft, unfingerprinted -- this run is an exploratory D0-D1 prototype under the draft-specification exception documented in CS002's own \"Immediate implementation handoff\" section, not an approved CS002 result.",
+    "source": "nonlinear-deterministic-transition-d0-d1-claude-handoff--CS002.md and nonlinear-deterministic-and-order-two-work-plan--CP002-CP003.md (TAI public finnace codex research workspace)"
+  }
+}
