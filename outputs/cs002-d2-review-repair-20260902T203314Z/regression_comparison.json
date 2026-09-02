@@ -1,0 +1,296 @@
+{
+  "old_run_id": "RUN-20260902T190139Z-CS002-D2-0b721f21-01",
+  "new_run_id": "RUN-20260902T203314Z-CS002-D2-REPAIR-94332783-01",
+  "old_code_commit": "0b721f2171cd1e3b163a0e119656f961b87d7ca8",
+  "new_code_commit": "94332783e8db9951bf446582c4af5875a0962f65",
+  "note": "Both runs use the identical config (K_bar=1, tau_bar=0.5 calibration; fingerprint af6b8d613e26...); the only code difference is the two review repairs (K_bar physical-unit terminal map; complete per-path horizon/mesh comparison). This isolates the repair's effect.",
+  "directions": {
+    "productivity": {
+      "full_reported_path_max_abs_diff_over_0_to_40y": {
+        "z": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": -1.796616591576036,
+          "new_value_at_max": -1.796616591576036
+        },
+        "x": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.0,
+          "new_value_at_max": 0.0
+        },
+        "r0": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.01809549700436294,
+          "new_value_at_max": 0.01809549700436294
+        },
+        "capital": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 1.0,
+          "new_value_at_max": 1.0
+        },
+        "log_capital_deviation": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.0,
+          "new_value_at_max": 0.0
+        },
+        "tax_rate": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.5,
+          "new_value_at_max": 0.5
+        },
+        "nu_tax_speed": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": -0.001411637159303873,
+          "new_value_at_max": -0.001411637159303873
+        },
+        "ell_J_K": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 1.0103662754020892,
+          "new_value_at_max": 1.0103662754020892
+        },
+        "m_J_tau": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": -0.0010098645405410347,
+          "new_value_at_max": -0.0010098645405410347
+        },
+        "output": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.357692674029293,
+          "new_value_at_max": 0.357692674029293
+        },
+        "fiscal_resources": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.2568849194443132,
+          "new_value_at_max": 0.2568849194443132
+        },
+        "J": {
+          "max_abs_diff": 1.0551559626037488e-12,
+          "time_of_max_diff": 1.2000000000000002,
+          "old_value_at_max": 12.671204241857124,
+          "new_value_at_max": 12.67120424185818
+        },
+        "X": {
+          "max_abs_diff": 5.115907697472721e-13,
+          "time_of_max_diff": 22.6,
+          "old_value_at_max": 12.574568435610612,
+          "new_value_at_max": 12.574568435611123
+        },
+        "N": {
+          "max_abs_diff": 6.262499199771732e-13,
+          "time_of_max_diff": 40.0,
+          "old_value_at_max": 0.004344685135464203,
+          "new_value_at_max": 0.004344685134837953
+        },
+        "c": {
+          "max_abs_diff": 1.0380585280245214e-14,
+          "time_of_max_diff": 22.6,
+          "old_value_at_max": 0.2540403257487598,
+          "new_value_at_max": 0.25404032574877017
+        },
+        "varpi": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": -0.4516348430707195,
+          "new_value_at_max": -0.4516348430707195
+        },
+        "lq_log_capital_deviation": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.0,
+          "new_value_at_max": 0.0
+        },
+        "lq_tax_rate": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.5,
+          "new_value_at_max": 0.5
+        }
+      },
+      "worst_path_max_abs_diff": "J",
+      "old_horizon_mesh_comparisons_pooled_tolerance": {
+        "horizon_20y_vs_baseline": {
+          "tolerance": 1.0366275402089231e-05,
+          "within_tolerance": true
+        },
+        "horizon_80y_vs_baseline": {
+          "tolerance": 1.0366275402089231e-05,
+          "within_tolerance": true
+        },
+        "mesh_321_vs_161": {
+          "tolerance": 1.0366275402089231e-05,
+          "within_tolerance": true
+        }
+      },
+      "new_horizon_mesh_comparisons_per_path": {
+        "horizon_20y_vs_baseline": {
+          "within_tolerance_overall": false,
+          "failing_paths": [
+            "varpi"
+          ]
+        },
+        "horizon_80y_vs_baseline": {
+          "within_tolerance_overall": true,
+          "failing_paths": []
+        },
+        "mesh_321_vs_161": {
+          "within_tolerance_overall": true,
+          "failing_paths": []
+        }
+      }
+    },
+    "automation": {
+      "full_reported_path_max_abs_diff_over_0_to_40y": {
+        "z": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": -1.806616591576036,
+          "new_value_at_max": -1.806616591576036
+        },
+        "x": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.1335313926245227,
+          "new_value_at_max": 0.1335313926245227
+        },
+        "r0": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.012111523352325971,
+          "new_value_at_max": 0.012111523352325971
+        },
+        "capital": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 1.0,
+          "new_value_at_max": 1.0
+        },
+        "log_capital_deviation": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.0,
+          "new_value_at_max": 0.0
+        },
+        "tax_rate": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.5,
+          "new_value_at_max": 0.5
+        },
+        "nu_tax_speed": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": -0.005932515726273926,
+          "new_value_at_max": -0.005932515726273926
+        },
+        "ell_J_K": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 1.0410833296924507,
+          "new_value_at_max": 1.0410833296924507
+        },
+        "m_J_tau": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": -0.00424471885636968,
+          "new_value_at_max": -0.00424471885636968
+        },
+        "output": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.35775032483864044,
+          "new_value_at_max": 0.35775032483864044
+        },
+        "fiscal_resources": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.25514401799187836,
+          "new_value_at_max": 0.25514401799187836
+        },
+        "J": {
+          "max_abs_diff": 1.6342482922482304e-13,
+          "time_of_max_diff": 1.4000000000000001,
+          "old_value_at_max": 12.924843001518152,
+          "new_value_at_max": 12.924843001518315
+        },
+        "X": {
+          "max_abs_diff": 7.283063041541027e-14,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 13.042626856324553,
+          "new_value_at_max": 13.042626856324626
+        },
+        "N": {
+          "max_abs_diff": 5.363678251546489e-14,
+          "time_of_max_diff": 0.2,
+          "old_value_at_max": -0.0016397120657033598,
+          "new_value_at_max": -0.001639712065649723
+        },
+        "c": {
+          "max_abs_diff": 1.4988010832439613e-15,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.26349637302994394,
+          "new_value_at_max": 0.26349637302994544
+        },
+        "varpi": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": -1.7665973132304449,
+          "new_value_at_max": -1.7665973132304449
+        },
+        "lq_log_capital_deviation": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.0,
+          "new_value_at_max": 0.0
+        },
+        "lq_tax_rate": {
+          "max_abs_diff": 0.0,
+          "time_of_max_diff": 0.0,
+          "old_value_at_max": 0.5,
+          "new_value_at_max": 0.5
+        }
+      },
+      "worst_path_max_abs_diff": "J",
+      "old_horizon_mesh_comparisons_pooled_tolerance": {
+        "horizon_20y_vs_baseline": {
+          "tolerance": 4.1083329692450654e-05,
+          "within_tolerance": true
+        },
+        "horizon_80y_vs_baseline": {
+          "tolerance": 4.1083329692450654e-05,
+          "within_tolerance": true
+        },
+        "mesh_321_vs_161": {
+          "tolerance": 4.1083329692450654e-05,
+          "within_tolerance": true
+        }
+      },
+      "new_horizon_mesh_comparisons_per_path": {
+        "horizon_20y_vs_baseline": {
+          "within_tolerance_overall": false,
+          "failing_paths": [
+            "tax_rate",
+            "varpi"
+          ]
+        },
+        "horizon_80y_vs_baseline": {
+          "within_tolerance_overall": true,
+          "failing_paths": []
+        },
+        "mesh_321_vs_161": {
+          "within_tolerance_overall": true,
+          "failing_paths": []
+        }
+      }
+    }
+  }
+}

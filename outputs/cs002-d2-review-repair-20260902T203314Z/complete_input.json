@@ -1,0 +1,117 @@
+{
+  "cs002_d2_config": {
+    "acceptance_tolerances": {
+      "boundary_residual_max": 1e-08,
+      "branch_agreement_atol": 5e-06,
+      "branch_agreement_rtol": 1e-05,
+      "budget_separation_residual_max": 0.001,
+      "componentwise_rhs_tolerance": 1e-09,
+      "convergence_order_expected": 2.0,
+      "convergence_order_relative_tolerance": 0.2,
+      "horizon_mesh_effect_floor": 1e-07,
+      "horizon_mesh_effect_relative": 0.001,
+      "ode_residual_max": 1e-07,
+      "route_disagreement_effect_factor": 10.0
+    },
+    "continuation_amplitudes": [
+      0.0,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "convergence_amplitude_sequence": [
+      1.0,
+      0.5,
+      0.25,
+      0.125,
+      0.0625
+    ],
+    "cs001_experiment_file": "../cs001/lq_farhi_smoke.json",
+    "cs002_d2_config_id": "lq_farhi_d2_mean_reversion_v1",
+    "horizons_years": {
+      "baseline": 40.0,
+      "comparisons": [
+        20.0,
+        80.0
+      ]
+    },
+    "initial_public_net_worth": 0.0,
+    "internal_coordinates": "k=log(K/K_bar), tau in levels (K(0)=K_bar, tau(0)=tau_bar always -- the shock displaces the exogenous state, not the fiscal state)",
+    "max_nodes": 100000,
+    "mean_reverting_common_states": "z(t), x(t) follow their analytic OU paths toward (z_bar, x_bar); r_0(t) is state-dependent -- see the CS002 D2 handoff",
+    "mesh": {
+      "baseline_points": 161,
+      "refined_points": 321
+    },
+    "numerical_scaffolding": {
+      "tax_max": 0.95,
+      "tax_min": -0.5,
+      "tax_speed_abs_max": 0.5
+    },
+    "provenance": {
+      "empirical_status": "Illustrative solver/algebra benchmark; not an empirical calibration.",
+      "source": "nonlinear-deterministic-transition-d2-claude-handoff--CS002.md and nonlinear-deterministic-and-order-two-work-plan--CP002-CP003.md (TAI public finnace codex research workspace)",
+      "specification_status": "CS002 v0.2, draft, unfingerprinted -- this run is an exploratory D2 prototype under the draft-specification exception documented in CS002's own \"Immediate implementation handoff\" section, extending the reviewed D0-D1 evidence per the D2 work-plan authorization. Not an approved CS002 result."
+    },
+    "shock_directions": {
+      "automation": {
+        "delta_alpha": 0.01,
+        "description": "x(0) solves automation_share(x(0))-alpha_bar=0.01 via a numerical root-find, z(0)=z_bar"
+      },
+      "productivity": {
+        "delta_z": 0.01,
+        "description": "z(0)-z_bar=0.01, x(0)=x_bar"
+      }
+    },
+    "solver_tolerance": 1e-10,
+    "varpi_tail_horizon_sequence": [
+      40.0,
+      80.0,
+      200.0
+    ]
+  },
+  "primitives": {
+    "model_branch": "brownian_v5_1_qd1_full_specialisation",
+    "normalizations": {
+      "capital_anchor": 1.0,
+      "labour": 1.0,
+      "public_net_worth_anchor": 0.0
+    },
+    "parameters": {
+      "alpha_lower": 0.19,
+      "alpha_upper": 0.49,
+      "annual_discount_factor": 0.98,
+      "automation_persistence_annual": 0.81,
+      "automation_stationary_sd": 0.25,
+      "capital_advantage": 0.375,
+      "depreciation_rate": 0.08,
+      "installed_capital_price": 1.0,
+      "international_log_capital_labour_ratio": 0.0,
+      "new_task_labour_advantage": 1.25,
+      "productivity_persistence_annual": 0.81,
+      "productivity_stationary_sd": 0.04,
+      "tax_adjustment_scale": 0.5,
+      "x_mean": 0.0
+    },
+    "primitive_set_id": "lq_farhi_annual_primitives_v1",
+    "provenance": {
+      "annual_discount_factor": "Farhi annual benchmark; rho=-log(0.98)",
+      "automation_process": "Provisional project choice",
+      "capital_share_anchor": "Logistic midpoint gives alpha_bar=0.34, matching the Farhi benchmark",
+      "depreciation_rate": "Conventional annual macro value",
+      "empirical_status": "Illustrative solver and algebra benchmark; not an empirical calibration",
+      "productivity_process": "Farhi annual persistence and reported state standard deviation, translated to a continuous-time OU process",
+      "source": "local-lq-system-computation-and-proof-plan.md, illustrative annual smoke calibration table (TAI public finnace codex research-notes)",
+      "task_advantages": "Project choices screened for the maintained full-specialisation branch",
+      "tax_adjustment_scale": "Provisional project choice"
+    },
+    "units": {
+      "capital_and_flows": "levels relative to L=K_bar=1",
+      "portfolio_and_net_worth": "market value in the same consumption numeraire",
+      "rates": "continuous annual rates unless labelled annual discrete factors",
+      "time": "years",
+      "x": "latent automation state",
+      "z": "log productivity"
+    }
+  }
+}
