@@ -1,0 +1,289 @@
+schema_version: '1.0'
+run_id: RUN-20260902T190139Z-CS002-D2-0b721f21-01
+created_utc: '2026-09-02T19:02:01Z'
+status: completed
+purpose: 'Exploratory CS002 D2 prototype: deterministic mean-reverting productivity
+  and automation transitions, state-dependent safe rate, two-route J/X/N/varpi recovery.
+  Bounded feasibility extension of the reviewed D0-D1 frozen-common-state evidence,
+  under CS002 v0.2''s draft-specification exception -- not an approved or completed
+  CS002 result; does not authorize Block D3.'
+specification:
+  id: CS002
+  version: '0.2'
+  status: draft
+  fingerprint_sha256: null
+input_fingerprints:
+  cs002_d2_config_sha256: af6b8d613e264b3b13e63c215f2507365742954675a70eab038a46d76ba4f435
+  cs001_primitive_sha256: 78837354ee416984183ef0eed43c54105c60c8a31b6a75c2f6f84c58f924917f
+  cs001_experiment_sha256: 9c4b5e3b627e8fb031ad07649d4fdc80d1b1956ce1c251bc1bc2d94b02024570
+  cs001_complete_input_sha256: e521c69dc3fd1a3e92d1ecf603f7449a7c96becd5c0c636abde72ef0024a32a4
+problem_id: CP002
+approach_id: CA002
+benchmark_id: null
+implementation:
+  repository_url: https://github.com/Nathan-Barnard/tai-public-finance
+  local_path: /Users/nathanbarnard/Documents/TAI public finnace claude-cs002-deterministic-mean-reversion-d2
+  commit: 0b721f2171cd1e3b163a0e119656f961b87d7ca8
+  branch: cs002/deterministic-mean-reversion-d2
+  dirty_worktree: false
+  dirty_worktree_at_run_start: false
+  implementer: claude_code
+  entrypoint: python3 -m tai_public_finance.cs002_nonlinear_transition.cli_d2
+  command: uv run python -m tai_public_finance.cs002_nonlinear_transition.cli_d2 --config
+    configs/cs002/lq_farhi_d2_mean_reversion_v1.json --output-dir outputs/cs002-d2-mean-reversion-20260902T190139Z
+    --run-id RUN-20260902T190139Z-CS002-D2-0b721f21-01
+environment:
+  operating_system: macOS-15.6.1-arm64-arm-64bit-Mach-O
+  architecture: arm64
+  runtime_versions:
+    python: 3.13.5
+    numpy: 2.5.2
+    scipy: 1.18.1
+    matplotlib: 3.11.1
+    pyyaml: 6.0.3
+  dependency_lock_path: uv.lock
+  dependency_lock_sha256: 3c59dc4b381ad68cd634a6f917f1ce4fa1080d9ce43e2344064acb6109f76c4a
+  container_or_image: null
+hardware:
+  resource_lane: L1_interactive
+  machine_label: local_mac
+  cpu: arm
+  logical_cores: 10
+  memory_gb: 16.0
+  accelerator: null
+  accelerator_memory_gb: null
+  detected_at_runtime: true
+budget:
+  wall_seconds_limit: 1200
+  cash_limit_usd: 0
+  actual_cash_usd: 0
+  early_stop_rule: Stop and retain failure if any independent residual, componentwise-RHS,
+    horizon/mesh stability, convergence-order, branch-agreement, route-disagreement,
+    budget-separation, or boundary-margin acceptance check fails for either shock
+    direction; solver-reported convergence alone never sets the outcome to pass.
+randomness:
+  deterministic_requested: true
+  seeds: []
+  nondeterminism_notes: Deterministic float64 BVP collocation and ODE quadrature;
+    no simulation draws.
+inputs:
+  parameter_set_id: lq_farhi_illustrative_smoke_v1
+  parameter_fingerprint_sha256: 78837354ee416984183ef0eed43c54105c60c8a31b6a75c2f6f84c58f924917f
+  cs002_d2_config_id: lq_farhi_d2_mean_reversion_v1
+  input_artifacts:
+  - /Users/nathanbarnard/Documents/TAI public finnace claude-cs002-deterministic-mean-reversion-d2/configs/cs002/lq_farhi_d2_mean_reversion_v1.json
+  - /Users/nathanbarnard/Documents/TAI public finnace claude-cs002-deterministic-mean-reversion-d2/configs/cs001/lq_farhi_smoke.json
+  - /Users/nathanbarnard/Documents/TAI public finnace claude-cs002-deterministic-mean-reversion-d2/configs/primitives/lq_farhi_annual_v1.json
+  shock_directions:
+    productivity:
+      delta_z: 0.01
+      z0_target: -1.796616591576036
+    automation:
+      delta_alpha: 0.01
+      alpha_target: 0.35
+      x0_target: 0.1335313926245227
+  continuation_amplitudes:
+  - 0.0
+  - 0.25
+  - 0.5
+  - 1.0
+  horizons_years:
+    baseline: 40.0
+    comparisons:
+    - 20.0
+    - 80.0
+  initial_public_net_worth: 0.0
+solver:
+  packages_and_versions:
+    numpy: 2.5.2
+    scipy: 1.18.1
+  method: scipy.integrate.solve_bvp collocation on the non-autonomous characteristic
+    system driven by the analytic exogenous OU path, continuation in shock amplitude
+    from a warm-started previous checkpoint (route A) cross-checked against direct
+    crude-anchor-guess solves at every amplitude (route B); independent off-mesh finite-difference
+    ODE residual, re-applied terminal-condition boundary residual, and an algebraically
+    separate componentwise manual RHS reconstruction.
+  tolerances:
+    ode_residual_max: 1.0e-07
+    boundary_residual_max: 1.0e-08
+    horizon_mesh_effect_floor: 1.0e-07
+    horizon_mesh_effect_relative: 0.001
+    convergence_order_expected: 2.0
+    convergence_order_relative_tolerance: 0.2
+    branch_agreement_atol: 5.0e-06
+    branch_agreement_rtol: 1.0e-05
+    route_disagreement_effect_factor: 10.0
+    budget_separation_residual_max: 0.001
+    componentwise_rhs_tolerance: 1.0e-09
+  initialization: warm-started continuation from the previous amplitude (route A)
+    / crude constant-anchor guess at every amplitude (route B)
+  continuation: amplitude sequence [0.0, 0.25, 0.5, 1.0]
+  precision: float64
+preflight:
+  tests_command: uv run pytest
+  tests_status: passed
+  exact_or_manufactured_benchmark: D0-D1's matrix-exponential manufactured BVP and
+    R16 fixed-tax closed-form transition (inherited, reused unchanged); D2's own componentwise
+    manual RHS reconstruction and OU-path-vs-numerical-propagation checks.
+result:
+  outcome: computational_pass
+  wall_seconds: 2.134644332982134
+  task_elapsed_seconds: 10800.0
+  peak_memory_gb: null
+  actual_cash_usd: 0
+  checkpoints_recovered: true
+  solver_reported_metrics: null
+  independent_diagnostics:
+    checks:
+      productivity_zero_amplitude_returns_anchor: true
+      productivity_route_a_all_amplitudes_converged: true
+      productivity_route_b_all_amplitudes_converged: true
+      productivity_ou_path_matches_numerical_propagation: true
+      productivity_ode_residual_within_tolerance: true
+      productivity_boundary_residual_within_tolerance: true
+      productivity_componentwise_rhs_agrees: true
+      productivity_horizon_mesh_stability: true
+      productivity_lq_convergence_expected_order: true
+      productivity_j_recovery_routes_agree: true
+      productivity_x_recovery_routes_agree: true
+      productivity_n_recovery_routes_agree: true
+      productivity_varpi_recovery_routes_agree: true
+      productivity_varpi_along_path_residual_within_tolerance: true
+      productivity_budget_separation_within_tolerance: true
+      productivity_wrong_r0_is_detected: true
+      productivity_branch_agreement_route_a_vs_b: true
+      productivity_no_boundary_reached_on_baseline_path: true
+      automation_zero_amplitude_returns_anchor: true
+      automation_route_a_all_amplitudes_converged: true
+      automation_route_b_all_amplitudes_converged: true
+      automation_ou_path_matches_numerical_propagation: true
+      automation_ode_residual_within_tolerance: true
+      automation_boundary_residual_within_tolerance: true
+      automation_componentwise_rhs_agrees: true
+      automation_horizon_mesh_stability: true
+      automation_lq_convergence_expected_order: true
+      automation_j_recovery_routes_agree: true
+      automation_x_recovery_routes_agree: true
+      automation_n_recovery_routes_agree: true
+      automation_varpi_recovery_routes_agree: true
+      automation_varpi_along_path_residual_within_tolerance: true
+      automation_budget_separation_within_tolerance: true
+      automation_wrong_r0_is_detected: true
+      automation_branch_agreement_route_a_vs_b: true
+      automation_no_boundary_reached_on_baseline_path: true
+  economic_quantities:
+    productivity_j0: 12.699859576677412
+    productivity_varpi0: -0.4516348430707195
+    automation_j0: 13.042626856324553
+    automation_varpi0: -1.7665973132304449
+    anchor_fiscal_wealth_bar: 12.569150319683768
+  reliable_region: Only the reported baseline (full-amplitude) productivity and automation
+    paths at N_bar=0, with recorded positive branch and margin slack; small-displacement
+    illustrative benchmark, not a global feasibility or uniqueness claim.
+  failure_code: null
+  failure_detail: null
+artifacts:
+- role: primary_output
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/report.json
+  sha256: 3f8d472dc3b3aca53f7b542c6eb243244a53c2cb2d2a8fc0a37476abf5d9fdea
+  bytes: 21712
+- role: supporting_output
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/complete_input.json
+  sha256: f2a11290500927d14b17fca07a75187a61aad1635d6f67398933edbb871e3c89
+  bytes: 4622
+- role: supporting_output
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/summary.md
+  sha256: 0a5671964cb2afd71c5794a1443334109872dfb802366f00a96889e96d314c0b
+  bytes: 3460
+- role: supporting_output
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/productivity_path.csv
+  sha256: 7469152aa219c8adecdaf153e46ec14b7ca8531dca334badd818fa7ccdd932f5
+  bytes: 72217
+- role: supporting_output
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/productivity_margins.csv
+  sha256: 2e1d2e0f411dee38f91d4bc6bc568cce7b6585b9462d9441af1ce1f9115cef26
+  bytes: 20077
+- role: supporting_output
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/automation_path.csv
+  sha256: f0b1e704fd59e1642d7be4cb829f7030742120c82f72608b9f075f5ff916d08d
+  bytes: 75241
+- role: supporting_output
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/automation_margins.csv
+  sha256: cd1018f5f82841e90ea95ddf9366fee7388709f8b59473f8440835132508750f
+  bytes: 20046
+- role: supporting_output
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/continuation_checkpoints.csv
+  sha256: df43aca17e5c543d5af4a09e9bcced30496cf18900a6d3c691182d563e23f2a1
+  bytes: 1946
+- role: supporting_output
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/horizon_mesh_comparisons.csv
+  sha256: a859e46cdda3e6ea6575664005f7c79ced7acf3848f7c49007fad31ffe2b5577
+  bytes: 1079
+- role: supporting_output
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/convergence.csv
+  sha256: ad498610ecaa21b91309d794f7f45ad0787b500f5c2e4355d9d9d459b20d197a
+  bytes: 668
+- role: supporting_output
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/varpi_horizon_sensitivity.csv
+  sha256: 0fe412cf3f4a7c0f339dae887ea272cc3f2117cf265a95bc17441ec295c8b500
+  bytes: 264
+- role: figure
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/figures/productivity_paths.png
+  sha256: b20fba773bbc5153d1037e7bdc14cbfe6d556ec7c900b6365660f1f46cd5b156
+  bytes: 200930
+- role: figure
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/figures/automation_paths.png
+  sha256: f6cf6033ff571ee00eca464b76db05d8500eab468f3e1bb477566ea860d65adb
+  bytes: 213880
+- role: figure
+  location: outputs/cs002-d2-mean-reversion-20260902T190139Z/figures/nonlinear_vs_lq_convergence.png
+  sha256: 8882a667e63630c6702b25cc3efbf15618f0aa51a208002bc725b8f93fe33521
+  bytes: 116928
+interpretation:
+  supports_result_ids:
+  - R08
+  - R09
+  - R11
+  - R16
+  challenges_result_ids: []
+  question_ids:
+  - Q02
+  - Q03
+  - Q05
+  - Q06
+  - Q08
+  - Q17
+  assurance_or_review_artifacts:
+  - research-notes/nonlinear-deterministic-and-order-two-risk-development.md
+  - assurance/dossiers/deterministic-fiscal-wealth-opportunity-value-and-tax-speed--R08-R09-R11.md
+  conclusion: Both shock directions reached computational_pass. Exploratory prototype
+    evidence only -- not an approved CS002 result.
+  limitations:
+  - CS002 is registered as draft, unfingerprinted, in the codex research workspace;
+    this run is a bounded exploratory D2 prototype under the draft-specification exception
+    recorded in CS002's own "Immediate implementation handoff" section, not an approved
+    or completed CS002 result.
+  - 'Deterministic zero-risk paths only: these are local illustrative IRFs, not stochastic
+    expected paths. Block D3 (derivative service), V2, R4, order-epsilon^4, a stochastic
+    PDE, jump models, calibration, and the broad experiment grid are explicitly out
+    of scope and not implemented here.'
+  - Illustrative solver/algebra benchmark on the Farhi-based smoke calibration, not
+    an empirical UK calibration.
+  - min_net_rental_tax_base_margin (min(R^K-delta)) and comprehensive_resource_margin
+    (X) are local reporting margins, not a structural-solvency or global-feasibility
+    calculation -- structural_continuation_solvency is reported literally as not_evaluated
+    for both shock directions.
+  - The varpi(0) terminal tail convention is 0 at the run's own horizon; varpi_horizon_sensitivity
+    reports how much varpi(0) changes as the horizon (hence the tail's own horizon)
+    is extended, rather than silently assuming the tail is immaterial.
+  - budget_separation_within_tolerance uses a central-finite-difference cross-check
+    of already-recovered N and J arrays (np.gradient on a 401-point grid), materially
+    coarser than the dedicated off-mesh characteristic-BVP residual -- it is a supplementary
+    accounting-identity diagnostic, not the primary numerical-accuracy evidence.
+  - task_elapsed_seconds is the implementer's own end-to-end estimate of reading,
+    implementation, and debugging time, not an instrumented wall-clock measurement;
+    wall_seconds (this material run's own compute time) is directly measured and exact.
+  next_decision: Research owner reviews the equation map, the D2-specific terminal-condition
+    and recovery generalizations, residual/branch/route-disagreement evidence, and
+    margin profile for both shock directions before CS002 may move toward review_ready
+    or Block D3 (derivative service) is authorized.
